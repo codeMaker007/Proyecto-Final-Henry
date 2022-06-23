@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector, connect } from 'react-redux';
 import { deleteProductCarrito } from '../../redux/actions/carritoA';
+import style from './assets/Carrito.module.css';
+import close from './assets/cross-close.svg';
 
 function Carrito({ deleteProductCarrito }) {
     const products = useSelector((state) => state.carrito.productosCarrito);
@@ -13,19 +15,26 @@ function Carrito({ deleteProductCarrito }) {
     }
 
     return (
-        <div>
-            <h1>Carrito</h1>
-            {products.map(e => (
-                <div key={e.id}>
-                    <h1>{e.name}</h1>
-                    <img src={e.image} alt='Imagen producto' width='150px' />
-                    <h2>Precio: {e.price}</h2>
-                    <h3 onClick={() => handleDelete(e)}>Sacar de carrito</h3>
+        <div className={style.body}>
+            <div className={style.container}>
+                <div className={style.products}>
+                    {products.map(e => (
+                        <div key={e.id} className={style.card}>
+                            <img src={e.image} alt='Imagen producto' width='50px' />
+                            <p>{e.name}</p>
+                            <p>${e.price}</p>
+                            <img className={style.cancelBtn} src={close} onClick={() => handleDelete(e)} alt='Close' />
+                        </div>
+                    ))}
                 </div>
-            )
-            )}
-            <h2>{total}</h2>
-            <button>Terminar compra</button>
+                <div className={style.containerTotal}>
+                    <div className={style.cardTotal}>
+                        <p>Total</p>
+                        <h2>${total}</h2>
+                        <button className={style.comprarBtn}>Terminar compra</button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
