@@ -40,6 +40,7 @@ export const decrementeQuantity = (id) => {
 }
 
 export const limpiarCarrito = () => {
+    localStorage.setItem('carrito', JSON.stringify([]));
     return { type: CLEAN_CART, payload: null }
 }
 

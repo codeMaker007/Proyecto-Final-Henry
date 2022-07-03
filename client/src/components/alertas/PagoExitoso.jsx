@@ -16,13 +16,13 @@ export default function PagoExitoso({ type }) {
                     ? <div className={style.body}>
                         <div className={style.cartel}>
                             Pago Exitoso
-                            <p>Será redirigido al Inicio</p>
+                            <p>Será redirigido al catalogo</p>
                         </div>
                     </div>
                     : <div className={style.bodyCancel}>
                         <div className={style.cartel}>
                             Pago cancelado
-                            <p>Será redirigido al Inicio</p>
+                            <p>Será redirigido al catalogo</p>
                         </div>
                     </div>
             }

@@ -6,7 +6,6 @@ import { getOneProduct } from '../../redux/actions/detailProductA';
 import noImage from './assets/no-image.jpg';
 import { addProductCarrito } from '../../redux/actions/carritoA';
 import Alerta from '../alertas/Alerta';
-import Alerta2 from '../alertas/Alerta2';
 
 function Producto({ getOneProduct }) {
     const dispatch = useDispatch();
@@ -104,12 +103,18 @@ function Producto({ getOneProduct }) {
                         <div>
                         </div>
                         <p className={style.descripcion}>{productDetail.description}</p>
-                        <div className={style.containerCantidad}>
-                            <button onClick={() => decrementarCantidad()}>-</button>
-                            <p>{cantidad}</p>
-                            <button onClick={() => incrementarCantidad()}>+</button>
-                        </div>
-                        <button id='btnCarrito' onClick={handleCarrito} className={style.button}>Agregar al carrito</button>
+                        {
+                            (productDetail.stock === 0) ? <></>
+                                : <div className={style.containerCantidad}>
+                                    <button onClick={() => decrementarCantidad()}>-</button>
+                                    <p>{cantidad}</p>
+                                    <button onClick={() => incrementarCantidad()}>+</button>
+                                </div>}
+                        {
+                            (productDetail.stock === 0)
+                                ? <></>
+                                : <button id='btnCarrito' onClick={handleCarrito} className={style.button}>Agregar al carrito</button>
+                        }
                     </div>
                 </div>
             </div>
