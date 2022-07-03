@@ -1,7 +1,7 @@
 .card {
     margin: 15px;
-    width: 16vw;
-    height: 55vh;
+    width: 14vw;
+    height: 45vh;
     /* padding: .8em; */
     background: #f5f5f5;
     position: relative;
@@ -15,31 +15,28 @@
 
 .cardImg {
     background-color: #252525;
+    height: 50%;
     width: 100%;
     transition: .3s ease;
     border-bottom: 1px solid #ddd;
+}
+
+.containerTitle {
+    height: 30%;
 }
 
 .card p {
     display: flex;
     text-align: center;
     font-size: 1em;
-    height: 8vh;
 }
 
 /* .cardInfo {
     padding-top: 10%;
 } */
 
-svg {
-    position: relative;
-    width: 20px;
-    height: 20px;
-    top: 3px;
-    right: -1px;
-}
-
 .footer {
+    height: 20%;
     width: 90%;
     display: flex;
     justify-content: space-between;
@@ -49,6 +46,15 @@ svg {
 
     /* background-color: #252525; */
 }
+
+svg {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 3px;
+    right: -1px;
+}
+
 
 /*Text*/
 .textTitle {
@@ -64,9 +70,11 @@ svg {
     max-height: 50px;
 }
 
+
 /*Button*/
 .cardButton {
-    width: 25px;
+    width: 10%;
+    height: 25%;
     border: 1px solid #252525;
     /* display: flex; */
     padding: .3em;
@@ -76,8 +84,9 @@ svg {
 }
 
 .btnDetail {
-    position: relative;
-    left: 47px;
+    /* position: relative; */
+    /* left: 10%; */
+    height: 40%;
     border: 1px solid #252525;
     padding: .3em;
     cursor: pointer;
@@ -99,8 +108,8 @@ svg {
 .favorite {
     position: absolute;
     width: 18px;
-    top: 10px;
-    left: 280px;
+    top: 2%;
+    left: 87%;
     cursor: pointer;
 }
 
@@ -121,8 +130,8 @@ svg {
 
 @media only screen and (max-width: 1400px) {
     .card {
-        height: 31%;
-        width: 20vw;
+        height: 46vh;
+        width: 15vw;
         padding: 3px;
     }
 
@@ -135,10 +144,11 @@ svg {
     }
 }
 
+
 @media only screen and (max-width: 1116px) {
     .card {
-        height: 31%;
-        width: 30vw;
+        height: 56vh;
+        width: 19.7vw;
         padding: 3px;
     }
 
@@ -153,7 +163,7 @@ svg {
 
 @media only screen and (max-width: 960px) {
     .card {
-        height: 31%;
+        height: 67vh;
         width: 30vw;
         padding: 3px;
     }
@@ -165,7 +175,7 @@ svg {
 
 @media only screen and (max-width: 768px) {
     .card {
-        height: 31%;
+        height: 43vh;
         width: 35vw;
     }
 
@@ -190,7 +200,7 @@ svg {
 
 @media only screen and (max-width: 414px) {
     .card {
-        height: 16%;
+        height: 55vh;
         width: 100vw;
     }
 }

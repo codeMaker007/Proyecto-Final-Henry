@@ -11,7 +11,7 @@ export default function Favoritos() {
             <div className={style.container}>
                 <div className={style.cardsContainer}>
                     {
-                        (productosFavoritos.length === 0) ? <div> <h1>No has agregado nada a favoritos </h1> </div>
+                        (productosFavoritos.length === 0) ? <div> <h1 className={style.title}>No has agregado nada a favoritos... </h1> </div>
                             : productosFavoritos.map(e => {
                                 return (
                                     <ProductCard
@@ -22,7 +22,6 @@ export default function Favoritos() {
                                         category={e.category}
                                         image={e.image}
                                         description={e.description}
-                                        favorito={true}
                                     />
                                 )
                             })}

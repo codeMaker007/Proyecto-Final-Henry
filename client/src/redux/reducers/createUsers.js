@@ -10,7 +10,6 @@ const userCreated = (state = initialState, { type, payload }) => {
         case ADD_USER:
             return {
                 ...state,
-                userCreated: state.userCreated.concat(payload)
             }
         default:
             return state;

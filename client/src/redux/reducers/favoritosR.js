@@ -1,7 +1,7 @@
 import { ADD_PRODUCT_FAVORITO, REMOVE_PRODUCT_FAVORITO } from "../actions/favoritosA";
 
 const initialState = {
-    productosFavoritos: [],
+    productosFavoritos: (JSON.parse(localStorage.getItem('favorites')) === null) ? [] : JSON.parse(localStorage.getItem('favorites')),
 }
 
 const favoritosR = (state = initialState, { type, payload }) => {
@@ -14,7 +14,7 @@ const favoritosR = (state = initialState, { type, payload }) => {
         case REMOVE_PRODUCT_FAVORITO:
             return {
                 ...state,
-                productosFavoritos: state.productosFavoritos.filter(e => e.id !== payload)
+                productosFavoritos: state.productosFavoritos = JSON.parse(localStorage.getItem('favorites'))
             }
 
         default:

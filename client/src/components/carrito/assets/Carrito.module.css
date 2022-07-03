@@ -72,5 +72,66 @@
 
 .comprarBtn {
     position: relative;
-    top: 55px;
+    top: 45px;
+    background-color:var(--navbar-bg-color);
+    display:inline-block;
+    cursor:pointer;
+    color:white;
+    font-family:Verdana;
+    font-size:14px;
+    font-weight:bold;
+    border-radius: 4px;
+    padding:5px 15px;
+    text-decoration:none;
+    border-color: var(--navbar-bg-color);
+}
+.comprarBtn:hover{
+    background-color:white;
+    color:var(--navbar-bg-color);
+    
+}
+
+.title {
+    padding-right: 60px;
+    margin-left: auto;
+    margin-top: 10%;
+    justify-content: center;
+    font-size: x-large;
+    font-family: 'Roboto', sans-serif;
+    font-weight: "Lucida Console", "Courier New", monospace;
+    color: var(--navbar-bg-color);
+    text-decoration: none;
+    /* margin- */
+}
+
+.total {
+    font-weight:bold;
+    justify-content: center;
+    font-size: x-large;
+    font-family: 'Roboto', sans-serif;
+    font-weight: "Lucida Console", "Courier New", monospace;
+    color: var(--navbar-bg-color);
+    text-decoration: none;
+    /* margin- */
+}
+.verProductos {
+    position: relative;
+    margin-left: 30%;
+    top: 45px;
+    background-color:var(--navbar-bg-color);
+    /* display:inline-block; */
+    cursor:pointer;
+    color:white;
+    font-family:Verdana;
+    font-size:14px;
+    font-weight:bold;
+    border-radius: 4px;
+    padding:5px 15px;
+    text-decoration:none;
+    border-color: var(--navbar-bg-color);
+}
+.verProductos:hover{
+    background-color:white;
+    color:var(--navbar-bg-color);
+    
 }

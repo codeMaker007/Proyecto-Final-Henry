@@ -9,16 +9,17 @@ import favoriteSelected from './assets/favorite-select.svg';
 import { addFavorite, removeFavorite } from '../../redux/actions/favoritosA';
 import Alerta from '../alertas/Alerta';
 
-function ProductCard({ name, image, price, description, category, stock, id, addProductCarrito, favorito = false, addFavorite, removeFavorite }) {
+function ProductCard({ name, image, price, description, category, stock, id, quantity, addProductCarrito, addFavorite, removeFavorite }) {
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
     const productsInFavoritos = useSelector((state) => state.favoritos.productosFavoritos);
-    const [isFavorite, setIsFavorite] = useState(favorito);
+    const [isFavorite, setIsFavorite] = useState(false);
     const [modal, setModal] = useState({
         open: false,
         type: ''
     });
 
     useEffect(() => {
+        if (productsInFavoritos == null) return
         if (productsInFavoritos.some(element => element.id === id)) setIsFavorite(true)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,14 +29,16 @@ function ProductCard({ name, image, price, description, category, stock, id, add
         const check = productsInCarrito.some(e => e.id === id);
         if (check) return setModal({ ...modal, open: true, type: 'error' })
         else {
-            addProductCarrito([{
+            addProductCarrito({
                 id: id,
                 name: name,
                 image: image,
                 price: price,
-                stock: stock
-            }])
-            // alert('Producto agregado a carrito')
+                stock: stock,
+                description: description,
+                category: category,
+                quantity: quantity
+            })
             setModal({ ...modal, open: true, type: 'success' })
         }
     }
@@ -50,6 +53,7 @@ function ProductCard({ name, image, price, description, category, stock, id, add
         }
     }
 
+
     return (
         <>
             <div id={id} className={style.card}>
@@ -57,15 +61,14 @@ function ProductCard({ name, image, price, description, category, stock, id, add
                     currentTarget.onerror = null; // prevents looping
                     currentTarget.src = `${noImage}`;
                 }} />
-                <Link to={`/detail/${id}`} className={style.linkTo}><p className={style.textTitle}>{name.charAt(0).toUpperCase() + name.slice(1)}</p></Link>
+                <div className={style.containerTitle}>
+                    <Link to={`/detail/${id}`} className={style.linkTo}><p className={style.textTitle}>{name.charAt(0).toUpperCase() + name.slice(1)}</p></Link>
+                </div>
 
 
                 <div className={style.footer}>
-                    <span className={style.textTitle}>${price}</span>
+                    <span className={style.textTitle}>${Math.trunc(price)}</span>
 
-                    {(isFavorite) ? <img className={style.favorite} onClick={() => checkFavorite()} src={favoriteSelected} alt="Favorito" />
-                        : <img className={style.favorite} onClick={() => checkFavorite()} src={favorite} alt="No favorito" />
-                    }
 
                     {/* {checkFavorite()} */}
 
@@ -77,6 +80,9 @@ function ProductCard({ name, image, price, description, category, stock, id, add
                             <path d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"></path>
                         </svg>
                     </div>
+                    {(isFavorite) ? <img className={style.favorite} onClick={() => checkFavorite()} src={favoriteSelected} alt="Favorito" />
+                        : <img className={style.favorite} onClick={() => checkFavorite()} src={favorite} alt="No favorito" />
+                    }
                 </div>
             </div >
             {

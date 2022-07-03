@@ -32,6 +32,23 @@
     z-index: 2;
 }
 
+.warning {
+    width: 20vw;
+    height: 2%;
+    margin: 15px;
+    padding: 20px;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background-color: #f48c06;
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    z-index: 2;
+}
+
 .svgChecked {
     height: 200%;
 }

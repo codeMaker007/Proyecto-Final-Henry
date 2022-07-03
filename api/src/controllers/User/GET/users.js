@@ -19,13 +19,8 @@ async function getAdminUsers() {
     return userList;
 }
 
-async function getNonAdminUsers() {
-    const where = {isAdmin: false};
-    const attributes = ['id','username', 'name', 'lastName', 'dni', 'email', 'celphone'];
-    const userList = await User.findAll({
-        where,
-        attributes
-    });
+async function getUsers() {
+    const userList = await User.findAll();
     return userList;
 }
 
@@ -58,7 +53,7 @@ async function deleteUser(username) {
 module.exports={
     createUser,
     getAdminUsers,
-    getNonAdminUsers,
+    getUsers,
     getUserByUsername,
     updateUser,
     deleteUser

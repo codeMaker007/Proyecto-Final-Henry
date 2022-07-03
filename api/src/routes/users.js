@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const {addFavourite, getFavourites, removeFavourite} = require("../controllers/Product/GET/favourites");
 const {createAddress, getAddress, updateAddress} = require("../controllers/Address/GET/addresses");
-const {createUser, getAdminUsers, getNonAdminUsers, getUserByUsername,updateUser} = require("../controllers/User/GET/users");
+const {createUser, getAdminUsers, getUsers, getUserByUsername,updateUser} = require("../controllers/User/GET/users");
 const router = Router();
 
 router.post('/', async (req,res) => {
@@ -19,7 +19,7 @@ router.post('/', async (req,res) => {
 
 router.get('/', async (req,res) => {
     try {
-        const userList = await getNonAdminUsers();
+        const userList = await getUsers();
         return res.json(userList);
     }
     catch (err) {

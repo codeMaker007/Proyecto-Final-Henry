@@ -4,8 +4,9 @@ import React from 'react';
 // import rightArrow from './assets/right-arrow.svg'
 import style from './assets/Paginado.module.css';
 
-export default function Paginado({ ITEMS_PER_PAGE, products, paginado, number }) {
+export default function Paginado({ ITEMS_PER_PAGE, products, paginado, number, cantCards }) {
     function goToNextPage() {
+        if (number === 1 && cantCards <= 10) return btn.disabled = true;
         paginado((pageNumber) => pageNumber + 1)
     }
 
@@ -15,7 +16,8 @@ export default function Paginado({ ITEMS_PER_PAGE, products, paginado, number })
 
     const btn = document.querySelector('#btnNext');
     function lastPage() {
-        if (number >= Math.round((products / ITEMS_PER_PAGE))) btn.disabled = true;
+        console.log(cantCards)
+        if (number >= Math.floor((products / ITEMS_PER_PAGE))) btn.disabled = true;
     }
 
     function enableButton() {

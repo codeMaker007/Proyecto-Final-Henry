@@ -1,5 +1,4 @@
 const { DataTypes } = require('sequelize');
-const { default: isEmail } = require('validator/lib/isEmail');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
@@ -7,16 +6,11 @@ module.exports = (sequelize) => {
   sequelize.define('User', {
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    lastName: {
-        type: DataTypes.STRING,
-        allowNull: false
     },
     dni: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: true
+        unique: true,
+        allowNull: true,
     },
     email: {
         type: DataTypes.STRING,
@@ -28,20 +22,25 @@ module.exports = (sequelize) => {
       },
     celphone: {
         type: DataTypes.BIGINT,
-        allowNull: false
+        allowNull: true,
     },
     isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
     username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    password: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+      type: DataTypes.STRING,
+      unique: true,
+      validate: {
+        len: {
+          args: [3, 255],
+          mensaje: "El usuario tiene que tener 2 caracteres como minimo"
+        }
+      }
+   },
+    picture: {
+    type: DataTypes.STRING,
+    allowNull: true,
     }
   });
 };

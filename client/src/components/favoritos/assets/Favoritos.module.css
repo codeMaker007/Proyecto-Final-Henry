@@ -15,3 +15,15 @@
     justify-content: center;
     /* height: 100%; */
 }
+.title {
+    padding-right: 60px;
+    margin-left: auto;
+    margin-top: 10%;
+    justify-content: center;
+    font-size: x-large;
+    font-family: 'Roboto', sans-serif;
+    font-weight: "Lucida Console", "Courier New", monospace;
+    color: var(--navbar-bg-color);
+    text-decoration: none;
+    /* margin- */
+}

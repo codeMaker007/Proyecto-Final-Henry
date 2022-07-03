@@ -6,7 +6,7 @@ import style from './assets/Products.module.css';
 import Filtrado from './Filtrado';
 import Paginado from './Paginado';
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 9;
 
 function Products({ getAllProducts }) {
     const products = useSelector((state) => state.products.products);
@@ -35,7 +35,6 @@ function Products({ getAllProducts }) {
         <div className={style.body}>
             <div className={style.container}>
                 <div className={style.containerFilter}><Filtrado /></div>
-                {/* <Link to='/createProduct'><button>Crear producto</button></Link> */}
                 <div className={style.containerCards}>
                     {currentProducts.map(e => {
                         return (
@@ -44,16 +43,17 @@ function Products({ getAllProducts }) {
                                 key={e.id}
                                 name={e.name}
                                 price={e.price}
-                                category={e.category}
+                                category={e.categories}
                                 image={e.image}
                                 description={e.description}
                                 stock={e.stock}
+                                quantity={e.quantity}
                             />
                         )
                     })}
-                    <Paginado ITEMS_PER_PAGE={ITEMS_PER_PAGE} products={products.length} paginado={paginado} number={currentPage} />
                 </div>
             </div>
+            <Paginado ITEMS_PER_PAGE={ITEMS_PER_PAGE} products={products.length} paginado={paginado} number={currentPage} cantCards={products.length} />
         </div >
     )
 }

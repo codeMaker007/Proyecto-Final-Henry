@@ -1,7 +1,7 @@
-import { ADD_PRODUCT_CARRITO, DELETE_PRODUCT_CARRITO, INCREMENT_TOTAL, DECREMENT_TOTAL, RESET_TOTAL } from "../actions/carritoA";
+import { ADD_PRODUCT_CARRITO, DELETE_PRODUCT_CARRITO, INCREMENT_TOTAL, DECREMENT_TOTAL, RESET_TOTAL, INCREMENT_QUANTITY, DECREMENT_QUANTITY, CLEAN_CART } from "../actions/carritoA";
 
 const initialState = {
-    productosCarrito: [],
+    productosCarrito: (JSON.parse(localStorage.getItem('carrito')) === null) ? [] : JSON.parse(localStorage.getItem('carrito')),
     totalCarrito: 0
 }
 
@@ -15,7 +15,12 @@ const carritoR = (state = initialState, { type, payload }) => {
         case DELETE_PRODUCT_CARRITO:
             return {
                 ...state,
-                productosCarrito: state.productosCarrito.filter(e => e.id !== payload)
+                productosCarrito: state.productosCarrito = JSON.parse(localStorage.getItem('carrito'))
+            }
+        case CLEAN_CART:
+            return {
+                ...state,
+                productosCarrito: []
             }
         case INCREMENT_TOTAL:
             return {
@@ -31,6 +36,28 @@ const carritoR = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 totalCarrito: 0
+            }
+        case INCREMENT_QUANTITY:
+            let productIncrement = state.productosCarrito.find(e => e.id === payload);
+            let quantity = productIncrement.quantity + 1;
+            productIncrement = { ...productIncrement, quantity: quantity }
+            return {
+                ...state,
+                productosCarrito: state.productosCarrito.map(e => {
+                    if (e.id === payload) return productIncrement
+                    else return e
+                })
+            }
+        case DECREMENT_QUANTITY:
+            let productDecrement = state.productosCarrito.find(e => e.id === payload);
+            let cantidad = productDecrement.quantity - 1;
+            productDecrement = { ...productDecrement, quantity: cantidad }
+            return {
+                ...state,
+                productosCarrito: state.productosCarrito.map(e => {
+                    if (e.id === payload) return productDecrement
+                    else return e
+                })
             }
 
         default:

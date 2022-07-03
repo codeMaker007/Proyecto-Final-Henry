@@ -18,16 +18,22 @@
     margin-top: 25px;
     /* background-color: var(--navbar-bg-color); */
     border-radius: 15px;
-    /* text-align: center; */
+    text-align: center;
 }
 
+
 .section p {
+ 
+    margin-left: auto;
+    justify-content: center;
     font-size: x-large;
     font-family: 'Roboto', sans-serif;
-    font-weight: bold;
+    font-weight: "Lucida Console", "Courier New", monospace;
     color: var(--navbar-bg-color);
-    text-decoration: underline;
+    text-decoration: none;
+    /* margin- */
 }
+
 
 .productosVendidos {
     /* background-color: black; */
@@ -36,3 +42,41 @@
     display: flex;
     border-radius: 7px;
 }
+
+.containerCards {
+    display: flex;
+    width: 60vw;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 1280px) {
+    .containerCards {
+        width: 69vw;
+        grid-template-columns: repeat(5,1fr);
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .containerCards {
+        grid-template-columns: repeat(5,1fr);
+        width: 85vw;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 715px) {
+    .containerCards {
+        grid-template-columns: repeat(5,1fr);
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .containerCards {
+        grid-template-columns: repeat(5,1fr);
+        justify-content: center;
+    }
+}
+

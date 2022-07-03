@@ -1,11 +1,15 @@
 .foto{
-    border-radius:60px;
+    border-radius:600px;
+    width: 150px;
+    height: auto;
+    
 }
 
 .DetailContainer{
-    background: rgba(0, 38, 255, 0.664);
+    background: var(--navbar-bg-color);
     margin-left: 20%;
     margin-top: 5%;
+    margin-bottom: 5%;
     margin-right: 20%;
     display:center;
     align-items:stretch ;
@@ -42,19 +46,21 @@
 }
 
 .volver {
-    background-color:rgb(0, 38, 255);
+    background-color: rgba(255, 255, 255, 0.795);
     display:inline-block;
     cursor:pointer;
-    color:white;
+    color: var(--navbar-bg-color);
     font-family:Verdana;
     font-size:14px;
     font-weight:bold;
-    padding:10px 80px;
+    padding:4px 10px;
     text-decoration:none;
-    margin-left: 25%;
-    margin-right: 25%;
+     margin-left: 1%; 
+    /* margin-right: 25%; */
+    border-color: rgba(255, 255, 255, 0.795);
 }
 .volver:hover{
-    background-color:white;
-    color:rgb(0, 38, 255);
+    background-color: var(--navbar-bg-color);
+    color:rgba(255, 255, 255, 0.795);
+    border-color: rgba(255, 255, 255, 0.795);
 }

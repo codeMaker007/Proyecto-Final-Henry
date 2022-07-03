@@ -1,4 +1,5 @@
 const { Router } = require('express');
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {priceOrder} = require('../controllers/Product/GET/priceOrder')
@@ -17,10 +18,18 @@ const {filterDisabled} = require('../controllers/Admin/GET/filterDisabled')
 const {filterEyS} = require('../controllers/Admin/GET/filterEyS')
 const {filterPriceRange} = require('../controllers/Product/GET/filterPriceRange')
 const {filterDiscount} = require('../controllers/Admin/GET/filterDiscount');
-const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter')
+const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter');
+const { newestProducts } = require('../controllers/Product/GET/newestProducts');
+const { mostDiscountedProducts } = require('../controllers/Product/GET/mostDiscountedProducts');
+const { bestSellingProducts } = require('../controllers/Product/GET/bestSellingProducts');
+const { payments } = require('../controllers/PaymentsMP/payments');
+const { suscription } = require('../controllers/PaymentsMP/suscription');
+const {createOrder, captureOrder, cancelOrder} = require('../controllers/PaymentsPP/payment.paypal')
+
 
 
 const router = Router();
+
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
@@ -58,6 +67,20 @@ router.get('/filterPriceRange/:filterPrice', filterPriceRange)
 
 router.get('/filterDiscount/:discount', filterDiscount)
 
+router.get('/newestProducts', newestProducts)
 
+router.get('/mostDiscountedProducts', mostDiscountedProducts)
+
+router.get('/bestSellingProducts', bestSellingProducts)
+
+router.post('/payments', payments)
+
+router.post('/suscription', suscription)
+
+router.post('/create-order', createOrder)
+
+router.get('/capture-order', captureOrder)
+
+router.get('/cancel-order', cancelOrder)
 
 module.exports = router;

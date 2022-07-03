@@ -1,3 +1,4 @@
+
 .container {
     display: flex;
     flex-direction: column;
@@ -24,10 +25,16 @@
 }
 
 .input {
-    margin-top: 15px;
-    height: 5vh;
+    /* background-color:rgb(188, 188, 190); */
+    margin-top: 13px;
+    height: 4.5vh;
     border: 2px solid var(--navbar-bg-color);
 }
+.reset {
+    background: white;
+    border: 2px solid var(--navbar-bg-color);
+}
+
 
 .input:focus {
     border: 2px solid var(--navbar-bg-color);

@@ -58,6 +58,11 @@
     position: relative;
     width: 30px;
     right: 20px;
+    margin-bottom: 20px;
+}
+
+.account:hover{
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {

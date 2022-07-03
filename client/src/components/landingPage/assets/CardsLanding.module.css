@@ -17,3 +17,12 @@
     width: 100%;
     border-radius: 7px;
 }
+
+.linkTo {
+    font-size: x-large;
+    font-family: 'Roboto', sans-serif;
+    font-weight: "Lucida Console", "Courier New", monospace;
+    color: var(--navbar-bg-color);
+    text-decoration: none;
+    
+}

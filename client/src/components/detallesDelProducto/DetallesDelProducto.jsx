@@ -13,6 +13,7 @@ function Producto({ getOneProduct }) {
     const location = useLocation();
     const idProduct = location.pathname.substring(8, location.pathname.length);
     const productDetail = useSelector((state) => state.detailProduct.product);
+    const [cantidad, setCantidad] = useState(1);
     const [modal, setModal] = useState({
         open: false,
         type: ''
@@ -38,8 +39,8 @@ function Producto({ getOneProduct }) {
             let oferta = (productDetail.discount / 100) * productDetail.price
             return (
                 <div>
-                    <p className={style.antes}>ANTES: ${productDetail.price}</p>
-                    <p className={style.despues}>AHORA: ${productDetail.price - oferta} <span className={style.green}>%{productDetail.discount} OFF</span></p>
+                    <p className={style.antes}>ANTES: ${(productDetail.price).toFixed(2)}</p>
+                    <p className={style.despues}>AHORA: ${(productDetail.price - oferta).toFixed(2)} <span className={style.green}>%{productDetail.discount} OFF</span></p>
                 </div>
             )
         }
@@ -50,15 +51,29 @@ function Producto({ getOneProduct }) {
         const check = productsInCarrito.some(e => e.id === productDetail.id);
         if (check) return setModal({ ...modal, open: true, type: 'error' })
         else {
-            dispatch(addProductCarrito([{
+            dispatch(addProductCarrito({
                 id: productDetail.id,
                 name: productDetail.name,
                 image: productDetail.image,
                 price: productDetail.price,
-                stock: productDetail.stock
-            }]))
+                stock: productDetail.stock,
+                description: productDetail.description,
+                category: productDetail.category,
+                quantity: cantidad
+            }))
             setModal({ ...modal, open: true, type: 'success' })
         }
+    }
+
+
+    function incrementarCantidad() {
+        if (productDetail.stock === cantidad) return setCantidad(productDetail.stock)
+        else setCantidad(cantidad + 1);
+    }
+
+    function decrementarCantidad() {
+        if (cantidad === 1) return setCantidad(1)
+        else setCantidad(cantidad - 1);
     }
 
     return (
@@ -85,6 +100,11 @@ function Producto({ getOneProduct }) {
                         <div>
                         </div>
                         <p className={style.descripcion}>{productDetail.description}</p>
+                        <div className={style.containerCantidad}>
+                            <button onClick={() => incrementarCantidad()}>+</button>
+                            <p>{cantidad}</p>
+                            <button onClick={() => decrementarCantidad()}>-</button>
+                        </div>
                         <button onClick={handleCarrito} className={style.button}>Agregar al carrito</button>
                     </div>
                 </div>

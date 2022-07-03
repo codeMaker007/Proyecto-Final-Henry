@@ -11,7 +11,7 @@
 .container img {
     transition: 1s;
     opacity: 0;
-    width: 100vw;
+    width: 80vw;
     height: 400px;
 }
 

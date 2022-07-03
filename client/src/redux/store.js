@@ -8,6 +8,14 @@ import productoscreados from './reducers/createProductR';
 import users from './reducers/createUsers'
 import favoritos from './reducers/favoritosR';
 import PerfilDelUsuarioR from './reducers/PerfilDelUsuarioR';
+import landingPageNewestR from './reducers/landingPageNewestR';
+import landingPageMostSelledR from './reducers/landingPageMostSelledR';
+import landingPageDiscountsR from './reducers/landingPageDiscountsR';
+import adminProductsR from './reducers/adminProductsR';
+import DashboardUsersR from './reducers/DashboardUsersR';
+import searchHistoryR from './reducers/DashboardHistorySearchR';
+import historyShoppingR from './reducers/DashboardHistoryShoppingR';
+
 
 
 const reducer = combineReducers({
@@ -18,6 +26,14 @@ const reducer = combineReducers({
     users,
     favoritos,
     PerfilDelUsuarioR,
+    landingPageNewestR,
+    landingPageMostSelledR,
+    landingPageDiscountsR,
+    adminProductsR,
+    DashboardUsersR,
+    searchHistoryR,
+    historyShoppingR,
+
 })
 
 export const store = createStore(

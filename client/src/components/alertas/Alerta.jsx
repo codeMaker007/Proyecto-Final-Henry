@@ -2,8 +2,10 @@ import React from 'react';
 import style from './assets/Alertas.module.css';
 import checked from './assets/checked.svg';
 import error from './assets/error.svg';
+import warning from './assets/warning.svg';
 
-export default function Alerta({ setOpenModal, type }) {
+export default function Alerta({ setOpenModal, type, text }) {
+    // const [state, setState] = useState();
 
     setTimeout(() => {
         setOpenModal(false)
@@ -22,14 +24,14 @@ export default function Alerta({ setOpenModal, type }) {
                 return (
                     <div className={style.error}>
                         <img src={error} alt="error" className={style.svgChecked} />
-                        <div className={style.titleCloseBtn}>Producto ya en carrito</div>
+                        <div className={style.titleCloseBtn}>{text}</div>
                     </div>
                 )
             case 'warning':
                 return (
-                    <div className={style.modalContainer}>
-                        <img src={checked} alt="checked" className={style.svgChecked} />
-                        <div className={style.titleCloseBtn}>Producto agregado a carrito</div>
+                    <div className={style.warning}>
+                        <img src={warning} alt="warning" className={style.svgChecked} />
+                        <div className={style.titleCloseBtn}>{text}</div>
                     </div>
                 )
             default:
@@ -41,9 +43,5 @@ export default function Alerta({ setOpenModal, type }) {
         <>
             {tipoAlerta()}
         </>
-        // <div className={style.modalContainer}>
-        //     <img src={checked} alt="checked" className={style.svgChecked} />
-        //     <div className={style.titleCloseBtn}>Producto agregado a carrito</div>
-        // </div >
     );
 }
