@@ -45,7 +45,7 @@ export default function Checking() {
     console.log(data)
 
     // async function handleConfirmOrder(paymentMethod) {
-    //     let data = (products.productosCarrito.map(e => {
+    //     let mercadoPago = (products.productosCarrito.map(e => {
     //         return {
     //             name: e.name,
     //             description: e.description,
@@ -55,11 +55,10 @@ export default function Checking() {
     //             cost: 500
     //         }
     //     }));
-    //     if (paymentMethod === 'mercadopago') {
-    //         const response = await axios.post('/payments', data);
-    //         console.log(response.data.init_point);
-    //         window.location.href = `${response.data.init_point}`;
-    //     }
+    //     const response = await axios.post('/payments', mercadoPago);
+    //     console.log(response.data.init_point);
+    //     window.location.href = `${response.data.init_point}`;
+    // }
     // else if (paymentMethod === 'paypal') {
 
     //     let dataPaypal = data.map(e => {
@@ -99,6 +98,7 @@ export default function Checking() {
                                 <button onClick={() => handleCancelOrder()}>Cancelar orden</button>
                                 <h1>Pagar con:</h1>
                                 <div className={style.methodsPayment}>
+                                    {/* <button onClick={handleConfirmOrder} >MercadoPago</button> */}
                                     <Paypal data={data} total={products.totalCarrito} setPago={setPago} />
                                 </div>
                             </div>

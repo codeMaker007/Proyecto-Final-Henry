@@ -1,3 +1,5 @@
+// import { UPDATE_PRODUCT } from "../actions/DashboardUpdateProductA";
+
 const initialState = {
     productoscreados: []
 
@@ -18,6 +20,11 @@ const createProductR = (state = initialState, action) =>{
                 productoscreados: action.payload
         }
 
+        case "UPDATE_PRODUCT":
+            return {
+                ...state,
+                productoscreados: action.payload
+            }
         default:
             return state; 
     }

@@ -17,7 +17,7 @@ export default function Alerta({ setOpenModal, type, text }) {
                 return (
                     <div className={style.success}>
                         <img src={checked} alt="checked" className={style.svgChecked} />
-                        <div className={style.titleCloseBtn}>Producto agregado a carrito</div>
+                        <div className={style.titleCloseBtn}>{text}</div>
                     </div>
                 )
             case 'error':

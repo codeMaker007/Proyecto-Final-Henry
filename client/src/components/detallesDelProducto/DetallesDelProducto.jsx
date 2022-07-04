@@ -16,7 +16,8 @@ function Producto({ getOneProduct }) {
     const [cantidad, setCantidad] = useState(1);
     const [modal, setModal] = useState({
         open: false,
-        type: ''
+        type: '',
+        text: ''
     });
 
     useEffect(() => {
@@ -51,7 +52,7 @@ function Producto({ getOneProduct }) {
 
     function handleCarrito() {
         const check = productsInCarrito.some(e => e.id === productDetail.id);
-        if (check) return setModal({ ...modal, open: true, type: 'error' })
+        if (check) return setModal({ ...modal, open: true, type: 'error', text: 'Producto ya en carrito' })
         else if (productDetail.stock < 1) document.getElementById('btnCarrito').disabled = true;
         else {
             dispatch(addProductCarrito({
@@ -64,7 +65,7 @@ function Producto({ getOneProduct }) {
                 category: productDetail.category,
                 quantity: cantidad
             }))
-            setModal({ ...modal, open: true, type: 'success' })
+            setModal({ ...modal, open: true, type: 'success', text: 'Producto agregado a carrito' })
         }
     }
 
@@ -120,7 +121,7 @@ function Producto({ getOneProduct }) {
             </div>
             {
                 (modal.open)
-                    ? <Alerta setOpenModal={setModal} type={modal.type} />
+                    ? <Alerta setOpenModal={setModal} type={modal.type} text={modal.text} />
                     : <></>
             }
         </>

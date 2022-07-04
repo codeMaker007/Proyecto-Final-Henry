@@ -15,6 +15,8 @@ import adminProductsR from './reducers/adminProductsR';
 import DashboardUsersR from './reducers/DashboardUsersR';
 import searchHistoryR from './reducers/DashboardHistorySearchR';
 import historyShoppingR from './reducers/DashboardHistoryShoppingR';
+import UpdateProductR from './reducers/DashboardUpdateProductR';
+
 
 
 
@@ -33,6 +35,7 @@ const reducer = combineReducers({
     DashboardUsersR,
     searchHistoryR,
     historyShoppingR,
+    UpdateProductR,
 
 })
 

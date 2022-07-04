@@ -3,7 +3,8 @@ import { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { adminProducts } from "../../redux/actions/adminProductsA";
 import CardAdminProducts from './CardAdminProducts';
-
+import {Link} from "react-router-dom";
+// import UpdateProduct from './UpdateProduct';
 
 export default function AdminProd() {
     
@@ -22,7 +23,7 @@ export default function AdminProd() {
             {product.map(e => {
 
                 return(
-                    <Fragment >
+                    <Fragment > 
                     <CardAdminProducts
                         id={e.id}
                         key={e.id}
@@ -38,6 +39,9 @@ export default function AdminProd() {
                         disabled={e.disabled}
                         
                     />
+                    {/* <UpdateProduct /> */}
+                    <Link  to = {"/up/" + e.id}>Modificar producuto</Link>
+                    
                     </Fragment>
                 )
             })} 

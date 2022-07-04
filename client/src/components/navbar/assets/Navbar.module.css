@@ -20,6 +20,15 @@
     padding-right: 15px;
 }
 
+.dashboard {
+    margin-right: 25px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    padding-right: 15px;
+}
+
 .active {
     text-decoration: none;
 }
@@ -61,7 +70,7 @@
     margin-bottom: 20px;
 }
 
-.account:hover{
+.account:hover {
     cursor: pointer;
 }
 

@@ -1,5 +1,7 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
+import {ThemeProvider} from '@material-ui/core/styles';
+import theme from './components/material_UI/Styles';
 import Navbar from './components/navbar/Navbar';
 import Products from './components/products/Products';
 import LandingPage from './components/landingPage/LandingPage';
@@ -16,7 +18,7 @@ import UpdateBanned from './components/dashboard/UpdateBanned';
 function App() {
   return (
     <div >
-    
+      <ThemeProvider theme={theme}>
         <Navbar />
         <Routes>
           <Route path="" element={<LandingPage />} />
@@ -31,7 +33,7 @@ function App() {
           <Route path="/UpdateAdmin/:id" element={<UpdateAdmin />} />
           <Route path="/UpdateBanned/:id" element={<UpdateBanned />} />
         </Routes>
-      
+      </ThemeProvider>
     </div>
   );
 }

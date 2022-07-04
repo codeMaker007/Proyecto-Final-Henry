@@ -21,8 +21,9 @@ class PaymentService {
       back_urls: {
         failure: "/failure",
         pending: "/pending",
-        success: "/success"
-      },            
+        success: "https://pf-deployment.vercel.app/"
+      }, 
+      "auto_return": "approved",             
   "shipments": {
     cost: prod[0].cost,
     free_shipping: prod[0].free,
@@ -33,7 +34,7 @@ class PaymentService {
         "street_name": prod[0].streetname,
         "street_number": prod[0].streetnumber
     }
-      }
+      },
   };
 
     const payment = await axios.post(url, body, {

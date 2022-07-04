@@ -22,6 +22,8 @@ export default function Favoritos() {
                                         category={e.category}
                                         image={e.image}
                                         description={e.description}
+                                        quantity={e.quantity}
+                                        stock={e.stock}
                                     />
                                 )
                             })}

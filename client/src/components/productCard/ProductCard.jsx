@@ -15,7 +15,8 @@ function ProductCard({ name, image, price, description, category, stock, id, qua
     const [isFavorite, setIsFavorite] = useState(false);
     const [modal, setModal] = useState({
         open: false,
-        type: ''
+        type: '',
+        text: ''
     });
 
     useEffect(() => {
@@ -27,7 +28,7 @@ function ProductCard({ name, image, price, description, category, stock, id, qua
 
     function handleCarrito() {
         const check = productsInCarrito.some(e => e.id === id);
-        if (check) return setModal({ ...modal, open: true, type: 'error' })
+        if (check) return setModal({ ...modal, open: true, type: 'error', text: 'Producto ya en carrito' })
         else {
             addProductCarrito({
                 id: id,
@@ -39,7 +40,7 @@ function ProductCard({ name, image, price, description, category, stock, id, qua
                 category: category,
                 quantity: quantity
             })
-            setModal({ ...modal, open: true, type: 'success' })
+            setModal({ ...modal, open: true, type: 'success', text: 'Producto agregado a carrito' })
         }
     }
 
@@ -87,7 +88,7 @@ function ProductCard({ name, image, price, description, category, stock, id, qua
             </div >
             {
                 (modal.open)
-                    ? <Alerta setOpenModal={setModal} type={modal.type} />
+                    ? <Alerta setOpenModal={setModal} type={modal.type} text={modal.text} />
                     : <></>
             }
         </>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { postProducto } from "../../redux/actions/createProductA";
 import { useDispatch } from 'react-redux';
 import style from "./CreateProduct.module.css";
@@ -277,8 +276,7 @@ export default function CreateProduct() {
 
                 <button className={style.boton1} type='submit'>Crear Producto</button>
                 <br /><br />
-                <Link to="/"><button className={style.volver}>Ir al home</button></Link>
-                <Link to="/products"><button className={style.volver}>Ir a productos</button></Link>
+            
             </form>
         </div>
     )

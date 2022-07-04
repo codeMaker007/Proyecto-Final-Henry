@@ -41,6 +41,11 @@ module.exports = (sequelize) => {
     picture: {
     type: DataTypes.STRING,
     allowNull: true,
-    }
+    },
+    banned: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+  },
+
   });
 };

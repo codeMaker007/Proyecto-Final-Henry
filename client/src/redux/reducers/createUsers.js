@@ -1,4 +1,5 @@
 import {ADD_USER} from '../actions/createUsers';
+import {UPDATE_USER} from '../actions/DashboardUpdateUserA';
 
 const initialState = {
     userCreated: []
@@ -11,6 +12,13 @@ const userCreated = (state = initialState, { type, payload }) => {
             return {
                 ...state,
             }
+
+        case UPDATE_USER:
+            return {
+                ...state,
+                userCreated: payload
+            }
+
         default:
             return state;
 
