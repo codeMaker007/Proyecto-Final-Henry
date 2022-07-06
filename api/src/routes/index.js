@@ -24,7 +24,11 @@ const { mostDiscountedProducts } = require('../controllers/Product/GET/mostDisco
 const { bestSellingProducts } = require('../controllers/Product/GET/bestSellingProducts');
 const { payments } = require('../controllers/PaymentsMP/payments');
 const { suscription } = require('../controllers/PaymentsMP/suscription');
-const {createOrder, captureOrder, cancelOrder} = require('../controllers/PaymentsPP/payment.paypal')
+const {createOrder, captureOrder, cancelOrder} = require('../controllers/PaymentsPP/payment.paypal');
+const { getOrder } = require('../controllers/PaymentsMP/getOrder');
+const { createOrderMP } = require('../controllers/Order/POST/createOrderMP');
+const { getAdminOrders } = require('../controllers/Order/GET/getAdminOrders');
+const { getUserOrders } = require('../controllers/Order/GET/getUserOrders');
 
 
 
@@ -74,6 +78,14 @@ router.get('/mostDiscountedProducts', mostDiscountedProducts)
 router.get('/bestSellingProducts', bestSellingProducts)
 
 router.post('/payments', payments)
+
+router.get("/orderMP", getOrder)
+
+router.post("/createOrderMP", createOrderMP )
+
+router.get("/getAdminOrders", getAdminOrders)
+
+router.get("/getUserOrders/:userId", getUserOrders)
 
 router.post('/suscription', suscription)
 

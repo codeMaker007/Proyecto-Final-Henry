@@ -6,10 +6,12 @@ class PaymentService {
     let allProducts = []
     prod.forEach(p => {
       let obj = {
+        "id": p.id,
         "title": p.name,
         "description": p.description,
         "category_id": p.category,
         "quantity": p.quantity,
+        "picture_url": p.image,
         "unit_price": p.price
       }
       allProducts.push(obj)
