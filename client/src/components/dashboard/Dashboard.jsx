@@ -43,7 +43,7 @@ const Dashboard = () => {
     return (
         <>
             {
-                (isAuthenticated && findedUser.isAdmin)
+                (isAuthenticated && findedUser?.isAdmin)
                     ? <div className={style.container}>
                         <h1>Dashboard</h1>
                         <div>

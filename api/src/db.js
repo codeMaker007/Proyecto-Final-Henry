@@ -41,7 +41,7 @@ User.belongsToMany(Product, {as: 'cartProduct', through: "Cart"})
 Product.belongsToMany(User, {as: 'favouriteUser', through: "Favourite"})
 User.belongsToMany(Product, {as: 'favouriteProduct', through: "Favourite"})
 
-User.hasOne(Address, {onDelete: 'CASCADE'})
+User.hasMany(Address, {onDelete: 'CASCADE'})
 Address.belongsTo(User)
 
 Order.belongsToMany(User, {through: "User_Order"})

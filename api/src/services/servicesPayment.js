@@ -21,7 +21,7 @@ class PaymentService {
       payer_email: "test_user_91448486@testuser.com",
       items: allProducts ,
       back_urls: {
-        failure: "/failure",
+        failure: "https://pf-deployment.vercel.app/",
         pending: "/pending",
         success: "https://pf-deployment.vercel.app/"
       }, 

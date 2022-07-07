@@ -28,6 +28,7 @@ function ProductCard({ name, image, price, description, category, stock, id, qua
 
     function handleCarrito() {
         const check = productsInCarrito.some(e => e.id === id);
+        if (stock < 1) return setModal({ ...modal, open: true, type: 'error', text: 'Producto sin stock' })
         if (check) return setModal({ ...modal, open: true, type: 'error', text: 'Producto ya en carrito' })
         else {
             addProductCarrito({

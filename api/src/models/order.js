@@ -11,9 +11,6 @@ module.exports = (sequelize) => {
         merchant_order_id: {
             type: DataTypes.BIGINT,
             defaultValue: 0
-        },
-        items:{
-            type: DataTypes.ARRAY(DataTypes.STRING)
         }
     });
 };

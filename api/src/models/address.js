@@ -4,15 +4,16 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Address', {
-    address: {
+    street: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     number: {
         type: DataTypes.INTEGER,
+        allowNull: false,
     },
     zipCode: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     province: {
@@ -27,6 +28,10 @@ module.exports = (sequelize) => {
     },
     description: {
       type: DataTypes.TEXT,
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   });
 };
