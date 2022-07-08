@@ -19,6 +19,10 @@ export default function App({ products }) {
                 slidesPerView={5}
                 spaceBetween={15}
                 breakpoints={{
+                    360: {
+                        width: 360,
+                        slidesPerView: 1,
+                    },
                     370: {
                         width: 370,
                         slidesPerView: 1,

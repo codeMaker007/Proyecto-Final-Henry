@@ -1,67 +1,3 @@
-// import React from 'react';
-// // import { Link } from 'react-router-dom';
-// // import style from './assets/CardsLanding.module.css';
-// import Card from '@mui/material/Card';
-// import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import Typography from '@mui/material/Typography';
-// import { CardActionArea } from '@mui/material';
-// // import Badge from '@mui/material/Badge';
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
-
-// export default function CardsLanding({ name, image, price, description, category, stock, id, addProductCarrito, favorito = false, addFavorite, removeFavorite }) {
-//     let imageProduct
-//     if (image.length < 30) imageProduct = noImage;
-//     else imageProduct = image
-
-
-//     return (
-//         // <div id={id} className={style.card}>
-//         //     <img src={image} className={style.cardImg} alt='Imagen producto' onError={({ currentTarget }) => {
-//         //         currentTarget.onerror = null; // prevents looping
-//         //         currentTarget.src = `${noImage}`;
-//         //     }} />
-//         //     <Link to={`/`} className={style.linkTo}><p className={style.textTitle}>{name.charAt(0).toUpperCase() + name.slice(1)}</p></Link>
-
-
-//         //     <div className={style.footer}>
-//         //         {/* <span className={style.textTitle}>${price}</span> */}
-//         //     </div>
-//         // </div>
-//         <>
-//             <Card sx={{ maxWidth: 250 }}>
-//                 <CardActionArea>
-//                     <CardMedia
-//                         component="img"
-//                         height="200"
-//                         image={imageProduct}
-//                         alt={name}
-//                     />
-//                     <div style={{
-//                         display: "flex",
-//                         justifyContent: "space-between",
-//                         alignItems: "center",
-//                         marginBottom: 50
-//                     }}>
-//                         <CardContent>
-//                             <Typography gutterBottom variant="h5" component="div">
-//                                 {name}
-//                             </Typography>
-//                             <Typography variant="body2" color="text.secondary">
-//                                 {description}
-
-//                             </Typography>
-//                         </CardContent>
-//                     </div>
-//                 </CardActionArea>
-//                 <FavoriteBorderIcon />
-//             </Card>
-//         </>
-//     )
-// }
-
-
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import noImage from '../carrito/assets/no-image.jpg';
@@ -153,11 +89,11 @@ export default function CardsLanding({ name, image, price, description, category
                 position: 'absolute',
                 right: 0
             }}>
-                <IconButton aria-label="favorite">
+                <IconButton aria-label="favorite" onClick={checkFavorite} >
                     {
                         (isFavorite)
-                            ? <div onClick={checkFavorite} ><FavoriteIcon /></div>
-                            : <div onClick={checkFavorite} ><FavoriteBorderIcon onClick={checkFavorite} /></div>
+                            ? <div><FavoriteIcon /></div>
+                            : <div><FavoriteBorderIcon /></div>
                     }
                 </IconButton>
             </div>
@@ -194,11 +130,9 @@ export default function CardsLanding({ name, image, price, description, category
                     <Div>${price}</Div>
                 </div>
                 <Div>${Math.trunc(precioConDescuento)}</Div>
-                <div onClick={handleCarrito}>
-                    <Button disableElevation color="primary" variant="contained" >
-                        Comprar
-                    </Button>
-                </div>
+                <Button onClick={handleCarrito} disableElevation color="primary" variant="contained" >
+                    Comprar
+                </Button>
             </CardActions >
         </Card >
     );

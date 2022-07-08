@@ -2,9 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import { limpiarCarrito } from '../../redux/actions/carritoA';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function PaypalForm({ data, total, setPago }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     let paypalRef = React.useRef();
 
     let dataPaypal = data.map(e => {
@@ -46,13 +48,13 @@ export default function PaypalForm({ data, total, setPago }) {
                     });
                 },
                 onApprove: async (data, actions) => {
-                    // const order = await actions.order.capture();
+                    const order = await actions.order.capture();
                     dispatch(limpiarCarrito());
                     reducirStock.forEach(e => {
-                        axios.put(`/ProductDetail/${e.id}`, ({ stock: e.stock - e.quantity }))
+                        axios.put(`/ProductDetail/${e.id}`, ({ quantity: e.quantity }))
                     })
-                    // console.log(order);
-                    setPago('exitoso')
+                    console.log(order);
+                    navigate('/success');
                 },
                 onCancel: function (data, actions) {
                     console.log("Cancelaste la compra qlio");

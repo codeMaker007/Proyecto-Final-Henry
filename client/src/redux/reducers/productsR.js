@@ -3,6 +3,7 @@ import { GET_PRODUCT_BY_NAME } from '../actions/productName';
 
 const initialState = {
     products: [],
+    totalProducts: 0
 }
 
 const productsR = (state = initialState, { type, payload }) => {
@@ -10,7 +11,8 @@ const productsR = (state = initialState, { type, payload }) => {
         case GET_ALL_PRODUCTS:
             return {
                 ...state,
-                products: payload
+                products: payload,
+                totalProducts: payload.length
             }
         case ORDER_PRICE_ASC:
             return {

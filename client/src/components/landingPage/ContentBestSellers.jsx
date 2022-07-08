@@ -19,6 +19,10 @@ export default function App({ products }) {
                 slidesPerView={5}
                 spaceBetween={15}
                 breakpoints={{
+                    360: {
+                        width: 360,
+                        slidesPerView: 1,
+                    },
                     370: {
                         width: 370,
                         slidesPerView: 1,
@@ -34,7 +38,7 @@ export default function App({ products }) {
                 }}
                 slidesPerGroup={1}
                 loop={(products.length > 6) ? true : false}
-                loopFillGroupWithBlank={false}
+                loopFillGroupWithBlank={true}
                 // pagination={{
                 //     clickable: true,
                 // }}

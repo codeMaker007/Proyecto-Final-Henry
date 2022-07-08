@@ -26,11 +26,13 @@ export default function Navbar() {
     let number = productsCart.length;
 
     const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+    console.log(user)
 
     let isAdmin;
     if (isAuthenticated) {
         let findedUser = users.filter(e => e.username === user.nickname).shift();
         (findedUser?.isAdmin) ? isAdmin = true : isAdmin = false;
+        console.log(findedUser)
     }
     // console.log(findedUser)
 

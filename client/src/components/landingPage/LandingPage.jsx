@@ -38,10 +38,11 @@ export default function BasicGrid() {
         md: false
     });
 
+    console.log(window.innerWidth)
     const handleResponsive = () => {
-        if (window.innerWidth < 420) return setResponsive({ ...responsive, xs: true })
-        else if (window.innerWidth < 600) return setResponsive({ ...responsive, sm: true })
-        else if (window.innerWidth < 900) return setResponsive({ ...responsive, md: true })
+        if (window.innerWidth < 440) return setResponsive({ xs: true, sm: false, md: false })
+        else if (window.innerWidth < 600) return setResponsive({ xs: false, sm: true, md: false })
+        else if (window.innerWidth < 900) return setResponsive({ xs: false, sm: false, md: true })
     }
 
     useEffect(() => {
@@ -49,7 +50,7 @@ export default function BasicGrid() {
         dispatch(getDiscountedProducts());
         dispatch(getBestSellers());
         dispatch(getNewProducts());
-        window.addEventListener('resize', handleResponsive)
+        window.addEventListener('resize', handleResponsive())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -78,11 +79,11 @@ export default function BasicGrid() {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent='center' spacing={2}>
-                <Grid item xs={11} sm={11} md={8}>
+                <Grid item xs={12} sm={11} md={8}>
                     <Carousel images={images} />
                 </Grid>
                 <Grid container justifyContent='center' spacing={2}>
-                    <Grid item xs={10}>
+                    <Grid item xs={9.5} sm={9.7} lg={9} xl={8.5}>
                         <div style={{
                             marginTop: 12,
                             right: 400,
@@ -95,7 +96,7 @@ export default function BasicGrid() {
                     </Grid>
                 </Grid>
                 <Grid item container justifyContent='center' spacing={2} >
-                    <Grid item xs={10}>
+                    <Grid item xs={9.5} sm={9.7} lg={9} xl={8.5}>
                         <Content products={discountProducts} />
                     </Grid>
                 </Grid>
@@ -105,19 +106,19 @@ export default function BasicGrid() {
                 <Grid item xs={11} sm={5.5}>
                     <img src='https://www.nvidia.com/content/dam/en-zz/Solutions/events/ces-2022/strip-banner/geforce-ampere-rtx-laptops-learn-gf-strip-1024-t@2x-es-mx.jpg' alt='imagen' width='100%' style={{ borderRadius: 7 }} />
                 </Grid>
-                <Grid item container justifyContent='center' spacing={2}>
-                    <Grid item xs={9}>
+                <Grid container justifyContent='center' spacing={2}>
+                    <Grid item xs={10.5} sm={9.7} lg={9} xl={8.5}>
                         <div style={{
                             marginTop: 12,
                             textDecoration: 'underline',
-                            marginBottom: 15
+                            // marginBottom: -10
                         }}>
-                            <Typography variant="h5" component="div">
+                            <Typography variant="h5" gutterBottom component="div">
                                 Mas vendido
                             </Typography>
                         </div>
                     </Grid>
-                    <Grid item justifyContent='center' xs={9}>
+                    <Grid item xs={10} sm={9.5} lg={9} xl={8.5}>
                         {
                             (responsive.md || responsive.xs)
                                 ? <ContentBestSellers products={bestSellers} />
@@ -141,15 +142,15 @@ export default function BasicGrid() {
                 <Grid item container justifyContent='center' spacing={2}>
                     <Grid container justifyContent='center' item xs={11} width='100%' height={110} mt={5}>
                         {
-                            (responsive.md) ? <div style={{ backgroundColor: '#134074', width: '90%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            (responsive.md) ? <div style={{ backgroundColor: '#134074', width: '100%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
                                 <img src={asus} alt='asus' height='155%' />
                                 <img src={intel} alt='intel' height='135%' />
-                                <img src={amd} alt='amd' height='160%' />
+                                {/* <img src={amd} alt='amd' height='160%' /> */}
                             </div>
                                 : (responsive.xs)
                                     ? <div style={{ backgroundColor: '#134074', width: '90%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
                                         <img src={asus} alt='asus' height='95%' />
-                                        <img src={intel} alt='intel' height='75%' />
+                                        {/* <img src={intel} alt='intel' height='75%' /> */}
                                         <img src={amd} alt='amd' height='100%' />
                                     </div>
                                     : <div style={{ backgroundColor: '#134074', width: '82%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
@@ -199,7 +200,7 @@ export default function BasicGrid() {
                     </Grid>
                 </Grid>
                 <Grid container justifyContent='center' spacing={2}>
-                    <Grid item xs={8}>
+                    <Grid item xs={8} sm={11} lg={9} xl={9}>
                         <div style={{
                             borderRadius: 4,
                             padding: 3,
@@ -217,9 +218,9 @@ export default function BasicGrid() {
                     <Grid item xs={10.5}>
                         <Box sx={{ width: '100%', height: 300, marginTop: -2, display: 'flex', justifyContent: 'center', padding: 2 }}>
                             {
-                                (responsive.sm)
+                                (responsive.xs)
                                     ? <ContentEnd products={newProducts.slice(0, 4)} />
-                                    : (responsive.md)
+                                    : (window.innerWidth < 800)
                                         ? <ContentEnd products={newProducts.slice(0, 4)} />
                                         : <ContentEnd products={newProducts.slice(0, 6)} />
                             }

@@ -32,16 +32,12 @@ export const getByCategory = (data) => {
         return dispatch({ type: FILTER_CATEGORY, payload: response })
     }
 }
-export function rangoByPrice(payload) {
+export function rangoByPrice(minimo, maximo) {
     return async function (dispatch) {
-        var json = await axios.get(`/filterPriceRange/${payload}`);
-        return dispatch({
-            type: RANGO_PRICE,
-            payload: json.data
-        })
+        let response = (await axios.get(`/filterPriceRange/${minimo}/${maximo}`)).data;
+        return dispatch({ type: RANGO_PRICE, payload: response })
     }
 }
-
 
 export function byDiscount(payload) {
     return async function (dispatch) {
