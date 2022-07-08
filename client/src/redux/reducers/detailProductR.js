@@ -1,4 +1,4 @@
-import { GET_PRODUCT_ID } from "../actions/detailProductA";
+import { GET_PRODUCT_ID, REFRESH} from "../actions/detailProductA";
 
 const initialState = {
     product: [],
@@ -11,6 +11,12 @@ const detailProductR = (state = initialState, { type, payload }) => {
                 ...state,
                 product: payload
             }
+        case REFRESH:
+            return {
+                ...state,
+                product: []
+            }
+            
         default:
             return state;
     }

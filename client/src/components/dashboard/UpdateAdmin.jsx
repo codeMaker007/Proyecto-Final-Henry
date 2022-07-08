@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector  } from 'react-redux'
 import style from './assets/UpdateProduct.module.css';
 import { UpdateUserA } from '../../redux/actions/DashboardUpdateUserA'; ////
-import { useLocation } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 export default function UpdateAdmin() {
+    const {user, isAuthenticated, isLoading} = useAuth0()
+    const allUser = useSelector ((state) => state.DashboardUsersR.allUsers); 
 
-    const location = useLocation()
-    let id = (location.pathname.substring(13, location.pathname.length))
+    const usuario = allUser.find  (u =>u.email === user.email) 
+    const id = usuario.id
+
+    // const allUser = useSelector ((state) => state.DashboardUsersR.allUsers);
+    // const id = allUser[0].id
+
+    // const location = useLocation()
+    // let id = (location.pathname.substring(1, location.pathname.length))
     const dispatch = useDispatch()
     // const [errors, setErrors] = useState({}) 
     const [input, setInput] = useState({ isAdmin: "", })

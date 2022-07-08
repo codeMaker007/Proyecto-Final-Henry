@@ -1,4 +1,4 @@
-.foto{
+/* .foto{
     border-radius:600px;
     width: 150px;
     height: auto;
@@ -27,20 +27,25 @@
 .usuario{
     color: rgba(255, 255, 255, 0.795);
     font-size: 30px;
-    /* margin-top: -20px; */
-    font-family:Verdana;
+     font-family:Verdana;
 }
 .nombre{
     color: rgba(255, 255, 255, 0.795);
     font-size: 30px;
-    /* margin-top: -20px; */
+
     font-family:Verdana;
 }
 
 .datos{
     color: rgba(255, 255, 255, 0.795);
     font-size: 25px;
-    /* margin-top: 0px; */
+  
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+
+}
+.modificarDatos{
+    color: red;
+    font-size: 18px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 
 }
@@ -56,11 +61,11 @@
     padding:4px 10px;
     text-decoration:none;
      margin-left: 1%; 
-    /* margin-right: 25%; */
+
     border-color: rgba(255, 255, 255, 0.795);
 }
 .volver:hover{
     background-color: var(--navbar-bg-color);
     color:rgba(255, 255, 255, 0.795);
     border-color: rgba(255, 255, 255, 0.795);
-}
+} */

@@ -1,5 +1,7 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
+import {ThemeProvider} from '@material-ui/core/styles';
+// import theme from './components/material_UI/Styles';
 import Navbar from './components/navbar/Navbar';
 import Products from './components/products/Products';
 import LandingPage from './components/landingPage/LandingPage';
@@ -12,11 +14,13 @@ import CarritoContainer from './components/carrito/CarritoContainer';
 import UpdateProduct from './components/dashboard/UpdateProduct';
 import UpdateAdmin from './components/dashboard/UpdateAdmin';
 import UpdateBanned from './components/dashboard/UpdateBanned';
+import LoginData from "./components/perfilDelUsuario/LoginData";
+import LoginAddress from "./components/perfilDelUsuario/LoginAddress";
 
 function App() {
   return (
     <div >
-    
+    <ThemeProvider >
         <Navbar />
         <Routes>
           <Route path="" element={<LandingPage />} />
@@ -30,8 +34,10 @@ function App() {
           <Route path="/up/:id" element={<UpdateProduct />} />
           <Route path="/UpdateAdmin/:id" element={<UpdateAdmin />} />
           <Route path="/UpdateBanned/:id" element={<UpdateBanned />} />
+          <Route path="/LoginData/:id" element={<LoginData />} />
+          <Route path="/LoginAddress/:id" element={<LoginAddress />} />
         </Routes>
-      
+        </ThemeProvider>
     </div>
   );
 }

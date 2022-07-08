@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const {priceOrder} = require('../controllers/Product/GET/priceOrder')
+const {orderByName} = require('../controllers/Product/GET/priceOrder')
 const {filterCategories} = require('../controllers/Product/GET/filterCategories')
 const {getProduct} = require("../controllers/Product/GET/getProductByName");
 const { createProduct } = require('../controllers/Product/POST/createProduct');
@@ -45,7 +45,7 @@ router.get("/ProductDetail/:idProduct", getProductById)
 
 router.put("/ProductDetail/:idProduct", updateProduct)
 
-router.get('/order/:priceOrder', priceOrder)
+router.get('/order/:nameOrder', orderByName)
 
 router.get('/filterCategory/:filterCategory', filterCategories)
 
@@ -67,7 +67,7 @@ router.get('/filterDisabled/:filterDisabled', filterDisabled)
 
 router.get('/filterEyS/:filterEyS', filterEyS)
 
-router.get('/filterPriceRange/:filterPrice', filterPriceRange)
+router.get('/filterPriceRange/:minPrice/:maxPrice', filterPriceRange)
 
 router.get('/filterDiscount/:discount', filterDiscount)
 

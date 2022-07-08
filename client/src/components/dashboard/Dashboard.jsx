@@ -9,13 +9,15 @@ import DashboardUsers from './DashboardUsers';
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { DashboardUsersA } from '../../redux/actions/DashboardUsersA';
-
+import { refresh } from '../../redux/actions/detailProductA';
 
 
 const Dashboard = () => {
     const dispatch = useDispatch();
+    const detail = useSelector ((state) => state.detailProduct.product);
 
     useEffect(() => {
+        dispatch(refresh())
         dispatch(DashboardUsersA())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -27,7 +29,7 @@ const Dashboard = () => {
     if (isAuthenticated) {
         findedUser = users.filter(e => e.username === user.nickname).shift()
     }
-    console.log(findedUser)
+    // console.log(findedUser)
 
     const [isShown, setIsShown] = useState(false);
     const [buttIndex, setButtIndex] = useState(null);
@@ -44,7 +46,8 @@ const Dashboard = () => {
         <>
             {
                 (isAuthenticated && findedUser?.isAdmin)
-                    ? <div className={style.container}>
+                    ?
+                     <div className={style.container}>
                         <h1>Dashboard</h1>
                         <div>
                             <button id={1} onClick={handleClick} className={style.btn}>Crear productos</button>

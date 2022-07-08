@@ -1,20 +1,33 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {useDispatch, useSelector} from "react-redux"
 import  {DashboardUsersA}  from '../../redux/actions/DashboardUsersA';
 import CardUsuario from './CardUsuario';
-import {Link} from "react-router-dom";
-// import style from './assets/Dashboard.module.css';
-
+import UpdateAdmin from './UpdateAdmin';
+import UpdateBanned from './UpdateBanned';
+import style from './assets/Dashboard.module.css';
 
 
 export default function DashboardUsers() {
 
     const dispatch = useDispatch()
-    const allUser = useSelector ((state) => state.DashboardUsersR.allUsers); 
-
+    const allUser = useSelector ((state) => state.DashboardUsersR.allUsers);
+    console.log("usuario", allUser)
+       
     useEffect(()=>{
         dispatch (DashboardUsersA())
     },[dispatch]) 
+
+
+    const [isShown, setIsShown] = useState(false);
+    const [buttIndex, setButtIndex] = useState(null);
+
+   
+    const handleClick = event => {
+        event.preventDefault();
+        setIsShown(current => !current);
+        setButtIndex(Number(event.target.id))
+
+    };
 
     return (
         <div>
@@ -29,15 +42,22 @@ export default function DashboardUsers() {
                         key={e.id}
                         username={e.username}
                         name={e.name}
-                        // lastName={e.lastName}
-                        // dni={e.dni}
-                        // email={e.email}
-                        // celphone={e.celphone}
-                        banned = {e.banned}
-                        isAdmin = {e.isAdmin}
+                        email = {e.email === null? "No registrado" : e.email}
+                        celphone = {e.email === null? "No registrado" : e.celphone}
+                        isAdmin = {e.isAdmin === true? "Si. " : "No. "}
+                        banned = {e.banned === true? "Si. " : "No. "}
+                         
+                        
                     />
-                        <Link  to = {"/UpdateAdmin/" + e.id}>Hacer Administrador </Link>
-                        <Link  to = {"/UpdateBanned/" + e.id}>Bloquear usuario </Link>
+                       
+                    
+                        <button id={1} onClick={handleClick} className={style.btn}>Hacer administrador</button>
+                            {isShown && buttIndex === 1 &&  <UpdateAdmin id={e.id} /> }
+                        
+                        <button id={2} onClick={handleClick} className={style.btn}>Bloquear usuario</button>
+                            {isShown && buttIndex === 2 &&  <UpdateBanned id={e.id} /> }
+
+                        
                     </Fragment>
                 )
             })} 

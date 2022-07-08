@@ -7,16 +7,18 @@ export default function Card ({id, username, name, lastName, dni, email, celphon
         <div >
 
             <p >ID: {id}.
-            USERNAME: {username}. 
+            USUARIO: {username}. 
             NOMBRE: { name}. 
-            {/* APELLIDO: {lastName}.  */}
             {/* DNI: {dni}.  */}
-            {/* EMAIL: { email}.  */}
-            {/* TELEFONO: { celphone}. */}
+            EMAIL: { email}. 
+            TEL.: { celphone}.
+            ADMIN: { isAdmin}
+            BLOQUEADO: { banned}
             </p>
-            {/* {banned? <p>Usuario Bloqueado. </p> : ""}
-            {isAdmin === true? <p>Administrador </p> : ""}
-             */}
+          
+            
+           
+            
                       
         </div>
     );

@@ -2,43 +2,75 @@ import React, { useEffect, useState } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux'
 import style from './assets/UpdateProduct.module.css';
 import { UpdateProductA } from '../../redux/actions/DashboardUpdateProductA'; //   UpdateProductR.UpdateProduct
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import { getOneProduct } from '../../redux/actions/detailProductA';
 
 
 export default function UpdateProduct() {
  
+    const navigate = useNavigate ()
     const location = useLocation()
-    let id = (location.pathname.substring(4,location.pathname.length))
+    let id = (location.pathname.substring(4,location.pathname.length)) 
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
-    // const [input, setInput] = useSelector ((state) => state.DashboardUpdateProductR.productoscreados); 
+
+    // const {id} = useParams()usar la productDetail/:ID
+    let update = useSelector ((state) => state.detailProduct.product); 
+    if (!update.name){
+    dispatch(getOneProduct(id))
+    }
+    update = useSelector ((state) => state.detailProduct.product); 
+
+ 
+    
+      
     const [input, setInput] = useState({
         name: "", image: "", price: "", description: "", stock: "", categories: "", discount: "", brand: "", freeShipping: "",
     })
 
+   
+    
+    useEffect(()=>(setInput({
+        name: update.name,
+        image: update.image,
+        price: update.price,
+        description: update.description,
+        stock: update.stock,
+        categories: update.categories,
+        discount: update.discount,
+        brand: update.brand,
+        freeShipping: update.freeShipping,
+      })),[update]
+      )
+  
+    
     // useEffect(() => {
     //     dispatch (UpdateProductA(props.match.params.id));
     // }, [dispatch])
 
     function handleSubmit(e) {
         e.preventDefault()
+
+                
+        if(input.name !== update.name
+            || input.image !== update.image
+            || input.price !== update.price
+            || input.description !== update.description
+            || input.stock !== update.stock
+            || input.categories !== update.categories
+            || input.discount !== update.discount
+            || input.brand !== update.brand
+            || input.freeShipping !== update.freeShipping
+         ){
+            
         dispatch(UpdateProductA(id, input))
-        // console.log("componente", )
-        // await axios.put(`/ProductDetail/${id}`,({name, image, price, description, categories, }))
         alert("Producto modificado con exito")
-        // setInput({
-        //     name: "",
-        //     image: "",
-        //     price: "",
-        //     description: "",
-        //     categories: "",
-        //     stock: "",
-        //     brand: "",
-        //     freeShipping: "",
-        //     discount: "",
-        // })
-        
-        
+        navigate('/dashboard')
+         }
+        else {
+            alert ("Debe modificar algún campo")
+        }
+                
     }
 
 
