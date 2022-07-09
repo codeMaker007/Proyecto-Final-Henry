@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, ORDER_PRICE_DESC, FILTER_CATEGORY, RANGO_PRICE, DISCOUNT, ENVIOS, GET_BRAND, ORDER_PRICE_ASC } from "../actions/productsA";
+import { GET_ALL_PRODUCTS, ORDER_PRICE_DESC, FILTER_CATEGORY, RANGO_PRICE, DISCOUNT, ENVIOS, GET_BRAND, ORDER_PRICE_ASC, ORDER_ALPHA } from "../actions/productsA";
 import { GET_PRODUCT_BY_NAME } from '../actions/productName';
 
 const initialState = {
@@ -53,6 +53,11 @@ const productsR = (state = initialState, { type, payload }) => {
             }
 
         case GET_BRAND:
+            return {
+                ...state,
+                products: payload
+            }
+        case ORDER_ALPHA:
             return {
                 ...state,
                 products: payload

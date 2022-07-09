@@ -12,7 +12,7 @@ import ProductsCard from './ProductsCard';
 import Precio from './Precio';
 import Marcas from './Marcas';
 import { Button } from '@mui/material';
-import { getAllProducts, getByCategory, byEnvios, getbrand, rangoByPrice } from '../../redux/actions/productsA';
+import { getAllProducts, getByCategory, byEnvios, getbrand, rangoByPrice, order } from '../../redux/actions/productsA';
 import Paginado from './Paginado';
 
 const ITEMS_PER_PAGE = 12;
@@ -45,11 +45,13 @@ export default function BasicGrid() {
     const dispatch = useDispatch();
 
     const [state, setState] = useState({
-        categoria: 'null',
+        categoria: '',
         envio: '',
         marcas: '',
         minimo: 0,
-        maximo: 0
+        maximo: 0,
+        orden: '',
+
     });
 
     useEffect(() => {
@@ -58,10 +60,11 @@ export default function BasicGrid() {
     }, [])
 
     useEffect(() => {
-        if (state.categoria?.length > 2) dispatch(getByCategory(state.categoria));
+        if (state.categoria !== 'null') dispatch(getByCategory(state.categoria));
         if (state.envio?.length > 2) dispatch(byEnvios(state.envio));
         if (state.marcas?.length > 2) dispatch(getbrand(state.marcas));
         if (state.minimo > 0) dispatch(rangoByPrice(state.minimo, state.maximo));
+        if (state.orden?.length > 2) dispatch(order(state.orden));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state])
 
@@ -82,7 +85,7 @@ export default function BasicGrid() {
     }, [products]);
 
     function cleanFilters() {
-        setState({ categoria: 'null', envio: '', marcas: '', minimo: 0, maximo: 0 })
+        setState({ categoria: 'null', envio: '', marcas: '', minimo: 0, maximo: 0, orden: '' })
         dispatch(getAllProducts());
     }
 
@@ -124,7 +127,7 @@ export default function BasicGrid() {
                         </Grid>
 
                         <Item sx={{ marginTop: 2, textAlign: 'right', borderBottom: '1px solid', borderColor: '#022335' }} elevation={1} >
-                            <Ordenar />
+                            <Ordenar setState={setState} state={state} />
                         </Item>
                         <Item >
                             <Grid container spacing={0.5}>

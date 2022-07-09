@@ -14,6 +14,14 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addFavorite, removeFavorite } from '../../redux/actions/favoritosA';
 import { addProductCarrito } from '../../redux/actions/carritoA';
 
+const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText('#FFC400'),
+    backgroundColor: '#FFC400',
+    '&:hover': {
+        backgroundColor: '#FFC400',
+    },
+}));
+
 export default function CardsLanding({ name, image, price, description, category, stock, id, discount, favorito = false, quantity, amountSold }) {
     const [value, setValue] = useState(2);
     const dispatch = useDispatch();
@@ -39,7 +47,7 @@ export default function CardsLanding({ name, image, price, description, category
 
     const Descuento = styled('div')(({ theme }) => ({
         ...theme.typography.button,
-        backgroundColor: '#b2ff59',
+        backgroundColor: '#FFC400',
         borderRadius: 7,
         padding: 2,
         margin: 5
@@ -130,9 +138,9 @@ export default function CardsLanding({ name, image, price, description, category
                     <Div>${price}</Div>
                 </div>
                 <Div>${Math.trunc(precioConDescuento)}</Div>
-                <Button onClick={handleCarrito} disableElevation color="primary" variant="contained" >
+                <ColorButton onClick={handleCarrito} disableElevation color="primary" variant="contained" >
                     Comprar
-                </Button>
+                </ColorButton>
             </CardActions >
         </Card >
     );

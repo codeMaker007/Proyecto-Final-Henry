@@ -9,6 +9,7 @@ const { createProduct } = require('../controllers/Product/POST/createProduct');
 const { updateProduct } = require('../controllers/Product/PUT/updateProduct');
 const { getProductById } = require('../controllers/Product/GET/getProductById');
 const {userPost} = require('../controllers/User/POST/userPost')
+const reviewsRoute = require ('./reviews');
 const usersRoute = require ('./users');
 const { adminProducts } = require('../controllers/Admin/GET/adminProducts');
 const {filterShipping} = require('../controllers/Product/GET/filterShipping')
@@ -29,16 +30,15 @@ const { getOrder } = require('../controllers/PaymentsMP/getOrder');
 const { createOrderMP } = require('../controllers/Order/POST/createOrderMP');
 const { getAdminOrders } = require('../controllers/Order/GET/getAdminOrders');
 const { getUserOrders } = require('../controllers/Order/GET/getUserOrders');
-const {converter} = require('../controllers/Product/GET/converter')
+// const {converter} = require('../controllers/Product/GET/converter')
 const {orderByPrice} = require('../controllers/Product/GET/orderByPrice')
 
-
 const router = Router();
-
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.use("/users", usersRoute);
+router.use("/reviews", reviewsRoute);
 
 router.post("/CreateProduct", createProduct)
 
@@ -96,7 +96,7 @@ router.get('/capture-order', captureOrder)
 
 router.get('/cancel-order', cancelOrder)
 
-router.get('/conversor/:moneda/:cantidad', converter)
+// router.get('/conversor/:moneda/:cantidad', converter)
 
 router.get('/order/:priceOrder', orderByPrice)
 

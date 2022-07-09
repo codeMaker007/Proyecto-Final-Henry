@@ -5,7 +5,7 @@ const orderByName = async (req, res) => {
     const allProducts = await Product.findAll()
 
     try {
-        nameOrder === 'ASC' ?
+        nameOrder === 'A-Z' ?
             allProducts.sort(function (a, b) {
                 if (a.name > b.name) {
                     return 1;

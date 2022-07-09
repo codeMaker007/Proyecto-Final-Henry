@@ -27,7 +27,7 @@ const Dashboard = () => {
     const { user, isAuthenticated } = useAuth0();
     let findedUser;
     if (isAuthenticated) {
-        findedUser = users.filter(e => e.username === user.nickname).shift()
+        findedUser = users.find(e => e.email === user.email)
     }
     // console.log(findedUser)
 

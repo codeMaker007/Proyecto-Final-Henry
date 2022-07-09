@@ -131,19 +131,27 @@ router.put('/switchBan/:id', async (req, res) => {
 //******************* */
 //ADDRESSES
 
-router.post('/:userId/addresses', async (req, res) => {
-    const {userId} = req.params;
-    const addressData = req.body;
+router.post('/CreateAddress', async (req, res) => {
+    const {userId} = req.body;
+    const addressData = {
+        street: req.body.street,
+        number: req.body.number,
+        zipCode: req.body.zipCode,
+        province: req.body.province,
+        location: req.body.location,
+        apartment: req.body.apartment,
+        description: req.body.description
+      };
     try {
         const address = await addAddress(userId, addressData);
-        return res.json(address);
+        return res.json("Dirección creada");
     }
     catch (err) {
         return res.status(500).send(`No se pudo modificar la información de la dirección (${err})`);
     }
 });
 
-router.get('/:userId/addresses', async (req, res) => {
+router.get('/addresses/:userId', async (req, res) => {
     const {userId} = req.params;
     try {
         const addressList = await getAddresses(userId);
@@ -154,9 +162,18 @@ router.get('/:userId/addresses', async (req, res) => {
     }
 });
 
-router.put('/:UserId/addresses/:id', async (req, res) => {
-    const {UserId, id} = req.params;
-    const addressData = req.body;
+router.put('/:UserId/addresses/', async (req, res) => {
+    const {UserId} = req.params
+    const {id} = req.body
+    const addressData = {
+        street: req.body.street,
+        number: req.body.number,
+        zipCode: req.body.zipCode,
+        province: req.body.province,
+        location: req.body.location,
+        apartment: req.body.apartment,
+        description: req.body.description
+      }
     try {
         const address = await updateAddress(UserId, id, addressData);
         return res.json(address);

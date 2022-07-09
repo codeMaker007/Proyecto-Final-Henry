@@ -1,10 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux'
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import style from './assets/UpdateProduct.module.css';
 import { UpdateProductA } from '../../redux/actions/DashboardUpdateProductA'; //   UpdateProductR.UpdateProduct
 import {useLocation, useNavigate} from "react-router-dom";
 import { getOneProduct } from '../../redux/actions/detailProductA';
 
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
+import Stack from '@mui/material/Stack';
+
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 export default function UpdateProduct() {
  
@@ -14,21 +30,54 @@ export default function UpdateProduct() {
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
 
-    // const {id} = useParams()usar la productDetail/:ID
     let update = useSelector ((state) => state.detailProduct.product); 
     if (!update.name){
     dispatch(getOneProduct(id))
     }
     update = useSelector ((state) => state.detailProduct.product); 
 
- 
-    
-      
+
     const [input, setInput] = useState({
         name: "", image: "", price: "", description: "", stock: "", categories: "", discount: "", brand: "", freeShipping: "",
     })
 
-   
+    function validate(input) {
+        let errors = {};
+
+        if (!input.name) {
+            errors.name = 'Coloca un nombre al producto.';
+        }
+        if (!input.image) {
+            errors.image = 'Coloca una imagen al producto.';
+        }
+
+        if (!input.price || !/^[1-9]\d*(\.\d+)?$/.test(input.price)) { 
+            errors.price = 'Coloca un precio al producto mayor a 0.';
+        }
+        if (!input.description) {
+            errors.description = 'Coloca una descripción al producto.';
+        }
+        // if(!input.categories){ 
+        //     errors.categories = 'Coloca una categoria al producto.';
+        // }
+        if (!input.stock || !/^[0-9]\d*(\.\d+)?$/.test(input.stock)) { 
+            errors.stock = 'Coloca un numero, cero o más.';
+        }
+        if (!input.brand) {
+            errors.brand = 'Coloca una marca al producto.';
+        }
+
+        if (!input.discount || !/^[0-9]\d*(\.\d+)?$/.test(input.discount)) { 
+            errors.discount = 'Coloca un numero, cero o más.';
+        }
+        if (input.discount > 100 ) { 
+            errors.discount = 'No se puede hacer un descuento mayor al 100%';
+        }
+        
+
+        return errors
+
+    }
     
     useEffect(()=>(setInput({
         name: update.name,
@@ -52,23 +101,35 @@ export default function UpdateProduct() {
         e.preventDefault()
 
                 
-        if(input.name !== update.name
-            || input.image !== update.image
-            || input.price !== update.price
-            || input.description !== update.description
-            || input.stock !== update.stock
-            || input.categories !== update.categories
-            || input.discount !== update.discount
-            || input.brand !== update.brand
-            || input.freeShipping !== update.freeShipping
+        if  (  input.name === update.name
+            && input.image === update.image
+            && input.price === update.price
+            && input.description === update.description
+            && input.stock === update.stock
+            && input.categories === update.categories
+            && input.discount === update.discount
+            && input.brand === update.brand
+            && input.freeShipping === update.freeShipping
          ){
-            
-        dispatch(UpdateProductA(id, input))
-        alert("Producto modificado con exito")
-        navigate('/dashboard')
-         }
-        else {
             alert ("Debe modificar algún campo")
+
+         }
+        else if (input.name.length === 0
+            || errors.hasOwnProperty("name") //devuelve un buleano si el objeto tiene la propiedad especificada 
+            || errors.hasOwnProperty("image")
+            || errors.hasOwnProperty("price")
+            || errors.hasOwnProperty("description")
+            || errors.hasOwnProperty("brand")
+            || errors.hasOwnProperty("discount")
+            || !input.categories
+            || errors.hasOwnProperty("stock")
+        ) {
+            alert ("Hay campos no completados")
+        }
+        else {
+            dispatch(UpdateProductA(id, input))
+            alert("Producto modificado con exito")
+            navigate('/dashboard')
         }
                 
     }
@@ -100,272 +161,229 @@ export default function UpdateProduct() {
         
     }
 
+  
+
     return (
+
         <div>
 
-            <form className={style.contenedor} onSubmit={(e) => handleSubmit(e)} >
+            <form  onSubmit={(e) => handleSubmit(e)} >
+
+            <Box  sx={{
+            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" },width: '62ch', my: "2%", mx: "30%", maxWidth: "100%", bgcolor:'white', borderRadius: "10px" }}>
+        <Box
+          component="form"
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" }, maxWidth: "100%", bgcolor:'white', borderRadius: "10px" }}
+          noValidate
+          autoComplete="off"
+        >
+   
+            <div>
                 <div>
-                    <input
-                        // maxlength = "30"
-                        className={style.input}
-                        placeholder="Nombre del Producto: (*)"
-                        autoComplete="off"
-                        type="text"
-                        value={input.name}
-                        name="name"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {errors.name && (<p className={style.error}>{errors.name}</p>)}
-                </div>
-                <div><br />
-                    <input 
-                        className={style.input}
-                        type="text"
-                        value={input.image}
-                        autoComplete="off"
-                        name='image'
-                        placeholder="Imagen del producto: (*)"
-                        onChange={(e) => handleChange(e)} />
-                    {/* {errors.image && (<p className={style.error}>{errors.image}</p>)} */}
+                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#dee2e6',  borderRadius: "10px" }}
+                id="outlined-helperText"
+                label="Nombre del producto: "
+                maxlength = "30"
+                htmlFor="name"
+                value={input.name}
+                name="name"
+                onChange={(e) => handleChange(e)}
+                helperText="Campo obligatorio (*)"
+                InputLabelProps={{
+                  shrink: true,
+              }}
+                />
+                 {errors.name && (<p className={style.error}>{errors.name}</p>)}
                 </div>
 
-                <div><br />
-                    <input
-                        className={style.input}
-                        autoComplete="off"
-                        type="number"
-                        value={input.price}
-                        name='price'
-                        placeholder="Precio del producto: (*)"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {/* {errors.price && (<p className={style.error}>{errors.price}</p>)} */}
+                  
+
+                <div>
+                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                id="outlined-helperText"
+                label="Imagén del producto:"
+                htmlFor="image"
+                value={input.image}
+                onChange={(e) => handleChange(e)}
+                name="image"
+                helperText="Campo obligatorio (*)"
+                InputLabelProps={{
+                  shrink: true,
+              }}
+                />
+                 {errors.image && (<p className={style.error}>{errors.image}</p>)}
                 </div>
 
-                <div><br />
-                    <input
-                        className={style.input}
-                        autoComplete="off"
-                        type="number"
-                        value={input.discount}
-                        name='discount'
-                        placeholder="Descuentos:      %     (*)"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {/* {errors.discount && (<p className={style.error}>{errors.discount}</p>)} */}
+                <div>
+                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                id="outlined-helperText"
+                label="Marca del producto:"
+                htmlFor="brand"
+                value={input.brand}
+                onChange={(e) => handleChange(e)}
+                name="brand"
+                helperText="Campo obligatorio (*)"
+                InputLabelProps={{
+                  shrink: true,
+              }}
+                />
+                 {errors.brand && (<p className={style.error}>{errors.brand}</p>)}
                 </div>
+
+
+                <div>
+                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400', borderRadius: "10px" }}
+                id="outlined-number"
+                label= "Descuento del producto"
+                htmlFor="discount"
+                value={input.discount}
+                onChange={(e) => handleChange(e)} 
+                name="discount"
+                helperText="Campo obligatorio (*)"
+                type="number"
+                placeholder="%"
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                />
+                {errors.discount && (<p className={style.error}>{errors.discount}</p>)}
+                </div>
+                <div>
+                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                id="outlined-number"
+                label="Precio del producto"
+                htmlFor="price"
+                value={input.price}
+                onChange={(e) => handleChange(e)}                      
+                name="price"
+                type="number"
+                placeholder="$"
+                helperText="Campo obligatorio (*)"
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                />
+                {errors.price && (<p className={style.error}>{errors.price}</p>)}
+              </div>
+              
+
+              <div>
+                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                id="outlined-number"
+                label="Stock del producto"
+                htmlFor="stock"
+                value={input.stock}
+                onChange={(e) => handleChange(e)}                      
+                name="stock"
+                type="number"
+                helperText="Campo obligatorio (*)"
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                />
+                {errors.stock && (<p className={style.error}>{errors.stock}</p>)}
+              </div>
+
+              <div> 
+                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#dee2e6',  borderRadius: "10px" }}
+                textarea
+                id="outlined-helperText"
+                label="Descripción del producto: "
+                maxlength = "30"
+                htmlFor="description"
+                value={input.description}
+                name="description"
+                onChange={(e) => handleChange(e)}
+                helperText="Campo obligatorio (*)"
+                InputLabelProps={{
+                  shrink: true,
+              }}
+                />
+                 {errors.description && (<p className={style.error}>{errors.description}</p>)}
+                </div>
+              
 
                 
-                <div><br />
-                    <input
-                        className={style.input}
-                        autoComplete="off"
-                        type="number"
-                        value={input.stock}
-                        name='stock'
-                        placeholder="Stock del producto: (*)"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {/* {errors.stock && (<p className={style.error}>{errors.stock}</p>)}<br /> */}
-                </div>
+                <div >
+                <FormControl sx={{ m: 1, minWidth: 80, width: '97%', bgcolor:'#dee2e6'}}>
+                    <InputLabel id="demo-simple-select-autowidth-label" >Categorias</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-autowidth-label"
+                    id="demo-simple-select-autowidth"
+                    value={input.categories}
+                    // onChange={handleChangee}
+                    autoWidth
+                    label="Age"
+                    onChange={e => handleCheck(e)}
+                    >
 
-                <div><br />
-                    <input
-                        className={style.input}
-                        autoComplete="off"
-                        type="text"
-                        value={input.brand}
-                        name='brand'
-                        placeholder="Marca del producto: (*)"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {/* {errors.brand && (<p className={style.error}>{errors.brand}</p>)}<br /> */}
+                    <MenuItem value={"Auriculares"}>Auriculares</MenuItem>
+                    <MenuItem value={"Fuente de alimentación"}>Fuente de alimentación</MenuItem>
+                    <MenuItem value={"Gabinete"}>Gabinete</MenuItem>
+                    <MenuItem value={"HDD"}>HDD</MenuItem>
+                    <MenuItem value={"Micro-procesador"}>Micro-procesador</MenuItem>
+
+                    <MenuItem value={"Micrófono"}>Micrófono</MenuItem>
+                    <MenuItem value={"Monitor"}>Monitor</MenuItem>
+                    <MenuItem value={"MotherBoard"}>MotherBoard</MenuItem>
+                    <MenuItem value={"Mouse"}>Mouse</MenuItem>
+                    <MenuItem value={"Mousepad"}>Mousepad</MenuItem>
+
+                    <MenuItem value={"M.2NVme"}>M.2NVme</MenuItem>
+                    <MenuItem value={"Parlante"}>Parlante</MenuItem>
+                    <MenuItem value={"Placa de video"}>Placa de video</MenuItem>
+                    <MenuItem value={"RAM"}>RAM</MenuItem>
+                    <MenuItem value={"Refrigeración"}>Refrigeración</MenuItem>
+
+                    <MenuItem value={"Sillas"}>Sillas</MenuItem>
+                    <MenuItem value={"SSD"}>SSD</MenuItem>
+                    <MenuItem value={"Teclados"}>Teclados</MenuItem>
+                    <MenuItem value={"Webcam"}>Webcam</MenuItem>
+                
+                    </Select>
+                </FormControl>
+                {errors.categories && (<p className={style.error}><p className="error" >{errors.categories}</p></p>)}
                 </div>
-                <div><br />
+            <div>
+            <FormControl>
+                <FormLabel id="demo-form-control-label-placement"  sx={{ ml: 2, mt:2 }}>Envio</FormLabel>
+                <RadioGroup   row   aria-labelledby="demo-form-control-label-placement" 
+                    name="position"  defaultValue="false" onChange={e => handlefreeShipping(e)} value={input.freeShipping}>
+
+                    <FormControlLabel sx={{ ml: 2, mb:2, color: 'gray', bgcolor:'white',}}
+                    value="false"
+                    control={<Radio />}
+                    label="Con costo"
+                    labelPlacement="start"
+                    />
+                    <FormControlLabel sx={{ ml: 2, mb:2, color: 'gray', bgcolor:'white',}}
+                    value="true"
+                    control={<Radio />}
+                    label="Gratis"
+                    labelPlacement="start"
+                    />
                     
-                        <textarea 
-                        className={style.input}
-                        placeholder="Descripción: (*)"
-                        // autoComplete="off"
-                        type="text"
-                        value={input.description}
-                        name="description"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {/* {errors.description && (<p className={style.error}>{errors.description}</p>)} */}
-                </div>
+                    
+                </RadioGroup>
+                </FormControl>  
+            </div>
+                             
+            </div>
+            </Box>
+            <Stack direction="row" spacing={2} >
 
+            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+            Modificar Producto
+            </Button>
+            </Stack>
+                
+            </Box>
                 <br />
-                <select onChange={e => handlefreeShipping(e)} value={input.freeShipping} className={style.envio} >
+           
 
-                <option value="All" hidden>¿Envio gratis?</option>
+        </form>
+    </div>
 
-                <option value="false">No</option>
-                <option value="true">Si</option>
-                </select> <br /><br />
-
-
-                <select onChange={e => handleCheck(e)} value={input.categories} className={style.categorias} >
-
-                    <option value="All" hidden>Elige una categoria</option>
-
-                    <option value="Auriculares">Auriculares</option>
-                    <option value="Fuente de alimentación">Fuente de alimentación</option>
-                    <option value="Gabinete">Gabinete</option>
-                    <option value="HDD">HDD</option>
-                    <option value="Micro-procesador">Micro-procesador</option>
-
-                    <option value="Micrófono">Micrófono</option>
-                    <option value="Monitor">Monitor</option>
-                    <option value="MotherBoard">MotherBoard</option>
-                    <option value="Mouse">Mouse</option>
-                    <option value="Mousepad">Mousepad</option>
-
-                    <option value="M.2NVme">M.2NVme</option>
-                    <option value="Parlante">Parlante</option>
-                    <option value="Placa de video">Placa de video</option>
-                    <option value="RAM">RAM</option>
-                    <option value="Refrigeración">Refrigeración</option>
-
-                    <option value="Sillas">Sillas</option>
-                    <option value="SSD">SSD</option>
-                    <option value="Teclados">Teclados</option>
-                    <option value="Webcam">Webcam</option>
-
-
-                    {/* {errors.categories && (<p className={style.error}><p className="error" >{errors.categories}</p></p>)} */}
-                </select> <br /> <br />
-
-
-                <button className={style.boton1} type='submit'>Modificar Producto</button>
-                <br />
-              
-            </form>
-        </div>
-    )
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function Producto({ getOneProduct }) {
-//     const dispatch = useDispatch();
-//     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
-//     const location = useLocation();
-//     const idProduct = location.pathname.substring(8, location.pathname.length);
-//     const productDetail = useSelector((state) => state.detailProduct.product);
-//     const [modal, setModal] = useState({
-//         open: false,
-//         type: ''
-//     });
-
-//     useEffect(() => {
-//         getOneProduct(idProduct)
-//         // eslint-disable-next-line react-hooks/exhaustive-deps
-//     }, [])
-
-//     function stockDisponible() {
-//         if (productDetail.stock > 0) return (<p className={style.stockDisponible}>Stock disponible</p>)
-//         else return (<p className={style.stockNoDisponible}> Stock no disponible </p>)
-//     }
-
-//     function tipoEnvio() {
-//         if (productDetail.freeShipping) return (<p className={style.envio}>Envio gratis</p>)
-//         else return (<p className={style.envio}>Calcule su envio <Link to='/'>aquí</Link></p>)
-//     }
-
-//     function descuento() {
-//         if (productDetail.discount > 0) {
-//             let oferta = (productDetail.discount / 100) * productDetail.price
-//             return (
-//                 <div>
-//                     <p className={style.antes}>ANTES: ${(productDetail.price).toFixed(2)}</p>
-//                     <p className={style.despues}>AHORA: ${(productDetail.price - oferta).toFixed(2)} <span className={style.green}>%{productDetail.discount} OFF</span></p>
-//                 </div>
-//             )
-//         }
-//         else return (<p className={style.despues}>${productDetail.price}</p>)
-//     }
-
-//     function handleCarrito() {
-//         const check = productsInCarrito.some(e => e.id === productDetail.id);
-//         if (check) return setModal({ ...modal, open: true, type: 'error' })
-//         else {
-//             dispatch(addProductCarrito([{
-//                 id: productDetail.id,
-//                 name: productDetail.name,
-//                 image: productDetail.image,
-//                 price: productDetail.price,
-//                 stock: productDetail.stock
-//             }]))
-//             setModal({ ...modal, open: true, type: 'success' })
-//         }
-//     }
-
-//     return (
-//         <>
-//             <div className={style.body}>
-//                 <p className={style.categories}><Link to='/products'>Productos</Link> {'>'} <Link to='/products'>{productDetail.categories}</Link> </p>
-
-//                 <div className={style.productCard}>
-//                     <img src={productDetail.image} className={style.cardImg} alt='Imagen producto' onError={({ currentTarget }) => {
-//                         currentTarget.onerror = null; // prevents looping
-//                         currentTarget.src = `${noImage}`;
-//                     }} />
-//                     <div className={style.container}>
-//                         <h1 className={style.nombreProducto}>{productDetail.name}</h1>
-//                         <div className={style.subContainer}>
-//                             {stockDisponible()}
-//                         </div>
-//                         <div className={style.subContainer}>
-//                             {tipoEnvio()}
-//                         </div>
-//                         <div className={style.subContainer}>
-//                             {descuento()}
-//                         </div>
-//                         <div>
-//                         </div>
-//                         <p className={style.descripcion}>{productDetail.description}</p>
-//                         <button onClick={handleCarrito} className={style.button}>Agregar al carrito</button>
-//                     </div>
-//                 </div>
-//             </div>
-//             {
-//                 (modal.open)
-//                     ? <Alerta setOpenModal={setModal} type={modal.type} />
-//                     : <></>
-//             }
-//         </>
-//     )
-// }
-
-// export default connect(null, { getOneProduct })(Producto)
+  );
+};

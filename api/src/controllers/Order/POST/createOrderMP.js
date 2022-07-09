@@ -5,10 +5,17 @@ const {EMAIL} = process.env
 
 const createOrderMP = async (req, res) => {
     const { payment_status, merchant_order_id, items, userId } = req.body
-
+    
     let user = await User.findByPk(userId)
     try {
-        (await main()).sendMail({
+        let newOrder = await Order.create({
+            payment_status,
+            merchant_order_id,
+            items
+        })
+        newOrder.addUser(userId)
+        
+       /*  (await main()).sendMail({
             from: EMAIL,
             to: `${user.email}`,
             subject: `${items[0].title}`,
@@ -172,14 +179,8 @@ const createOrderMP = async (req, res) => {
     </tr>
     </tbody>
     </table>`
-        })
-        let newOrder = await Order.create({
-            payment_status,
-            merchant_order_id,
-            items
-        })
-        newOrder.addUser(userId)
-        res.send("Orden Creada")
+        }) */
+    res.send("Orden Creada")
     } catch (error) {
         res.status(404).send(error)
     }

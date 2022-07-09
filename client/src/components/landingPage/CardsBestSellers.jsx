@@ -10,19 +10,20 @@ import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import noImage from '../productCard/assets/no-image.jpg';
 import { addProductCarrito } from '../../redux/actions/carritoA';
+import { styled } from '@mui/material/styles';
+
+const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText('#FFC400'),
+    backgroundColor: '#FFC400',
+    '&:hover': {
+        backgroundColor: '#FFC400',
+    },
+}));
 
 export default function MediaControlCard({ booleano, bestSellers }) {
     const dispatch = useDispatch();
     const [value, setValue] = useState(2);
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
-    // const productsInFavoritos = useSelector((state) => state.favoritos.productosFavoritos);
-    // const [isFavorite, setIsFavorite] = useState(false);
-    // const [modal, setModal] = useState({
-    //     open: false,
-    //     type: '',
-    //     text: ''
-    // });
-    // console.log(bestSellers)
 
     function handleCarrito() {
         const check = productsInCarrito.some(e => e.id === bestSellers.id);
@@ -77,9 +78,9 @@ export default function MediaControlCard({ booleano, bestSellers }) {
                             <Box sx={{ display: 'flex', pl: 1, pb: 1, flexDirection: 'column' }}>
                                 <Rating name="read-only" value={value} readOnly size="small" sx={{ pb: 1.5 }} />
                                 <div onClick={handleCarrito}>
-                                    <Button disableElevation color="primary" variant="contained" >
+                                    <ColorButton disableElevation color="primary" variant="contained" >
                                         Comprar
-                                    </Button>
+                                    </ColorButton>
                                 </div>
                             </Box>
                         </Box>
@@ -113,9 +114,9 @@ export default function MediaControlCard({ booleano, bestSellers }) {
                             <Box sx={{ display: 'flex', pl: 1, pb: 1, flexDirection: 'column', alignItems: 'flex-start' }}>
                                 <Rating name="read-only" value={value} readOnly size="small" sx={{ pb: 0.9 }} />
                                 <div onClick={handleCarrito} style={{ marginBottom: -5 }}>
-                                    <Button size="small" disableElevation color="primary" variant="contained" >
+                                    <ColorButton size="small" disableElevation color="primary" variant="contained" >
                                         Comprar
-                                    </Button>
+                                    </ColorButton>
                                 </div>
                             </Box>
                         </Box>

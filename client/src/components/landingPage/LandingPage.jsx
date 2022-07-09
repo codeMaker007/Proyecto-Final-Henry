@@ -142,18 +142,18 @@ export default function BasicGrid() {
                 <Grid item container justifyContent='center' spacing={2}>
                     <Grid container justifyContent='center' item xs={11} width='100%' height={110} mt={5}>
                         {
-                            (responsive.md) ? <div style={{ backgroundColor: '#134074', width: '100%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            (responsive.md) ? <div style={{ backgroundColor: '#3a0ca3', width: '100%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
                                 <img src={asus} alt='asus' height='155%' />
                                 <img src={intel} alt='intel' height='135%' />
                                 {/* <img src={amd} alt='amd' height='160%' /> */}
                             </div>
                                 : (responsive.xs)
-                                    ? <div style={{ backgroundColor: '#134074', width: '90%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
+                                    ? <div style={{ backgroundColor: '#3a0ca3', width: '90%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
                                         <img src={asus} alt='asus' height='95%' />
                                         {/* <img src={intel} alt='intel' height='75%' /> */}
                                         <img src={amd} alt='amd' height='100%' />
                                     </div>
-                                    : <div style={{ backgroundColor: '#134074', width: '82%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
+                                    : <div style={{ backgroundColor: '#3a0ca3', width: '82%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
                                         <img src={asus} alt='asus' height='155%' />
                                         <img src={intel} alt='intel' height='135%' />
                                         <img src={amd} alt='amd' height='160%' />
@@ -207,7 +207,7 @@ export default function BasicGrid() {
                             paddingLeft: 15,
                             marginTop: 25,
                             right: 400,
-                            backgroundColor: '#022335',
+                            backgroundColor: '#3a0ca3',
                             color: 'white'
                         }}>
                             <Typography variant="h6" component="div">

@@ -3,17 +3,17 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { orderByPrice } from '../../redux/actions/productsA';
-import { useDispatch } from 'react-redux';
+// import { orderByPrice } from '../../redux/actions/productsA';
+// import { useDispatch } from 'react-redux';
 
-export default function SelectSmall() {
+export default function SelectSmall({ setState, state }) {
     const [orden, setOrden] = useState('');
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(orderByPrice(orden));
+        setOrden(state.orden)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [orden])
+    }, [state])
 
 
     return (
@@ -25,9 +25,8 @@ export default function SelectSmall() {
                 id="demo-select-small"
                 value={orden}
                 label="orden"
-                onChange={(e) => setOrden(e.target.value)}
+                onChange={(e) => setState({ ...state, orden: e.target.value })}
             >
-                <MenuItem value='Mas vendido'>Mas vendido</MenuItem>
                 <MenuItem value='ASC'>Precio, menor a mayor</MenuItem>
                 <MenuItem value='DESC'>Precio, mayor a menor</MenuItem>
                 <MenuItem value='A-Z'>Alphabeticamente, A-Z</MenuItem>

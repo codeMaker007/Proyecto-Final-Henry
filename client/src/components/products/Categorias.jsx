@@ -32,8 +32,8 @@ export default function Categorias({ setState, state, total }) {
                                 type="radio"
                                 name="radio"
                                 value="null"
-                                readOnly
                                 checked={select === "null"}
+                                onChange={(e) => { setState({ ...state, categoria: e.target.value }); setSelect(e.target.value); }}
                             />
                             <RadioButtonLabel />
                             <div>Todos los productos {`(${total})`}</div>

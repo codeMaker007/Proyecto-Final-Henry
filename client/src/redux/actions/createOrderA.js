@@ -7,7 +7,7 @@ export const getOrder = (orderId) => {
     return async function (dispatch) {
         const response = (await axios.get(`/orderMP?merchant_order_id=${orderId}`)).data;
         dispatch(controlStock(response.items));
-        dispatch(createOrder(orderId, response));
+        dispatch(createOrder(orderId));
     }
 }
 

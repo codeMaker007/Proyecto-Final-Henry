@@ -30,7 +30,7 @@ export default function Navbar() {
 
     let isAdmin;
     if (isAuthenticated) {
-        let findedUser = users.filter(e => e.username === user.nickname).shift();
+        let findedUser = users.find(e => e.email === user.email);
         (findedUser?.isAdmin) ? isAdmin = true : isAdmin = false;
         console.log(findedUser)
     }

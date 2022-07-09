@@ -9,6 +9,12 @@ export default function PaypalForm({ data, total, setPago }) {
     const navigate = useNavigate();
     let paypalRef = React.useRef();
 
+    function converter(cantidad) {
+        let dolar = 0.0079;
+        let resultado = (cantidad * dolar).toFixed(2)
+        return resultado
+    }
+
     let dataPaypal = data.map(e => {
         return {
             name: e.name,
@@ -16,7 +22,7 @@ export default function PaypalForm({ data, total, setPago }) {
             quantity: e.quantity,
             unit_amount: {
                 currency_code: 'USD',
-                value: e.price
+                value: converter(e.price)
             }
         }
     });
@@ -35,11 +41,11 @@ export default function PaypalForm({ data, total, setPago }) {
                                 items: dataPaypal,
                                 amount: {
                                     currency_code: "USD",
-                                    value: total,
+                                    value: converter(total),
                                     breakdown: {
                                         item_total: {
                                             currency_code: "USD",
-                                            value: total
+                                            value: converter(total)
                                         }
                                     }
                                 }

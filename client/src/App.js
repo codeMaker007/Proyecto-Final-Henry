@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
 import { ThemeProvider } from '@material-ui/core/styles';
-// import theme from './components/material_UI/Styles';
+
 import Navbar from './components/navbar/Navbar';
 import Products from './components/products/Products';
 import LandingPage from './components/landingPage/LandingPage';
@@ -17,6 +17,7 @@ import UpdateBanned from './components/dashboard/UpdateBanned';
 import LoginData from "./components/perfilDelUsuario/LoginData";
 import LoginAddress from "./components/perfilDelUsuario/LoginAddress";
 import Success from './components/alertas/Success';
+import OrderDetail from "./components/perfilDelUsuario/OrderDetail";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/LoginData/:id" element={<LoginData />} />
           <Route path="/LoginAddress/:id" element={<LoginAddress />} />
           <Route path="/success" element={<Success />} />
+          <Route path="/orderDetail/:id" element={<OrderDetail />} />
         </Routes>
       </ThemeProvider>
     </div>

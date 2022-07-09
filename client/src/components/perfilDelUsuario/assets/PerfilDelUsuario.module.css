@@ -1,54 +1,30 @@
-/* .foto{
+.subTitulo{
+    color: #dee2e6 ;
+    
+}
+
+.modificar{
+    color: #FFC400 ;
+    text-decoration:none;
+    font-size: 12px;
+    /* border-color: red 10px; */
+}
+
+.foto{
     border-radius:600px;
-    width: 150px;
+    width: 60px;
     height: auto;
     
 }
 
-.DetailContainer{
-    background: var(--navbar-bg-color);
-    margin-left: 20%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-right: 20%;
-    display:center;
-    align-items:stretch ;
-    color:white;
-    font-family:Verdana;
-    font-size:12px;
-    font-weight:bold;
-    padding-top:2%;
-    padding-bottom:2%;
-    padding-left:10%;
-    text-decoration:none;
+.fotoBtn{
+    border-radius:600px;
+    width: 30px;
+    height: auto;
     
 }
 
-.usuario{
-    color: rgba(255, 255, 255, 0.795);
-    font-size: 30px;
-     font-family:Verdana;
-}
-.nombre{
-    color: rgba(255, 255, 255, 0.795);
-    font-size: 30px;
 
-    font-family:Verdana;
-}
-
-.datos{
-    color: rgba(255, 255, 255, 0.795);
-    font-size: 25px;
-  
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-
-}
-.modificarDatos{
-    color: red;
-    font-size: 18px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-
-}
 
 .volver {
     background-color: rgba(255, 255, 255, 0.795);
@@ -68,4 +44,4 @@
     background-color: var(--navbar-bg-color);
     color:rgba(255, 255, 255, 0.795);
     border-color: rgba(255, 255, 255, 0.795);
-} */
+}
