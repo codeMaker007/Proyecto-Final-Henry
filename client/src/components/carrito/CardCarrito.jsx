@@ -17,6 +17,13 @@ const Img = styled('img')({
     borderRadius: 3
 });
 
+
+const Div = styled('div')(({ theme }) => ({
+    [theme.breakpoints.down('md')]: {
+        display: 'none'
+    }
+}));
+
 const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#f7f7f7'),
     backgroundColor: '#f7f7f7',
@@ -62,33 +69,52 @@ export default function CardCarrito({ id, name, image, price, stock, quantity, f
     return (
         <Box sx={{ width: 1, borderBottom: 'solid', borderBottomWidth: 1, borderColor: '#e1e1e1', marginLeft: -0.4, marginTop: 0.5 }}>
             < Grid container justifyContent='center' >
-                < Grid item md={12} lg={12} xl={12} sx={{
+                {/* < Grid item xs={12} md={12} lg={12} xl={12} sx={{
                     display: 'flex', flexDirection: 'row', flexWrap: 'wrap', overflow: 'hidden'
-                }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', width: '10%', height: 100, justifyContent: 'center', alignItems: 'center', hover: '#FFC400' }}>
-                        <CloseIcon onClick={() => handleDelete(id)} sx={{ cursor: 'pointer' }} />
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 100, justifyContent: 'center', alignItems: 'center' }}>
-                        <Img alt="complex" src={image} />
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', width: '25%', height: 100, flexWrap: 'wrap', textAlign: 'left', justifyContent: 'center' }}>
-                        <p>{name}</p>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 100, justifyContent: 'center', alignItems: 'center' }}>
-                        <p>${price.toFixed(2)}</p>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', width: '20%', height: 100, justifyContent: 'center', alignItems: 'center' }}>
-                        <ButtonGroup variant="outlined">
-                            <ColorButton onClick={decrementar} >-</ColorButton>
-                            <ColorButton disabled >{cantComprar}</ColorButton>
-                            <ColorButton onClick={incrementar} >+</ColorButton>
-                        </ButtonGroup>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 100, justifyContent: 'center', alignItems: 'center' }}>
-                        <p>${(cantComprar * price).toFixed(2)}</p>
-                    </div>
-                </Grid >
+                }}> */}
+                {
+                    (window.innerWidth < 480)
+                        ? <>
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '1%', height: 100, justifyContent: 'center', alignItems: 'center', hover: '#FFC400', marginLeft: -10 }}>
+                                <CloseIcon onClick={() => handleDelete(id)} sx={{ cursor: 'pointer' }} />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '25%', height: 100, justifyContent: 'center', alignItems: 'center' }}>
+                                <Img alt="complex" src={image} />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '35%', height: 100, flexWrap: 'wrap', textAlign: 'left', justifyContent: 'center' }}>
+                                <p>{name}</p>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '20%', height: 100, justifyContent: 'center', alignItems: 'center' }}>
+                                <p>${price.toFixed(2)}</p>
+                            </div>
+                        </>
+                        : <>
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '10%', height: 100, justifyContent: 'center', alignItems: 'center', hover: '#FFC400' }}>
+                                <CloseIcon onClick={() => handleDelete(id)} sx={{ cursor: 'pointer' }} />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 100, justifyContent: 'center', alignItems: 'center' }}>
+                                <Img alt="complex" src={image} />
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '25%', height: 100, flexWrap: 'wrap', textAlign: 'left', justifyContent: 'center' }}>
+                                <p>{name}</p>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 100, justifyContent: 'center', alignItems: 'center' }}>
+                                <p>${price.toFixed(2)}</p>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '20%', height: 100, justifyContent: 'center', alignItems: 'center' }}>
+                                <ButtonGroup variant="outlined">
+                                    <ColorButton onClick={decrementar} >-</ColorButton>
+                                    <ColorButton disabled >{cantComprar}</ColorButton>
+                                    <ColorButton onClick={incrementar} >+</ColorButton>
+                                </ButtonGroup>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 100, justifyContent: 'center', alignItems: 'center' }}>
+                                <p>${(cantComprar * price).toFixed(2)}</p>
+                            </div>
+                        </>
+                }
             </Grid >
+            {/* </Grid > */}
         </Box >
     );
 }

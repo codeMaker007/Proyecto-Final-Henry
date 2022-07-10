@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
@@ -9,26 +10,15 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import DatosPersonales from './DatosPersonales';
 import DatosDireccion from './DatosDireccion';
+// import { useSelector } from 'react-redux';
 
-const steps = [
-    {
-        label: 'Datos personales',
-        description: (<div>
-            <DatosPersonales />
-        </div>),
-    },
-    {
-        label: 'Configuración de envío',
-        description: (<div>
-            <DatosDireccion />
-        </div>),
-    },
-];
 
-export default function Comprobaciones() {
+
+export default function Comprobaciones({ personalData, setPersonalData, addressData, setAddressData }) {
+    const adress = useSelector((state) => state.userAddressesR.userAddresses);
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
-    const maxSteps = steps.length;
+
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -38,6 +28,22 @@ export default function Comprobaciones() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    const steps = [
+        {
+            label: 'Datos personales',
+            description: (<div>
+                <DatosPersonales personalData={personalData} setPersonalData={setPersonalData} />
+            </div>),
+        },
+        {
+            label: 'Configuración de envío',
+            description: (<div>
+                <DatosDireccion adress={adress} addressData={addressData} setAddressData={setAddressData} />
+            </div>),
+        },
+    ];
+
+    const maxSteps = steps.length;
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Paper
@@ -57,7 +63,7 @@ export default function Comprobaciones() {
             >
                 <Typography>{steps[activeStep].label}</Typography>
             </Paper>
-            <Box sx={{ height: 400, width: '100%', p: 1 }}>
+            <Box sx={{ height: 400, width: '100%', p: 1, marginLeft: -20 }}>
                 {steps[activeStep].description}
             </Box>
             <MobileStepper

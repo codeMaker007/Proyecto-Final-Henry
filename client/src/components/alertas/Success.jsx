@@ -7,12 +7,14 @@ import { limpiarCarrito } from '../../redux/actions/carritoA';
 export default function Success() {
     const queryParams = new URLSearchParams(window.location.search);
     const orderId = queryParams.get("merchant_order_id");
+    // const payerId = queryParams.get("PayerID");
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (orderId?.length > 1) dispatch(getOrder(orderId));
+        // else dispatch(getOrder(payerId))
         dispatch(limpiarCarrito());
         setTimeout(() => {
             navigate('/');

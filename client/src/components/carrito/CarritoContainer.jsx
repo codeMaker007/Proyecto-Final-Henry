@@ -11,6 +11,7 @@ import { Button } from '@mui/material';
 import CardCarrito from './CardCarrito';
 import Divider from '@mui/material/Divider';
 import { resetTotal } from '../../redux/actions/carritoA';
+import Checkout from './Checkout';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -28,6 +29,7 @@ const Img = styled('img')({
     maxHeight: '100%',
 });
 
+
 const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#FFC400'),
     borderRadius: 0,
@@ -38,10 +40,10 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 
-export default function BasicGrid() {
-    const navigate = useNavigate();
+export default function CarritoContainer() {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.carrito);
+    const [checkout, setCheckout] = useState(false)
 
     useEffect(() => {
         return () => {
@@ -52,14 +54,14 @@ export default function BasicGrid() {
 
     function renderCheckout() {
         if (products.productosCarrito.length === 0) return alert('No hay productos en el carrito')
-        navigate('/checkout')
+        setCheckout(true)
     }
 
-    return (
+    if (!checkout) return (
         <Box sx={{ width: 1, marginTop: 3 }}>
             <Grid container direction='column'>
                 <Grid container justifyContent='center' spacing={2} >
-                    <Grid item md={7} lg={7} xl={6}>
+                    <Grid item xs={12} md={7} lg={7} xl={6}>
                         <Item sx={{ marginTop: 3, display: 'flex', flexDirection: 'column' }} elevation={1}>
                             {
                                 (products.productosCarrito.length === 0)
@@ -71,24 +73,24 @@ export default function BasicGrid() {
                                             < Typography variant='subtitle2' mb={4}>CARRITO</Typography>
                                             <Box sx={{ width: 1, borderBottom: 'solid', borderBottomWidth: 1, borderColor: '#e1e1e1', marginLeft: -0.4, marginTop: 0.5 }}>
                                                 < Grid container justifyContent='center' >
-                                                    < Grid item md={12} lg={12} xl={12} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', overflow: 'hidden' }}>
-                                                        <div style={{ display: 'flex', flexDirection: 'column', width: '10%', height: 20, justifyContent: 'center', alignItems: 'center', hover: '#FFC400' }}>
-                                                        </div>
-                                                        <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 4 }}></div>
-                                                        <div style={{ display: 'flex', flexDirection: 'column', width: '25%', height: 20, flexWrap: 'wrap', textAlign: 'left', justifyContent: 'center', marginBottom: 4 }}>
-                                                            <Typography variant="button" display="block" gutterBottom>Producto</Typography>
-                                                        </div>
-                                                        <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 4 }}>
-                                                            <Typography variant="button" display="block" gutterBottom>Precio</Typography>
-                                                        </div>
-                                                        <div style={{ display: 'flex', flexDirection: 'column', width: '20%', height: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 4 }}>
-                                                            <Typography variant="button" display="block" gutterBottom>Cantidad</Typography>
-                                                        </div>
-                                                        <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 4 }}>
-                                                            <Typography variant="button" display="block" gutterBottom>Total</Typography>
-                                                        </div>
-                                                    </Grid >
+                                                    {/* < Grid item md={12} lg={12} xl={12} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', overflow: 'hidden' }}> */}
+                                                    <div style={{ display: 'flex', flexDirection: 'column', width: '10%', height: 20, justifyContent: 'center', alignItems: 'center', hover: '#FFC400' }}>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 4 }}></div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', width: '25%', height: 20, flexWrap: 'wrap', textAlign: 'left', justifyContent: 'center', marginBottom: 4 }}>
+                                                        <Typography variant="button" display="block" gutterBottom>Producto</Typography>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 4 }}>
+                                                        <Typography variant="button" display="block" gutterBottom>Precio</Typography>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', width: '20%', height: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 4 }}>
+                                                        <Typography variant="button" display="block" gutterBottom>Cantidad</Typography>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', width: '15%', height: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 4 }}>
+                                                        <Typography variant="button" display="block" gutterBottom>Total</Typography>
+                                                    </div>
                                                 </Grid >
+                                                {/* </Grid > */}
                                             </Box >
                                             <div>
 
@@ -117,7 +119,7 @@ export default function BasicGrid() {
 
                         </Item>
                     </Grid>
-                    <Grid item xs={12} sm={10.5} md={3} lg={3} xl={2.5}>
+                    <Grid item xs={12} sm={6} md={3} lg={3} xl={2.5}>
                         {/* 
                         <Item sx={{ marginTop: 2, textAlign: 'right', borderBottom: '1px solid', borderColor: '#022335' }} elevation={1} >
 
@@ -140,5 +142,10 @@ export default function BasicGrid() {
                 </Grid>
             </Grid >
         </Box >
+    )
+    else return (
+        <>
+            <Checkout setCheckout={setCheckout} />
+        </>
     );
 }

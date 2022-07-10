@@ -5,11 +5,15 @@ import style from './assets/DetallesDelProducto.module.css';
 import { getOneProduct } from '../../redux/actions/detailProductA';
 import noImage from './assets/no-image.jpg';
 import { addProductCarrito } from '../../redux/actions/carritoA';
+import { getAllReviews } from '../../redux/actions/productReviewA';
 import Alerta from '../alertas/Alerta';
+import AddReview from '../addReview/AddReview';
 
 function Producto({ getOneProduct }) {
     const dispatch = useDispatch();
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
+    const allReviews = useSelector((state) => state.productReviewR.productReviews);
+    console.log(allReviews);
     const location = useLocation();
     const idProduct = location.pathname.substring(8, location.pathname.length);
     const productDetail = useSelector((state) => state.detailProduct.product);
@@ -21,9 +25,18 @@ function Producto({ getOneProduct }) {
     });
 
     useEffect(() => {
+        dispatch(getAllReviews(idProduct))
         getOneProduct(idProduct)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const [isShown, setIsShown] = useState(false);
+
+    const handleClick = event => {
+        event.preventDefault();
+        // toggle shown state
+        setIsShown(current => !current);
+    };
 
     function stockDisponible() {
         if (productDetail.stock > 0) return (<p className={style.stockDisponible}>Stock disponible</p>)
@@ -117,6 +130,23 @@ function Producto({ getOneProduct }) {
                                 : <button id='btnCarrito' onClick={handleCarrito} className={style.button}>Agregar al carrito</button>
                         }
                     </div>
+                </div>
+                <div>
+                    <button onClick={handleClick}>Agregar una reseña</button>
+                    {isShown && <AddReview productId = {productDetail.id}/>}
+                </div>
+                <br/>
+                <div>
+                    {allReviews? allReviews.map((r, index) => {
+                        return(
+                            <div key={index}>
+                                <span>Usuario: {r.User.username} </span>
+                                <span>Título: {r.title} </span>
+                                <span>Puntuación {r.score} </span>
+                                <p>{r.text}</p>
+                            </div>
+                        )
+                    }): <p>No hay reseñas</p>}
                 </div>
             </div>
             {

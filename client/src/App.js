@@ -18,6 +18,8 @@ import LoginData from "./components/perfilDelUsuario/LoginData";
 import LoginAddress from "./components/perfilDelUsuario/LoginAddress";
 import Success from './components/alertas/Success';
 import OrderDetail from "./components/perfilDelUsuario/OrderDetail";
+import CreateAddress from './components/createAddress/CreateAddress';
+import UpdateAddress from './components/updateAddress/UpdateAddress';
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
           <Route path="/LoginAddress/:id" element={<LoginAddress />} />
           <Route path="/success" element={<Success />} />
           <Route path="/orderDetail/:id" element={<OrderDetail />} />
+          <Route path="/createAddress" element={<CreateAddress />} />
+          <Route path="/updateAddress/:id" element={<UpdateAddress />} />
         </Routes>
       </ThemeProvider>
     </div>

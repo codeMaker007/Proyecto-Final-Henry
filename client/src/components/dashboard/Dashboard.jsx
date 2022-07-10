@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { DashboardUsersA } from '../../redux/actions/DashboardUsersA';
 import { refresh } from '../../redux/actions/detailProductA';
+import DashboardOrders from "./DashboardOrders";
 
 
 const Dashboard = () => {
@@ -61,7 +62,10 @@ const Dashboard = () => {
                             <button id={3} onClick={handleClick} className={style.btn}>Usuarios</button>
                             {isShown && buttIndex === 3 && <DashboardUsers />}
                         </div>
-
+                        <div>
+                            <button id={4} onClick={handleClick} className={style.btn}>Ordenes</button>
+                            {isShown && buttIndex === 4 && <DashboardOrders />}
+                        </div>
                         {/* <div>
                     <button id={4} onClick={handleClick} className={style.btn}>Historial de compra</button>
                     {isShown && buttIndex === 4 && <div><p className={style.provisorio}>Solo falta que el Back mande la ruta.. mientras tanto tenes los usuarios una vez mas {"-->"}</p><DashboardHistoryShopping /></div>}
