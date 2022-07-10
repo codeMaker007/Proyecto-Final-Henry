@@ -1,5 +1,5 @@
 .navbar {
-    background-color: var(--navbar-bg-color);
+    background-color: #3a0ca3;
     height: 70px;
     display: flex;
     justify-content: space-evenly;

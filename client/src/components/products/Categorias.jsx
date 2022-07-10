@@ -8,8 +8,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const colorRadioButton = '#FFC400'
 
-export default function Categorias({ setState, state, total }) {
-    const [select, setSelect] = useState('null');
+export default function Categorias({ setState, state }) {
+    const [select, setSelect] = useState('');
 
     useEffect(() => {
         setSelect(state.categoria)
@@ -27,17 +27,6 @@ export default function Categorias({ setState, state, total }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Wrapper>
-                        <Item>
-                            <RadioButton
-                                type="radio"
-                                name="radio"
-                                value="null"
-                                checked={select === "null"}
-                                onChange={(e) => { setState({ ...state, categoria: e.target.value }); setSelect(e.target.value); }}
-                            />
-                            <RadioButtonLabel />
-                            <div>Todos los productos {`(${total})`}</div>
-                        </Item>
                         <Item>
                             <RadioButton
                                 type="radio"

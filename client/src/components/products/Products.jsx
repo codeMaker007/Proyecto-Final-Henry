@@ -60,11 +60,15 @@ export default function BasicGrid() {
     }, [])
 
     useEffect(() => {
-        if (state.categoria !== 'null') dispatch(getByCategory(state.categoria));
+        if (state.categoria.length > 2) dispatch(getByCategory(state.categoria));
         if (state.envio?.length > 2) dispatch(byEnvios(state.envio));
         if (state.marcas?.length > 2) dispatch(getbrand(state.marcas));
         if (state.minimo > 0) dispatch(rangoByPrice(state.minimo, state.maximo));
-        if (state.orden?.length > 2) dispatch(order(state.orden));
+        if (state.orden?.length > 2) {
+            setTimeout(() => {
+                dispatch(order(state.orden));
+            }, 500);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state])
 
