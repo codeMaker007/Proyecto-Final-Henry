@@ -9,21 +9,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SendIcon from '@mui/icons-material/Send';
 import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import StarBorder from '@mui/icons-material/StarBorder';
+import ExpandMore from '@mui/icons-material/ExpandMore'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import ImageIcon from '@mui/icons-material/Image';
-import WorkIcon from '@mui/icons-material/Work';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import Divider from '@mui/material/Divider';
 
 import { useAuth0 } from "@auth0/auth0-react";
@@ -73,6 +66,7 @@ export default function PerfilDelUsuario(){
 
 
     const order  = useSelector ((state) => state.userOrderR.userOrder); 
+    console.log("Soy order", order);
 
 
     if(isLoading){
@@ -179,16 +173,32 @@ export default function PerfilDelUsuario(){
                 <ListItemIcon>
                 <div>
                     <div>
-                       {usuario.email !== null? <p className= {style.subTitulo}>Email: {usuario.email}</p> 
-                        : <p className= {style.subTitulo}>Complete su Email</p>}
+                       {usuario.street !== null? <p className= {style.subTitulo}>Calle: {usuario.street}</p> 
+                        : <p className= {style.subTitulo}>Complete su calle</p>}
                     </div>  
                     <div>
-                        {usuario.dni !== null? <p className= {style.subTitulo}>DNI: {usuario.dni}</p> 
-                        : <p className= {style.subTitulo}>Complete su DNI</p>}
+                        {usuario.number !== null? <p className= {style.subTitulo}>Número: {usuario.number}</p> 
+                        : <p className= {style.subTitulo}>Complete su número</p>}
                     </div>
                     <div>
-                        {usuario.celphone !== null? <p className= {style.subTitulo}>Telefono: {usuario.celphone}</p> 
-                        : <p className= {style.subTitulo}>Complete su Telefono</p>}
+                        {usuario.zipCode !== null? <p className= {style.subTitulo}>Código postal: {usuario.zipCode}</p> 
+                        : <p className= {style.subTitulo}>Complete su código postal:</p>}
+                    </div>
+                    <div>
+                       {usuario.province !== null? <p className= {style.subTitulo}>Provincia: {usuario.province}</p> 
+                        : <p className= {style.subTitulo}>Complete su provincia</p>}
+                    </div>  
+                    <div>
+                        {usuario.location !== null? <p className= {style.subTitulo}>Localidad: {usuario.location}</p> 
+                        : <p className= {style.subTitulo}>Complete su localidad</p>}
+                    </div>
+                    <div>
+                        {usuario.apartment !== null? <p className= {style.subTitulo}>Departamento: {usuario.apartment}</p> 
+                        : <p className= {style.subTitulo}>Complete su departamento</p>}
+                    </div>
+                    <div>
+                        {usuario.description !== null? <p className= {style.subTitulo}>Descripción: {usuario.description}</p> 
+                        : <p className= {style.subTitulo}>Agregue una descripción</p>}
                     </div>
                     <div>
             
@@ -221,10 +231,10 @@ export default function PerfilDelUsuario(){
                 <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                 <div>
-                    {order[0]? order.map (o => 
+                    {(order.Orders && order.Orders[0])? order.Orders.map (o => 
                         <div>
-                            <p>{o.payment_status}</p>
-                            <p>{o.merchant_order_id}</p>
+                            <p className= {style.subTitulo}>{o.payment_status === "approved"? <p>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</p>: <p>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</p>}</p>
+                            
                             <Stack direction="row" spacing={2} fontSize = "small">
                             <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                             <Link className= {style.modificar} to = {"/orderDetail/" + o.merchant_order_id}> Ver detalles </Link>

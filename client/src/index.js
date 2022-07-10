@@ -12,7 +12,7 @@ axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:3001';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <Router>
       <Auth0Provider
@@ -24,5 +24,5 @@ root.render(
       </Auth0Provider>
       </Router>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
