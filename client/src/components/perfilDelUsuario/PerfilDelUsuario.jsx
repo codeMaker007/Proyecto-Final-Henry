@@ -110,10 +110,10 @@ export default function PerfilDelUsuario(){
                          src="/static/images/avatar/1.jpg"
                          sx={{ width: 60, height: 60}}
                         >
-                        {usuario.picture? <img src={usuario.picture} className= {style.foto} alt= ""/>:  <AccountCircleIcon  className= {style.foto2} fontSize = "large"/>  } 
+                        {usuario?.picture? <img src={usuario.picture} className= {style.foto} alt= ""/>:  <AccountCircleIcon  className= {style.foto2} fontSize = "large"/>  } 
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText    primary= {<p > Bienvenido {usuario.name}!!</p>}secondary= {usuario.isAdmin === true? <p className= {style.subTitulo}> Administrador. </p> : ""} />
+                    <ListItemText    primary= {<p > Bienvenido {usuario?.name}!!</p>}secondary= {usuario?.isAdmin === true? <p className= {style.subTitulo}> Administrador. </p> : ""} />
                     </ListItem>
                     <Divider variant="inset" component="li" />
                
