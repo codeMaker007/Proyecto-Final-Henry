@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
 import Navbar from './components/navbar/Navbar';
 import Products from './components/products/Products';
@@ -20,31 +20,45 @@ import Success from './components/alertas/Success';
 import OrderDetail from "./components/perfilDelUsuario/OrderDetail";
 import CreateAddress from './components/createAddress/CreateAddress';
 import UpdateAddress from './components/updateAddress/UpdateAddress';
+import { SnackbarProvider } from 'notistack';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#FFC400',
+    },
+    secondary: {
+      main: '#3a0ca3',
+    },
+  },
+});
 
 function App() {
   return (
     <div >
-      <ThemeProvider >
-        <Navbar />
-        <Routes>
-          <Route path="" element={<LandingPage />} />
-          <Route path="products" element={<Products />} />
-          <Route path="carrito" element={<CarritoContainer />} />
-          <Route path="/detail/:id" element={<DetailProduct />} />
-          <Route path="/profile" element={<PerfilDelUsuario />} />
-          <Route path="/favoritos" element={<Favoritos />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          {/* <Route path="/material" element={<Material_UI />} /> */}
-          <Route path="/up/:id" element={<UpdateProduct />} />
-          <Route path="/UpdateAdmin/:id" element={<UpdateAdmin />} />
-          <Route path="/UpdateBanned/:id" element={<UpdateBanned />} />
-          <Route path="/LoginData/:id" element={<LoginData />} />
-          <Route path="/LoginAddress/:id" element={<LoginAddress />} />
-          <Route path="/success" element={<Success />} />
-          <Route path="/orderDetail/:id" element={<OrderDetail />} />
-          <Route path="/createAddress" element={<CreateAddress />} />
-          <Route path="/updateAddress/:id" element={<UpdateAddress />} />
-        </Routes>
+      <ThemeProvider theme={theme} >
+        <SnackbarProvider maxSnack={3}>
+          <Navbar />
+          <Routes>
+            <Route path="" element={<LandingPage />} />
+            <Route path="products" element={<Products />} />
+            <Route path="carrito" element={<CarritoContainer />} />
+            <Route path="/detail/:id" element={<DetailProduct />} />
+            <Route path="/profile" element={<PerfilDelUsuario />} />
+            <Route path="/favoritos" element={<Favoritos />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/material" element={<Material_UI />} /> */}
+            <Route path="/up/:id" element={<UpdateProduct />} />
+            <Route path="/UpdateAdmin/:id" element={<UpdateAdmin />} />
+            <Route path="/UpdateBanned/:id" element={<UpdateBanned />} />
+            <Route path="/LoginData/:id" element={<LoginData />} />
+            <Route path="/LoginAddress/:id" element={<LoginAddress />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/orderDetail/:id" element={<OrderDetail />} />
+            <Route path="/createAddress" element={<CreateAddress />} />
+            <Route path="/updateAddress/:id" element={<UpdateAddress />} />
+          </Routes>
+        </SnackbarProvider>
       </ThemeProvider>
     </div>
   );

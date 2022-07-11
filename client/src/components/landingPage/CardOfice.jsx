@@ -25,7 +25,7 @@ export default function ImgMediaCard() {
             </CardContent>
             < CardActions sx={{ display: 'flex', justifyContent: 'flex-end', height: '10%' }}>
                 {/* <Button size="small">Share</Button> */}
-                <Button variant='outlined' size="medium">Comprar</Button>
+                <Button variant='outlined' color='secondary' size="medium">Comprar</Button>
             </CardActions>
         </Card >
     );

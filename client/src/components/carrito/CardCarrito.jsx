@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+// import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import CloseIcon from '@mui/icons-material/Close';
@@ -18,11 +18,11 @@ const Img = styled('img')({
 });
 
 
-const Div = styled('div')(({ theme }) => ({
-    [theme.breakpoints.down('md')]: {
-        display: 'none'
-    }
-}));
+// const Div = styled('div')(({ theme }) => ({
+//     [theme.breakpoints.down('md')]: {
+//         display: 'none'
+//     }
+// }));
 
 const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#f7f7f7'),

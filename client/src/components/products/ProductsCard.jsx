@@ -15,6 +15,7 @@ import { addProductCarrito } from '../../redux/actions/carritoA';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { addFavorite, removeFavorite } from '../../redux/actions/favoritosA';
+import { useSnackbar } from 'notistack';
 
 const Div = styled('div')(({ theme }) => ({
     ...theme.typography.button,
@@ -40,6 +41,7 @@ const ColorButton2 = styled(Button)(({ theme }) => ({
 }));
 
 export default function BasicCard({ id, name, price, category, image, description, stock, quantity, discount }) {
+    const { enqueueSnackbar } = useSnackbar();
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
     const dispatch = useDispatch();
 
@@ -72,10 +74,10 @@ export default function BasicCard({ id, name, price, category, image, descriptio
         precioConDescuento = (price - oferta);
     }
 
-    function handleCarrito() {
+    function handleCarrito(variant) {
         const check = productsInCarrito.some(e => e.id === id);
-        if (stock < 1) return alert('Producto sin stock')
-        if (check) return alert('Producto ya en carrito')
+        if (stock < 1) return enqueueSnackbar('Producto sin stock', { variant: 'warning' });
+        if (check) return enqueueSnackbar('Producto ya en carrito', { variant });
         else {
             dispatch(addProductCarrito({
                 id: id,
@@ -87,7 +89,7 @@ export default function BasicCard({ id, name, price, category, image, descriptio
                 category: category,
                 quantity: quantity
             }))
-            alert('Producto agregado a carrito')
+            enqueueSnackbar('Producto agregado al carrito', { variant: 'success' });
         }
     }
 
@@ -140,7 +142,7 @@ export default function BasicCard({ id, name, price, category, image, descriptio
                         justifyContent: 'center',
                         flexDirection: 'column'
                     }}>
-                        <ColorButton onClick={handleCarrito} variant='contained' disableElevation size='medium'>
+                        <ColorButton onClick={() => handleCarrito('error')} variant='contained' disableElevation size='medium'>
                             {
                                 (stock > 0) ? 'Añadir al carrito' : 'Sin stock'
                             }

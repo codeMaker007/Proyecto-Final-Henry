@@ -15,6 +15,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Comprobaciones from './Comprobaciones';
 import axios from 'axios';
+import { useSnackbar } from 'notistack';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -41,6 +42,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Checkout({ setCheckout }) {
+    const { enqueueSnackbar } = useSnackbar();
     const dispatch = useDispatch();
     const products = useSelector((state) => state.carrito);
     // const users = useSelector((state) => state.DashboardUsersR.allUsers)
@@ -63,9 +65,8 @@ export default function Checkout({ setCheckout }) {
     };
 
     const handlePayment = async () => {
-        if (personalData.name?.length < 2 || personalData.lastName?.length < 2 || personalData.username?.length < 2 || personalData.dni?.length < 2 || personalData.celphone?.length < 2 || personalData.caracteristica?.length < 2) return alert('Faltan completar datos');
-        if (addressData.street?.length < 2 || addressData.number?.length < 2 || addressData.zipCode?.length < 2 || addressData.province?.length < 2 || addressData.location?.length < 2) return alert('Faltan completar datos');
-        // if (personalData.name.length < 2 && personalData.lastname.length < 2 && personalData.username.length < 2 && personalData.dni.length < 2 && personalData.celphone.length < 2 && personalData.caracteristica.length < 2) alert('Faltan completar datos');
+        if (personalData.name?.length < 2 || personalData.lastName?.length < 2 || personalData.username?.length < 2 || personalData.dni?.length < 2 || personalData.celphone?.length < 2 || personalData.caracteristica?.length < 2) return enqueueSnackbar('Faltan completar datos', { variant: 'info' });
+        if (addressData.street?.length < 2 || addressData.number?.length < 2 || addressData.zipCode?.length < 2 || addressData.province?.length < 2 || addressData.location?.length < 2) return enqueueSnackbar('Faltan completar datos', { variant: 'info' });
         if (value === 'mercadopago') {
             let data = (products.productosCarrito.map(e => {
                 return {

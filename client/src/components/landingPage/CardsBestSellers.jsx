@@ -11,6 +11,7 @@ import Rating from '@mui/material/Rating';
 import noImage from '../productCard/assets/no-image.jpg';
 import { addProductCarrito } from '../../redux/actions/carritoA';
 import { styled } from '@mui/material/styles';
+import { useSnackbar } from 'notistack';
 
 const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#FFC400'),
@@ -21,14 +22,15 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function MediaControlCard({ booleano, bestSellers }) {
+    const { enqueueSnackbar } = useSnackbar();
     const dispatch = useDispatch();
     const [value, setValue] = useState(2);
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
 
     function handleCarrito() {
         const check = productsInCarrito.some(e => e.id === bestSellers.id);
-        if (bestSellers.stock < 1) return alert('Producto sin stock')
-        if (check) return alert('Producto ya en carrito')
+        if (bestSellers.stock < 1) return enqueueSnackbar('Producto sin stock', { variant: 'warning' });
+        if (check) return enqueueSnackbar('Producto ya en carrito', { variant: 'error' });
         else {
             dispatch(addProductCarrito({
                 id: bestSellers?.id,
@@ -41,7 +43,7 @@ export default function MediaControlCard({ booleano, bestSellers }) {
                 quantity: bestSellers?.quantity,
                 amountSold: bestSellers?.amountSold
             }))
-            alert('Producto agregado a carrito')
+            enqueueSnackbar('Producto agregado al carrito', { variant: 'success' });
         }
     }
     return (
@@ -78,7 +80,7 @@ export default function MediaControlCard({ booleano, bestSellers }) {
                             <Box sx={{ display: 'flex', pl: 1, pb: 1, flexDirection: 'column' }}>
                                 <Rating name="read-only" value={value} readOnly size="small" sx={{ pb: 1.5 }} />
                                 <div onClick={handleCarrito}>
-                                    <ColorButton disableElevation color="primary" variant="contained" >
+                                    <ColorButton disableElevation color='primary' variant="contained" >
                                         Comprar
                                     </ColorButton>
                                 </div>
@@ -114,7 +116,7 @@ export default function MediaControlCard({ booleano, bestSellers }) {
                             <Box sx={{ display: 'flex', pl: 1, pb: 1, flexDirection: 'column', alignItems: 'flex-start' }}>
                                 <Rating name="read-only" value={value} readOnly size="small" sx={{ pb: 0.9 }} />
                                 <div onClick={handleCarrito} style={{ marginBottom: -5 }}>
-                                    <ColorButton size="small" disableElevation color="primary" variant="contained" >
+                                    <ColorButton size="small" color='primary' disableElevation variant="contained" >
                                         Comprar
                                     </ColorButton>
                                 </div>

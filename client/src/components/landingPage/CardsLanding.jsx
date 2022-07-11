@@ -13,6 +13,7 @@ import { styled } from '@mui/material/styles';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addFavorite, removeFavorite } from '../../redux/actions/favoritosA';
 import { addProductCarrito } from '../../redux/actions/carritoA';
+import { useSnackbar } from 'notistack';
 
 const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#FFC400'),
@@ -23,6 +24,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function CardsLanding({ name, image, price, description, category, stock, id, discount, favorito = false, quantity, amountSold }) {
+    const { enqueueSnackbar } = useSnackbar();
     const [value, setValue] = useState(2);
     const dispatch = useDispatch();
     const productsInFavoritos = useSelector((state) => state.favoritos.productosFavoritos);
@@ -53,10 +55,11 @@ export default function CardsLanding({ name, image, price, description, category
         margin: 5
     }));
 
+
     function handleCarrito() {
         const check = productsInCarrito.some(e => e.id === id);
-        if (stock < 1) return alert('Producto sin stock')
-        if (check) return alert('Producto ya en carrito')
+        if (stock < 1) return enqueueSnackbar('Producto sin stock', { variant: 'warning' });
+        if (check) return enqueueSnackbar('Producto ya en carrito', { variant: 'error' });
         else {
             dispatch(addProductCarrito({
                 id: id,
@@ -69,7 +72,7 @@ export default function CardsLanding({ name, image, price, description, category
                 quantity: quantity,
                 amountSold: amountSold
             }))
-            alert('Producto agregado a carrito')
+            enqueueSnackbar('Producto agregado al carrito', { variant: 'success' });
         }
     }
 
@@ -138,7 +141,7 @@ export default function CardsLanding({ name, image, price, description, category
                     <Div>${price}</Div>
                 </div>
                 <Div>${Math.trunc(precioConDescuento)}</Div>
-                <ColorButton onClick={handleCarrito} disableElevation color="primary" variant="contained" >
+                <ColorButton onClick={handleCarrito} color='primary' disableElevation variant="contained" >
                     Comprar
                 </ColorButton>
             </CardActions >
