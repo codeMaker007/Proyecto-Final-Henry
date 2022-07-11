@@ -66,7 +66,7 @@ export default function LoginData({ personalData, setPersonalData }) {
                                 value={personalData.name}
                                 name="name"
                                 onChange={(e) => setPersonalData({ ...personalData, name: e.target.value })}
-                                defaultValue={usuario.name ? "" : "Ingrese un nombre"}
+                                defaultValue={usuario?.name}
                                 helperText=""
                                 InputLabelProps={{
                                     shrink: true,
@@ -94,7 +94,7 @@ export default function LoginData({ personalData, setPersonalData }) {
                                     onChange={(e) => setPersonalData({ ...personalData, dni: e.target.value })}
                                     name="dni"
                                     type="number"
-                                    defaultValue={usuario.dni ? "" : "Ingrese un DNI"}
+                                    defaultValue={usuario?.dni}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -122,7 +122,7 @@ export default function LoginData({ personalData, setPersonalData }) {
                                 value={personalData.celphone}
                                 onChange={(e) => setPersonalData({ ...personalData, celphone: e.target.value })}
                                 name="celphone"
-                                defaultValue={usuario.celphone ? "" : "Ingrese un telefono"}
+                                defaultValue={usuario?.celphone}
                                 type="number"
                                 InputLabelProps={{
                                     shrink: true,
