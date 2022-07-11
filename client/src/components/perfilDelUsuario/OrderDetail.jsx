@@ -13,6 +13,12 @@ import {useDispatch, useSelector} from "react-redux"
 import  {userDetail}  from '../../redux/actions/userOrderA';
 import {useLocation} from "react-router-dom";
 
+import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
+import Stack from '@mui/material/Stack';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import { Link } from 'react-router-dom'
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -82,42 +88,16 @@ export default function DashboardUsers() {
         }
         </TableBody>
       </Table>
+;
+      <Stack direction="row" spacing={2} >
+      <Link to= "/profile" ><Button sx={{ m: 1, width: '20ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "5px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+        volver
+      </Button></Link> 
+
+      </Stack>
     </TableContainer>
 
   );
 }
 
        
-
-//     return (
-//         <div>
-//             <p>Estado de la compra: {list.status}</p>
-//             <p>Items </p>
-//             { list.items? list.items.map (i=>
-//             <div>
-//                 <div>
-//                     <p>
-//                     Categorias: {i.category_id}
-//                 </p>
-//                 <p>
-//                     Descripción: {i.description}
-//                 </p>
-//                 <p>
-//                     Nombre: {i.title}
-//                 </p>
-//                 <p>
-//                     Cantidad: {i.quantity}
-//                 </p>
-//                 <p>
-//                     Precio unitario: {i.unit_price}
-//                 </p>
-//                 </div>
-//                 <br/>
-//             </div>
-//                 ): <p>Loading...</p>}
-//                 
-
-        
-//         </div>
-//     )
-// }

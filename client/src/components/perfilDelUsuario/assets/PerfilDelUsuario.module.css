@@ -1,10 +1,14 @@
 .subTitulo{
-    color: #dee2e6 ;
+    color: #1A2027 ;
+    
+}
+.iconos{
+    color: #FFC400 ;
     
 }
 
 .modificar{
-    color: #FFC400 ;
+    color: #1A2027 ;
     text-decoration:none;
     font-size: 12px;
     /* border-color: red 10px; */
@@ -15,6 +19,12 @@
     width: 60px;
     height: auto;
     
+}
+.foto2{
+
+    width: 80px;
+    height: auto;
+
 }
 
 .fotoBtn{

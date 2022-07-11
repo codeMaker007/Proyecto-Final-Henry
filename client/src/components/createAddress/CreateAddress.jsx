@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import style from "./CreateAddress.module.css";
+import { useNavigate, Link } from 'react-router-dom';
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -11,8 +12,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 export default function CreateAddress() {
+
+    const navigate = useNavigate ()
     const {user} = useAuth0()
     const allUser = useSelector((state) => state.DashboardUsersR.allUsers);
 
@@ -21,7 +25,7 @@ export default function CreateAddress() {
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
-        street: "", number: 0, zipCode: "", description: "", province: "", apartment: "", location: "", userId: 0
+        street: "", number: "", zipCode: "", description: "", province: "", apartment: "", location: "", userId: 0
     })
 
     useEffect(() => {
@@ -63,9 +67,10 @@ export default function CreateAddress() {
         ) {
             dispatch(postAddress(input))
             alert("Dirección agregada con éxito")
+            navigate('/profile')
             setInput({
                 street: "",
-                number: 0,
+                number: "",
                 province: "",
                 zipCode: "",
                 location: "",
@@ -100,18 +105,18 @@ export default function CreateAddress() {
             <form  onSubmit={(e) => handleSubmit(e)} >
 
             <Box  sx={{
-            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" },width: '62ch', my: "2%", mx: "30%", maxWidth: "100%", bgcolor:'white', borderRadius: "10px" }}>
+            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" },width: '62ch', my: "2%", mx: "30%", maxWidth: "100%", bgcolor:'#d8d8d8', borderRadius: "10px" }}>
         <Box
           component="form"
           sx={{
-            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" }, maxWidth: "100%", bgcolor:'white', borderRadius: "10px" }}
+            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" }, maxWidth: "100%", bgcolor:'#d8d8d8', borderRadius: "10px" }}
           noValidate
           autoComplete="off"
         >
    
             <div>
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#dee2e6',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#dee2e6',  borderRadius: "10px" }}
                 id="outlined-helperText"
                 label="Calle: "
                 htmlFor="street"
@@ -129,7 +134,7 @@ export default function CreateAddress() {
                   
 
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="outlined-helperText"
                 label="Numeración:"
                 htmlFor="number"
@@ -146,7 +151,7 @@ export default function CreateAddress() {
                 </div>
 
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="outlined-helperText"
                 label="Provincia:"
                 htmlFor="province"
@@ -163,7 +168,7 @@ export default function CreateAddress() {
 
 
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400', borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400', borderRadius: "10px" }}
                 id="outlined-number"
                 label= "Código postal: "
                 htmlFor="zipCode"
@@ -178,7 +183,7 @@ export default function CreateAddress() {
                 {errors.zipCode && (<p className={style.error}>{errors.zipCode}</p>)}
                 </div>
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="outlined-number"
                 label="Descripción:"
                 htmlFor="description"
@@ -193,7 +198,7 @@ export default function CreateAddress() {
               
 
               <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="outlined-number"
                 label="Departamento: "
                 htmlFor="apartment"
@@ -207,7 +212,7 @@ export default function CreateAddress() {
               </div>
 
               <div> 
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#dee2e6',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#dee2e6',  borderRadius: "10px" }}
                 textarea
                 id="outlined-helperText"
                 label="Localidad: "
@@ -225,9 +230,15 @@ export default function CreateAddress() {
             </Box>
             <Stack direction="row" spacing={2} >
 
-            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
              Crear dirección
             </Button>
+            </Stack>
+            <Stack direction="row" spacing={2} >
+            <Link to= "/profile" className= {style.modificar}><Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+               volver
+            </Button></Link> 
+
             </Stack>
                 
             </Box>

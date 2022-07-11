@@ -88,18 +88,18 @@ export default function LoginData() {
 
       <form  onSubmit={(e) => handleSubmit(e)} >
       <Box  sx={{
-            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" },width: '62ch', my: "5%", mx: "35%", maxWidth: "100%", bgcolor:'white', borderRadius: "10px" }}>
+            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" },width: '62ch', my: "5%", mx: "30%", maxWidth: "100%", bgcolor:'#d8d8d8', borderRadius: "10px" }}>
         <Box
           component="form"
           sx={{
-            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" }, maxWidth: "100%", bgcolor:'white', borderRadius: "10px" }}
+            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" }, maxWidth: "100%", bgcolor:'#d8d8d8', borderRadius: "10px" }}
           noValidate
           autoComplete="off"
         >
        
             <div>
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#dee2e6',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#dee2e6',  borderRadius: "10px" }}
                 id="outlined-helperText"
                 label={usuario.name? "Nombre actual: " + usuario.name : "Nombre: "} 
                 htmlFor="name"
@@ -114,7 +114,7 @@ export default function LoginData() {
                 />
                 </div>
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="outlined-helperText"
                 label={usuario.username? "Usuario actual: " + usuario.username : "Usuario: "}
                 htmlFor="username"
@@ -129,7 +129,7 @@ export default function LoginData() {
                 />
                 </div>
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400', borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400', borderRadius: "10px" }}
                 id="outlined-number"
                 label={usuario.celphone? "Telefono actual: " + usuario.celphone : "Telefono:"}
                 htmlFor="celphone"
@@ -144,7 +144,7 @@ export default function LoginData() {
                 />
                 </div>
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="outlined-number"
                 label={usuario.dni? "DNI actual: " + usuario.dni : "Ingrese un DNI:"}
                 htmlFor="dni"
@@ -160,7 +160,7 @@ export default function LoginData() {
               </div>
               <div>
  
-              <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+              <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="input-with-icon-textfield"
                 label={usuario.picture? "" : "Foto:"}
                 htmlFor="picture"
@@ -184,13 +184,13 @@ export default function LoginData() {
             </Box>
             <Stack direction="row" spacing={2} >
 
-            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                 Modificar datos
             </Button>
             </Stack>
             
             <Stack direction="row" spacing={2} >
-            <Link to= "/profile" className= {style.modificar}><Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+            <Link to= "/profile" className= {style.modificar}><Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
                volver
             </Button></Link> 
 
