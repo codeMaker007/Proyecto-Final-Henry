@@ -21,6 +21,8 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import { Link } from "react-router-dom";
 
 export default function UpdateProduct() {
  
@@ -166,7 +168,11 @@ export default function UpdateProduct() {
     return (
 
         <div>
-
+        <Link to= "/dashboard" >
+            <Button sx={{ m: 1, width: '20ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "5px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+                volver
+            </Button>
+        </Link> 
             <form  onSubmit={(e) => handleSubmit(e)} >
 
             <Box  sx={{

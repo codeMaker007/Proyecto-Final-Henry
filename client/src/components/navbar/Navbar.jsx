@@ -29,6 +29,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import StoreSharpIcon from '@mui/icons-material/StoreSharp';
 import { getProductByName } from "../../redux/actions/productName";
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { useSnackbar } from 'notistack';
 
 const theme = createTheme({
     palette: {
@@ -102,14 +103,16 @@ const StyledBadge2 = styled(Badge)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+    const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const [producto, setProducto] = useState();
+    const [producto, setProducto] = useState('');
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (producto.length < 1) return enqueueSnackbar('No has ingresado nada!', { variant: 'info' });
         if (location.pathname !== '/products') {
             navigate("/products")
         }
@@ -222,7 +225,7 @@ export default function PrimarySearchAppBar() {
                                 Dashboard
                             </MenuItem>
                         </Link>
-                        : <></>
+                        : <div></div>
                 }
                 <MenuItem onClick={() => logout({ returnTo: window.location.origin })}>
                     <ListItemIcon>
@@ -315,7 +318,7 @@ export default function PrimarySearchAppBar() {
                             Dashboard
                         </MenuItem>
                     </Link>
-                    : <></>
+                    : <div></div>
             }
             <MenuItem onClick={() => logout({ returnTo: window.location.origin })}>
                 <ListItemIcon>

@@ -5,12 +5,15 @@ export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 export const FILTER_CATEGORY = 'FILTER_CATEGORY';
 export const ORDER_PRICE_ASC = 'ORDER_PRICE_ASC';
 export const ORDER_PRICE_DESC = 'ORDER_PRICE_DESC';
-export const ORDER_ALPHA = 'ORDER_ALPHA';
+export const ORDER_AZ = 'ORDER_AZ';
+export const ORDER_ZA = 'ORDER_ZA';
 
 export const RANGO_PRICE = 'RANGO_PRICE';
 export const DISCOUNT = 'DISCOUNT';
 export const ENVIOS = 'ENVIOS';
 export const GET_BRAND = 'GET_BRAND';
+export const SIN_COSTO = 'SIN_COSTO';
+export const CON_COSTO = 'CON_COSTO';
 
 export const getAllProducts = () => {
     return async function (dispatch) {
@@ -42,16 +45,6 @@ export function byDiscount(payload) {
     }
 }
 
-export function byEnvios(payload) {
-    return async function (dispatch) {
-        var json = await axios.get(`/filterShipping/${payload}`);
-        return dispatch({
-            type: ENVIOS,
-            payload: json.data
-        })
-    }
-}
-
 export function getbrand(payload) {
     return async function (dispatch) {
         try {
@@ -72,8 +65,11 @@ export function getbrand(payload) {
 export const order = (data) => {
     if (data === 'ASC') return { type: ORDER_PRICE_ASC, payload: null }
     else if (data === 'DESC') return { type: ORDER_PRICE_DESC, payload: null }
-    else return async function (dispatch) {
-        const response = (await axios.get(`/orders/${data}`)).data;
-        return dispatch({ type: ORDER_ALPHA, payload: response })
-    }
+    else if (data === 'A-Z') return { type: ORDER_AZ, payload: null }
+    else return { type: ORDER_ZA, payload: null }
+}
+
+export function byEnvios(payload) {
+    if (payload === 'true') return { type: SIN_COSTO, payload: null }
+    else return { type: CON_COSTO, payload: null }
 }

@@ -35,7 +35,7 @@ export default function Carousel(props) {
     return (
         <>
             <div className={style.container}>
-                <img src={require(`${selectedImage}`)} alt='carouselimg' onLoad={() => setLoaded(true)} className={loaded ? style.loaded : ''} width='100%' />
+                <img src={require(`${selectedImage}`)} alt='carouselimg' onLoad={() => setLoaded(true)} className={loaded ? style.loaded : ''} width='100%' height='500px' />
             </div>
         </>
 

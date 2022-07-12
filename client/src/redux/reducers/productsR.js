@@ -1,9 +1,10 @@
-import { GET_ALL_PRODUCTS, ORDER_PRICE_DESC, FILTER_CATEGORY, RANGO_PRICE, DISCOUNT, ENVIOS, GET_BRAND, ORDER_PRICE_ASC, ORDER_ALPHA } from "../actions/productsA";
+import { GET_ALL_PRODUCTS, ORDER_PRICE_DESC, FILTER_CATEGORY, RANGO_PRICE, DISCOUNT, ENVIOS, GET_BRAND, ORDER_PRICE_ASC, ORDER_AZ, ORDER_ZA, SIN_COSTO, CON_COSTO } from "../actions/productsA";
 import { GET_PRODUCT_BY_NAME } from '../actions/productName';
 
 const initialState = {
     products: [],
-    totalProducts: 0
+    totalProducts: 0,
+    productsCopy: []
 }
 
 const productsR = (state = initialState, { type, payload }) => {
@@ -12,6 +13,7 @@ const productsR = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 products: payload,
+                productsCopy: payload,
                 totalProducts: payload.length
             }
         case ORDER_PRICE_ASC:
@@ -32,6 +34,7 @@ const productsR = (state = initialState, { type, payload }) => {
         case FILTER_CATEGORY:
             return {
                 ...state,
+                productsCopy: payload,
                 products: payload
             }
         case RANGO_PRICE:
@@ -57,10 +60,25 @@ const productsR = (state = initialState, { type, payload }) => {
                 ...state,
                 products: payload
             }
-        case ORDER_ALPHA:
+        case ORDER_AZ:
             return {
                 ...state,
-                products: payload
+                products: state.products.sort((a, b) => -1 * a.name.localeCompare(b.name))
+            }
+        case ORDER_ZA:
+            return {
+                ...state,
+                products: state.products.sort((a, b) => a.name.localeCompare(b.name))
+            }
+        case SIN_COSTO:
+            return {
+                ...state,
+                products: state.productsCopy.filter(e => e.freeShipping === true)
+            }
+        case CON_COSTO:
+            return {
+                ...state,
+                products: state.productsCopy.filter(e => e.freeShipping !== true)
             }
         default:
             return state;

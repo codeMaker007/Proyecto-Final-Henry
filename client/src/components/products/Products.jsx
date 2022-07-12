@@ -54,25 +54,34 @@ export default function BasicGrid() {
 
     });
 
+    const [copystate, setCopyState] = useState({
+        categoria: '',
+    });
+
     useEffect(() => {
         dispatch(getAllProducts());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
-        if (state.categoria.length > 2) dispatch(getByCategory(state.categoria));
-        if (state.envio?.length > 2) dispatch(byEnvios(state.envio));
+        if (state.categoria?.length > 2 && state.categoria !== copystate.categoria) { setCopyState({ ...copystate, categoria: state.categoria }); dispatch(getByCategory(state.categoria)); }
         if (state.marcas?.length > 2) dispatch(getbrand(state.marcas));
         if (state.minimo > 0) dispatch(rangoByPrice(state.minimo, state.maximo));
+        if (state.envio?.length > 2) {
+            setTimeout(() => {
+                dispatch(byEnvios(state.envio));
+            }, 500);
+        }
         if (state.orden?.length > 2) {
             setTimeout(() => {
                 dispatch(order(state.orden));
-            }, 500);
+            }, 100);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state])
 
     const products = useSelector((state) => state.products.products);
+    const productsCopy = useSelector((state) => state.products.productsCopy);
     const cantProducts = useSelector((state) => state.products.totalProducts);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -89,7 +98,7 @@ export default function BasicGrid() {
     }, [products]);
 
     function cleanFilters() {
-        setState({ categoria: 'null', envio: '', marcas: '', minimo: 0, maximo: 0, orden: '' })
+        setState({ categoria: 'null', envio: null, marcas: '', minimo: 0, maximo: 0, orden: '' })
         dispatch(getAllProducts());
     }
 
@@ -109,7 +118,7 @@ export default function BasicGrid() {
                         <Item sx={{ marginTop: 3, display: 'flex', flexDirection: 'column' }} elevation={1}>
                             <Typography variant='overline'>Marcas</Typography>
                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                                <Marcas products={products} setState={setState} state={state} />
+                                <Marcas productsCopy={productsCopy} setState={setState} state={state} />
                             </div>
                         </Item>
                         <Item sx={{ marginTop: 3, display: 'flex', flexDirection: 'column' }} elevation={1}>
@@ -120,7 +129,7 @@ export default function BasicGrid() {
                         </Item>
                         <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column' }} elevation={1}>
                             <ColorButton onClick={() => cleanFilters()} variant='contained' disableElevation size='medium'>
-                                Resetear filtros
+                                Reiniciar filtros
                             </ColorButton>
                         </div>
                     </Grid>

@@ -1,7 +1,6 @@
 .container img {
     transition: 1s;
     opacity: 0;
-    border-radius: 5px;
 }
 
 .container .loaded {

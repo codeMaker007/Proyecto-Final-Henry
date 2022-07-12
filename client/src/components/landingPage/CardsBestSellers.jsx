@@ -89,10 +89,10 @@ export default function MediaControlCard({ booleano, bestSellers }) {
 
 
                     </Card >
-                    : < Card sx={{ display: 'flex', padding: 3, height: '70%' }}>
+                    : < Card sx={{ display: 'flex', padding: 0, height: '100%' }}>
                         {
                             (bestSellers?.image)
-                                ? <img src={bestSellers.image} alt='imagenProduct' width='40%' height='100%' style={{ borderRadius: 5 }} />
+                                ? <img src={bestSellers.image} alt='imagenProduct' width='40%' height='70%' style={{ borderRadius: 5, alignSelf: 'center' }} />
                                 : <img src={noImage} alt='imagenProduct' width='40%' height='100%' style={{ borderRadius: 5 }} />
 
                         }

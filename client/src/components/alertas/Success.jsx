@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { getOrder } from '../../redux/actions/createOrderA';
 import { useDispatch } from 'react-redux';
 import { limpiarCarrito } from '../../redux/actions/carritoA';
@@ -9,7 +8,6 @@ export default function Success() {
     const orderId = queryParams.get("merchant_order_id");
     // const payerId = queryParams.get("PayerID");
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -17,7 +15,7 @@ export default function Success() {
         // else dispatch(getOrder(payerId))
         dispatch(limpiarCarrito());
         setTimeout(() => {
-            navigate('/');
+            window.location.href = 'http://localhost:3000/';
         }, 1500);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

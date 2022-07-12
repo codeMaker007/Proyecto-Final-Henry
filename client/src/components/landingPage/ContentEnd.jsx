@@ -12,9 +12,8 @@ export default function App({ products }) {
             {
                 products.map(e => {
                     return (
-                        <Grid item xs={6} sm={3} md={4} lg={2}>
+                        <Grid key={e.id * Math.random()} item xs={6} sm={3} md={4} lg={2}>
                             <CardsContentEnd
-                                key={e.id * Math.random()}
                                 id={e.id}
                                 name={e.name}
                                 price={e.price}

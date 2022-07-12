@@ -24,6 +24,9 @@ import Select from '@mui/material/Select';
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import { Link } from "react-router-dom";
+
 export default function CreateProduct() {
    
     const dispatch = useDispatch()
@@ -168,7 +171,11 @@ export default function CreateProduct() {
         <>
         {(isAuthenticated && findedUser?.isAdmin)?
             <div>
-    
+        <Link to= "/dashboard" >
+            <Button sx={{ m: 1, width: '20ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "5px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+                volver
+            </Button>
+        </Link> 
                 <form  onSubmit={(e) => handleSubmit(e)} >
     
                 <Box  sx={{

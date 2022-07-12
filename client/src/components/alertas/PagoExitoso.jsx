@@ -1,12 +1,10 @@
 import React from 'react';
 import style from './assets/PagoExitoso.module.css';
-import { useNavigate } from 'react-router-dom';
 
 export default function PagoExitoso({ type }) {
-    const navigate = useNavigate();
 
     setTimeout(() => {
-        navigate('/products')
+        window.location.href = 'http://localhost:3000/';
     }, 2500);
 
     return (

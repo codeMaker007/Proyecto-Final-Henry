@@ -49,7 +49,6 @@ const BpCheckedIcon = styled(BpIcon)({
     },
 });
 
-// Inspired by blueprintjs
 function BpRadio(props) {
     return (
         <Radio
@@ -72,7 +71,7 @@ export default function CustomizedRadios({ setState, state }) {
     return (
         <FormControl>
             <RadioGroup
-                defaultValue="null"
+                defaultValue={null}
                 aria-labelledby="demo-customized-radios"
                 name="customized-radios">
                 <FormControlLabel value="false" control={<BpRadio />} label="Con costo" onChange={(e) => { setState({ ...state, envio: e.target.value }); }} />

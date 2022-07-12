@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
+// import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 export default function ImgMediaCard() {
@@ -15,7 +15,7 @@ export default function ImgMediaCard() {
                 height="50%"
                 image="https://i.ytimg.com/vi/bg58pqv3PUY/maxresdefault.jpg"
             />
-            <CardContent sx={{ height: '30%', overflow: 'hidden' }}>
+            <CardContent sx={{ height: '50%', overflow: 'hidden' }}>
                 <Typography gutterBottom variant="h5" component="div">
                     Diseño
                 </Typography>
@@ -23,10 +23,6 @@ export default function ImgMediaCard() {
                     Equipos super potentes pensados para los trabajos relacionados al mundo del diseño grafico, arquitectura, ingenieria civil, etc. Disponen de mucha capacidad de procesamiento gráfico.
                 </Typography>
             </CardContent>
-            <CardActions sx={{ display: 'flex', justifyContent: 'flex-end', height: '10%' }}>
-                {/* <Button size="small">Share</Button> */}
-                <Button variant='outlined' color='secondary' size="medium">Comprar</Button>
-            </CardActions>
         </Card>
     );
 }

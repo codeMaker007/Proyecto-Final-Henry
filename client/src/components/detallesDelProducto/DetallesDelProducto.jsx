@@ -8,6 +8,19 @@ import { addProductCarrito } from '../../redux/actions/carritoA';
 import { getAllReviews } from '../../redux/actions/productReviewA';
 import Alerta from '../alertas/Alerta';
 import AddReview from '../addReview/AddReview';
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import {IconButton, Rating} from "@mui/material";
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import Button from "@mui/material/Button";
+import CardMedia from "@mui/material/CardMedia";
+import { Container, Stack } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {styled} from "@mui/material/styles";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import CardReview from "../CardReview/CardReview";
 
 function Producto({ getOneProduct }) {
     const dispatch = useDispatch();
@@ -23,6 +36,22 @@ function Producto({ getOneProduct }) {
         type: '',
         text: ''
     });
+    const ColorButton = styled(Button)(({ theme }) => ({
+        color: theme.palette.getContrastText('#FFC400'),
+        backgroundColor: '#FFC400',
+        '&:hover': {
+            backgroundColor: '#FFC400',
+        },
+    }));
+    const ColorButtonCont = styled(Button)(({ theme }) => ({
+        color: theme.palette.getContrastText('#f7f7f7'),
+        backgroundColor: '#f7f7f7',
+        borderColor: '#a9a9a9',
+        height: 35,
+        '&:hover': {
+            backgroundColor: '#f7f7f7',
+        },
+    }));
 
     useEffect(() => {
         dispatch(getAllReviews(idProduct))
@@ -95,65 +124,174 @@ function Producto({ getOneProduct }) {
 
     return (
         <>
-            <div className={style.body}>
-                <p className={style.categories}><Link to='/products'>Productos</Link> {'>'} <Link to='/products'>{productDetail.categories}</Link> </p>
+            <Container
+                sx={{
+                    background: 'whitesmoke',
+                    borderRadius: '16px',
+                    marginTop: '40px',
+                }}
+            >
+                <Stack sx={{
+                    textAlign: 'center'
+                }}>
+                    <Typography
+                        variant="h4" component="h5"
+                    >
+                        {productDetail.name}
+                    </Typography>
+                </Stack>
+                <Grid container>
+                    <Grid item xs={12} sm={6}>
+                        <Box
+                            sx={{
+                                boxShadow: 15,
+                                borderRadius: 10
+                            }}
+                            margin={5}
+                        >
+                            <CardMedia
+                                sx={{
+                                    borderRadius: '20px',
+                                }}
+                                component="img"
+                                image={productDetail.image}
+                                height="400"
+                                width="100"
+                                alt="Imagen producto"
+                            />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Box
+                            border={0.5}
+                            margin={5}
+                        >
+                            <Box>
+                                <Typography
+                                    marginLeft={5}
+                                    fontStyle="italic"
+                                >
+                                    {stockDisponible()}
+                                </Typography>
+                            </Box>
+                            <Box margin={5}>
+                                <Typography
+                                    fontStyle="italic"
+                                >
+                                    {tipoEnvio()}
+                                </Typography>
+                            </Box>
+                            <Box>
+                                <Typography
+                                    marginLeft={5}
+                                    fontStyle="italic"
+                                >
+                                    {descuento()}
+                                </Typography>
+                            </Box>
+                            <Box margin={3}>
+                                <Typography
+                                    fontStyle="italic"
+                                >
+                                    {
+                                        (productDetail.stock === 0) ? <></>
+                                            :
+                                            <div style={{ display: 'flex', flexDirection: 'column', width: '20%', height: 100, justifyContent: 'center', alignItems: 'center', marginLeft: '27px' }}>
+                                                <ButtonGroup variant="outlined" >
+                                                    <ColorButtonCont onClick={() => decrementarCantidad()} >-</ColorButtonCont>
+                                                    <ColorButtonCont disabled >{cantidad}</ColorButtonCont>
+                                                    <ColorButtonCont onClick={() => incrementarCantidad()} >+</ColorButtonCont>
+                                                </ButtonGroup>
+                                            </div>
+                                    }
+                                </Typography>
+                            </Box>
+                            <Box m={5}>
+                                <Typography
+                                    fontStyle="italic"
+                                >
+                                    <ColorButton onClick={handleCarrito} variant="contained" endIcon={<ShoppingCartIcon />}
+                                    >
+                                        Agregar al carrito
+                                    </ColorButton>
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
+                <Grid container>
+                    <Grid item xs={12} sm={6}>
+                        <Box width={550} marginBottom={10}>
+                            <Typography
+                                marginLeft={5}
+                                fontSize={30}
+                            >
+                                DESCRIPCION:
+                            </Typography>
+                            <Typography
+                                marginLeft={5}
+                                fontStyle="italic"
+                            >
+                                {productDetail.description}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ width: 1, borderBottom: 'solid', borderBottomWidth: 1, borderColor: '#e1e1e1', marginLeft: -0.4, marginTop: 0.5 }}>
+                            < Grid container marginLeft={5} >
 
-                <div className={style.productCard}>
-                    <img src={productDetail.image} className={style.cardImg} alt='Imagen producto' onError={({ currentTarget }) => {
-                        currentTarget.onerror = null; // prevents looping
-                        currentTarget.src = `${noImage}`;
-                    }} />
-                    <div className={style.container}>
-                        <h1 className={style.nombreProducto}>{productDetail.name}</h1>
-                        <div className={style.subContainer}>
-                            {stockDisponible()}
-                        </div>
-                        <div className={style.subContainer}>
-                            {tipoEnvio()}
-                        </div>
-                        <div className={style.subContainer}>
-                            {descuento()}
-                        </div>
-                        <div>
-                        </div>
-                        <p className={style.descripcion}>{productDetail.description}</p>
-                        {
-                            (productDetail.stock === 0) ? <></>
-                                : <div className={style.containerCantidad}>
-                                    <button onClick={() => decrementarCantidad()}>-</button>
-                                    <p>{cantidad}</p>
-                                    <button onClick={() => incrementarCantidad()}>+</button>
-                                </div>}
-                        {
-                            (productDetail.stock === 0)
-                                ? <></>
-                                : <button id='btnCarrito' onClick={handleCarrito} className={style.button}>Agregar al carrito</button>
-                        }
-                    </div>
-                </div>
-                <div>
-                    <button onClick={handleClick}>Agregar una reseña</button>
-                    {isShown && <AddReview productId = {productDetail.id}/>}
-                </div>
-                <br/>
-                <div>
-                    {allReviews? allReviews.map((r, index) => {
-                        return(
-                            <div key={index}>
-                                <span>Usuario: {r.User.username} </span>
-                                <span>Título: {r.title} </span>
-                                <span>Puntuación {r.score} </span>
-                                <p>{r.text}</p>
-                            </div>
-                        )
-                    }): <p>No hay reseñas</p>}
-                </div>
-            </div>
-            {
-                (modal.open)
-                    ? <Alerta setOpenModal={setModal} type={modal.type} text={modal.text} />
-                    : <></>
-            }
+                                <div style={{ display: 'flex', flexDirection: 'column', width: '25%', height: 20, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 4 }}>
+                                    <Typography variant="button" display="block" gutterBottom>Usuario</Typography>
+                                </div>
+                                <div style={{display: 'flex', flexDirection: 'column', width: '15%', height: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 4 }}>
+                                    <Typography variant="button" display="block" gutterBottom>Puntuacion</Typography>
+                                </div>
+                                <div style={{ marginLeft: '13px', display: 'flex', flexDirection: 'column', width: '20%', height: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 4 }}>
+                                    <Typography variant="button" display="block" gutterBottom>Reseña</Typography>
+                                </div>
+
+                            </Grid >
+                        </Box >
+                        <div sx={{ width: 1, borderBottom: 'solid', borderBottomWidth: 1, borderColor: '#e1e1e1', marginLeft: -0.4, marginTop: 0.5 }}>
+                                        {allReviews? allReviews.map((r, index) => {
+                                            return(
+                                                <Box border={0.5} margin={2} borderRadius={2}>
+                                                    <CardReview
+                                                        key={index}
+                                                        usuario={r.User.username}
+                                                        score={r.score}
+                                                        review={r.text}
+                                                    />
+                                                </Box>
+
+                                            )
+                                        }): <p>No hay reseñas</p>}
+
+                        </div >
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <Box
+                            margin={5}
+                            paddingLeft={5}
+                        >
+                            <ColorButton onClick={handleClick}>Agregar una reseña</ColorButton>
+                            {
+                                isShown &&
+                                <Box marginLeft={-30}>
+                                    <AddReview productId = {productDetail.id}/>
+                                </Box>
+                            }
+                        </Box>
+
+                    </Grid>
+
+                </Grid>
+                {
+                    (modal.open)
+                        ? <Alerta setOpenModal={setModal} type={modal.type} text={modal.text} />
+                        : <></>
+                }
+            </Container>
+
+
         </>
     )
 }

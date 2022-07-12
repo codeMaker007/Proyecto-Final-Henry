@@ -19,15 +19,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { DashboardUsersA } from '../../redux/actions/DashboardUsersA';
 import axios from 'axios';
 
-// const Item = styled(Paper)(({ theme }) => ({
-//     backgroundColor: '#dee2e6 ',
-//     ...theme.typography.body2,
-//     padding: theme.spacing(1),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-// }));
-
-
 const images = ['./assets/imagen1.jpg', './assets/imagen3.jpg', './assets/imagen4.jpg'];
 
 export default function BasicGrid() {
@@ -38,7 +29,6 @@ export default function BasicGrid() {
         md: false
     });
 
-    console.log(window.innerWidth)
     const handleResponsive = () => {
         if (window.innerWidth < 440) return setResponsive({ xs: true, sm: false, md: false })
         else if (window.innerWidth < 600) return setResponsive({ xs: false, sm: true, md: false })
@@ -58,14 +48,10 @@ export default function BasicGrid() {
     const bestSellers = useSelector((state) => state.landingPage.bestSellers);
     const newProducts = useSelector((state) => state.landingPage.newestProducts);
     const users = useSelector((state) => state.DashboardUsersR.allUsers)
-    // console.log(newProducts[0])
-    // console.log(discountProducts)
-    // console.log(bestSellers)
     const { user, isAuthenticated } = useAuth0()
 
     if (isAuthenticated) {
         let findedUser = users.find(x => x.email === user.email)
-        // console.log(findedUser);
         if (!findedUser) {
             let obj = {
                 name: user.name,
@@ -73,13 +59,12 @@ export default function BasicGrid() {
                 email: user.email
             }
             axios.post('/user', obj)
-            /* navigate('/profile') */
         }
     }
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container justifyContent='center' spacing={2}>
-                <Grid item xs={12} sm={11} md={8}>
+                <Grid item xs={12} sm={11} md={12}>
                     <Carousel images={images} />
                 </Grid>
                 <Grid container justifyContent='center' spacing={2}>
@@ -130,11 +115,11 @@ export default function BasicGrid() {
                                         gridRow: '1 / 3'
                                     }}
                                 >
-                                    <Grid item elevation={0} sx={{ gridRow: '1 / 3', gridColumn: '1 / 6', height: 473 }}><CardsBestSellers booleano={true} key={61} bestSellers={bestSellers[0]} /></Grid>
-                                    <Grid item elevation={0} sx={{ gridRow: '1', gridColumn: '6 / 10 ', height: 225 }}><CardsBestSellers booleano={false} key={52} bestSellers={bestSellers[1]} /></Grid>
-                                    <Grid item elevation={0} sx={{ gridRow: '1', gridColumn: '10 / 16', height: 225 }}><CardsBestSellers booleano={false} key={763} bestSellers={bestSellers[2]} /></Grid>
-                                    <Grid item elevation={0} sx={{ gridRow: '2', gridColumn: '6 / 10', height: 225 }}><CardsBestSellers booleano={false} key={457} bestSellers={bestSellers[3]} /></Grid>
-                                    <Grid item elevation={0} sx={{ gridRow: '2', gridColumn: '10 / 16', height: 225 }}><CardsBestSellers booleano={false} key={565} bestSellers={bestSellers[4]} /></Grid>
+                                    <Grid item elevation={0} sx={{ gridRow: '1 / 3', gridColumn: '1 / 6', height: 480 }}><CardsBestSellers booleano={true} key={61} bestSellers={bestSellers[0]} /></Grid>
+                                    <Grid item elevation={0} sx={{ gridRow: '1', gridColumn: '6 / 10 ', height: 200 }}><CardsBestSellers booleano={false} key={52} bestSellers={bestSellers[1]} /></Grid>
+                                    <Grid item elevation={0} sx={{ gridRow: '1', gridColumn: '10 / 16', height: 200 }}><CardsBestSellers booleano={false} key={763} bestSellers={bestSellers[2]} /></Grid>
+                                    <Grid item elevation={0} sx={{ gridRow: '2', gridColumn: '6 / 10', height: 180, marginTop: -8 }}><CardsBestSellers booleano={false} key={457} bestSellers={bestSellers[3]} /></Grid>
+                                    <Grid item elevation={0} sx={{ gridRow: '2', gridColumn: '10 / 16', height: 180, marginTop: -8 }}><CardsBestSellers booleano={false} key={565} bestSellers={bestSellers[4]} /></Grid>
                                 </Box>
                         }
                     </Grid>

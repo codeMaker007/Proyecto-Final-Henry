@@ -67,8 +67,7 @@ export default function CreateAddress() {
         ) {
             dispatch(postAddress(input))
             alert("Dirección agregada con éxito")
-            navigate('/profile')
-            setInput({
+            /* setInput({
                 street: "",
                 number: "",
                 province: "",
@@ -76,7 +75,8 @@ export default function CreateAddress() {
                 location: "",
                 apartment: "",
                 description: "",
-            })
+            }) */
+            navigate('/profile')
         }
         else {
             alert("Debe compeltar correctamente todos los campos con asteriscos (*)")
