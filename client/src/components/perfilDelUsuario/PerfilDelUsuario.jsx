@@ -35,7 +35,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import Box from '@mui/material/Box';
-import  Loading  from '../loading/Loading.jsx';
+import Loading  from '../loading/Loading.jsx';
 
 const labels = {
     1: 'Malo',
@@ -118,7 +118,7 @@ export default function PerfilDelUsuario(){
                         {usuario?.picture? <img src={usuario.picture} className= {style.foto} alt= ""/>:  <AccountCircleIcon  className= {style.foto2} fontSize = "large"/>  } 
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText    primary= {<p > Bienvenido {usuario?.name}!!</p>}secondary= {usuario?.isAdmin === true? <p className= {style.subTitulo}> Administrador. </p> : ""} />
+                    <ListItemText    primary= {<p className= {style.espacio}> Bienvenido {usuario?.name}!!</p>}secondary= {usuario?.isAdmin === true? <p className= {style.espacio}> Administrador. </p> : ""} />
                     </ListItem>
                     <Divider variant="inset" component="li" />
                

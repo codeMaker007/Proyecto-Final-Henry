@@ -168,26 +168,26 @@ export default function UpdateProduct() {
     return (
 
         <div>
-        <Link to= "/dashboard" >
-            <Button sx={{ m: 1, width: '20ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "5px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+        <Link to= "/dashboard" className= {style.volver1}>
+            <Button sx={{ m: 1, width: '20ch', color: '#022335', bgcolor:'#fff', borderColor:'#dee2e6',  borderRadius: "5px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
                 volver
             </Button>
         </Link> 
             <form  onSubmit={(e) => handleSubmit(e)} >
 
             <Box  sx={{
-            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" },width: '62ch', my: "2%", mx: "30%", maxWidth: "100%", bgcolor:'white', borderRadius: "10px" }}>
+            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" },width: '62ch', my: "2%", mx: "30%", maxWidth: "100%", bgcolor:'#fff', borderRadius: "10px" }}>
         <Box
           component="form"
           sx={{
-            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" }, maxWidth: "100%", bgcolor:'white', borderRadius: "10px" }}
+            '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" }, maxWidth: "100%", bgcolor:'#fff', borderRadius: "10px" }}
           noValidate
           autoComplete="off"
         >
    
             <div>
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#dee2e6',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#dee2e6',  borderRadius: "10px" }}
                 id="outlined-helperText"
                 label="Nombre del producto: "
                 maxlength = "30"
@@ -206,7 +206,7 @@ export default function UpdateProduct() {
                   
 
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="outlined-helperText"
                 label="Imagén del producto:"
                 htmlFor="image"
@@ -222,7 +222,7 @@ export default function UpdateProduct() {
                 </div>
 
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="outlined-helperText"
                 label="Marca del producto:"
                 htmlFor="brand"
@@ -239,7 +239,7 @@ export default function UpdateProduct() {
 
 
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400', borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400', borderRadius: "10px" }}
                 id="outlined-number"
                 label= "Descuento del producto"
                 htmlFor="discount"
@@ -256,7 +256,7 @@ export default function UpdateProduct() {
                 {errors.discount && (<p className={style.error}>{errors.discount}</p>)}
                 </div>
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="outlined-number"
                 label="Precio del producto"
                 htmlFor="price"
@@ -275,7 +275,7 @@ export default function UpdateProduct() {
               
 
               <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#FFC400',  borderRadius: "10px" }}
                 id="outlined-number"
                 label="Stock del producto"
                 htmlFor="stock"
@@ -292,7 +292,7 @@ export default function UpdateProduct() {
               </div>
 
               <div> 
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#dee2e6',  borderRadius: "10px" }}
+                <TextField sx={{ bgcolor:'#fff ', color: '#dee2e6',  borderRadius: "10px" }}
                 textarea
                 id="outlined-helperText"
                 label="Descripción del producto: "
@@ -312,7 +312,7 @@ export default function UpdateProduct() {
 
                 
                 <div >
-                <FormControl sx={{ m: 1, minWidth: 80, width: '97%', bgcolor:'#dee2e6'}}>
+                <FormControl sx={{ m: 1, minWidth: 80, width: '97%', bgcolor:'#fff'}}>
                     <InputLabel id="demo-simple-select-autowidth-label" >Categorias</InputLabel>
                     <Select
                     labelId="demo-simple-select-autowidth-label"
@@ -357,13 +357,13 @@ export default function UpdateProduct() {
                 <RadioGroup   row   aria-labelledby="demo-form-control-label-placement" 
                     name="position"  defaultValue="false" onChange={e => handlefreeShipping(e)} value={input.freeShipping}>
 
-                    <FormControlLabel sx={{ ml: 2, mb:2, color: 'gray', bgcolor:'white',}}
+                    <FormControlLabel sx={{ ml: 2, mb:2, color: 'gray', bgcolor:'#fff',}}
                     value="false"
                     control={<Radio />}
                     label="Con costo"
                     labelPlacement="start"
                     />
-                    <FormControlLabel sx={{ ml: 2, mb:2, color: 'gray', bgcolor:'white',}}
+                    <FormControlLabel sx={{ ml: 2, mb:2, color: 'gray', bgcolor:'#fff',}}
                     value="true"
                     control={<Radio />}
                     label="Gratis"
@@ -379,7 +379,7 @@ export default function UpdateProduct() {
             </Box>
             <Stack direction="row" spacing={2} >
 
-            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
             Modificar Producto
             </Button>
             </Stack>

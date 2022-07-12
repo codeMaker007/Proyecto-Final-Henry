@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
@@ -10,15 +10,16 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import DatosPersonales from './DatosPersonales';
 import DatosDireccion from './DatosDireccion';
-// import { useSelector } from 'react-redux';
+import { userAddressesA } from '../../redux/actions/userAddressesA';
 
 
 
 export default function Comprobaciones({ personalData, setPersonalData, addressData, setAddressData }) {
     const adress = useSelector((state) => state.userAddressesR.userAddresses);
     const theme = useTheme();
+    const dispatch = useDispatch();
     const [activeStep, setActiveStep] = React.useState(0);
-
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -42,6 +43,12 @@ export default function Comprobaciones({ personalData, setPersonalData, addressD
             </div>),
         },
     ];
+
+    useEffect(() => {
+        dispatch(userAddressesA(usuario.id));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
 
     const maxSteps = steps.length;
     return (

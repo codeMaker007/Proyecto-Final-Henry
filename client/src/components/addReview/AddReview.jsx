@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from 'react-redux'
 import style from "./AddReview.module.css";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-
+import {styled} from "@mui/material/styles";
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
 import { postReview } from '../../redux/actions/productReviewA';
 
+import * as React from 'react';
+import Rating from '@mui/material/Rating';
+import SendIcon from '@mui/icons-material/Send';
+
+
 const AddReview = ({productId}) => {
+
+    const ColorButton = styled(Button)(({ theme }) => ({
+        color: theme.palette.getContrastText('#FFC400'),
+        backgroundColor: '#FFC400',
+        '&:hover': {
+            backgroundColor: '#FFC400',
+        },
+    }));
 
     const [input, setInput] = useState({userId: 0, productId: 0, score:0, title:'', text:''})
     const [errors, setErrors] = useState({})
@@ -96,61 +109,96 @@ const AddReview = ({productId}) => {
         >
    
             <div>
-                <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#dee2e6',  borderRadius: "10px" }}
-                id="outlined-helperText"
-                label="Título: "
-                htmlFor="title"
-                value={input.title}
-                name="title"
-                onChange={(e) => handleChange(e)}
-                InputLabelProps={{
-                  shrink: true,
-              }}
-                />
-                 {errors.title && (<p className={style.error}>{errors.title}</p>)}
-                </div>
-
-                  
+                <Stack spacing={1}>
+                    <Rating  defaultValue={2.5} precision={0.5} size="large"
+                    id="outlined-helperText"
+                    label="Puntuación:"
+                    htmlFor="score"
+                    value={input.score}
+                    onChange={(e) => handleChange(e)}
+                    name="score"
+                    type="number"
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                    />
+                </Stack>
 
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
-                id="outlined-helperText"
-                label="Puntuación:"
-                htmlFor="score"
-                value={input.score}
-                onChange={(e) => handleChange(e)}
-                name="score"
-                type="number"
-                InputLabelProps={{
-                  shrink: true,
-              }}
-                />
+
                  {errors.score && (<p className={style.error}>{errors.score}</p>)}
                 </div>
 
                 <div>
-                <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }}
-                id="outlined-helperText"
-                label="Reseña:"
-                htmlFor="text"
-                value={input.text}
-                onChange={(e) => handleChange(e)}
-                name="text"
-                InputLabelProps={{
-                  shrink: true,
-              }}
+                <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': { m: 1, width: '25ch' },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                    >
+                    <TextField 
+                    id="standard-basic" 
+                    label="Título" 
+                    variant="standard" 
+                    htmlFor="title"
+                    value={input.title}
+                    name="title"
+                    onChange={(e) => handleChange(e)}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                 />
+                </Box>
+
+                {/* <TextField sx={{ bgcolor:'#dee2e6 ', color: '#dee2e6',  borderRadius: "10px" }} */}
+
+                 {errors.title && (<p className={style.error}>{errors.title}</p>)}
+                </div>
+
+                <div>
+                <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': { m: 1, width: '25ch' },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                    >
+                    <TextField 
+                    id="standard-basic" 
+                    variant="standard" 
+                    label="Reseña:"
+                    htmlFor="text"
+                    value={input.text}
+                    onChange={(e) => handleChange(e)}
+                    name="text"
+                    InputLabelProps={{
+                      shrink: true,
+                  }}
+                  />
+                  
+                </Box>
+                {/* <TextField sx={{ bgcolor:'#dee2e6 ', color: '#FFC400',  borderRadius: "10px" }} */}
+                
                  {errors.text && (<p className={style.error}>{errors.text}</p>)}
                 </div>
                 </div>
             </Box>
-            <Stack direction="row" spacing={2} >
 
-            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
-             Agregar Reseña
-            </Button>
+            <Stack item xs={12} sm={6}>
+                <Box
+                    marginLeft={4}
+                    marginTop={2}
+
+                >
+                    <ColorButton  sx={{ m: 1, width: '22ch'}}type='submit' endIcon={<SendIcon/>}>Agregar    </ColorButton>  
+                    
+                </Box>
+
             </Stack>
+
                 
             </Box>
                 <br />

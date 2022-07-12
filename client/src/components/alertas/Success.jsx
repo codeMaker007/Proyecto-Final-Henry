@@ -4,15 +4,20 @@ import { useDispatch } from 'react-redux';
 import { limpiarCarrito } from '../../redux/actions/carritoA';
 
 export default function Success() {
+    let orderIdPayPal = localStorage.getItem('idOrderPP');
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+
+
     const queryParams = new URLSearchParams(window.location.search);
     const orderId = queryParams.get("merchant_order_id");
-    // const payerId = queryParams.get("PayerID");
+    const payerId = queryParams.get("PayerID");
+
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (orderId?.length > 1) dispatch(getOrder(orderId));
-        // else dispatch(getOrder(payerId))
+        if (orderId?.length > 1) dispatch(getOrder(orderId, usuario.id, 'mp'));
+        else if (payerId?.length > 1) dispatch(getOrder(orderIdPayPal, usuario.id, 'pp'));
         dispatch(limpiarCarrito());
         setTimeout(() => {
             window.location.href = 'http://localhost:3000/';

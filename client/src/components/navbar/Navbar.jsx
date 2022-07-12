@@ -143,6 +143,7 @@ export default function PrimarySearchAppBar() {
     if (isAuthenticated) {
         let findedUser = users.find(e => e.email === user.email);
         (findedUser?.isAdmin) ? isAdmin = true : isAdmin = false;
+        localStorage.setItem('usuario', JSON.stringify(findedUser));
     }
 
     const [anchorEl, setAnchorEl] = React.useState(null);

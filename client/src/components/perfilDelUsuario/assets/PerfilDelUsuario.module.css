@@ -1,9 +1,13 @@
-.subTitulo{
-    color: #1A2027 ;
+/* .subTitulo{
+    color: red ;
     
-}
+} */
 .iconos{
     color: #FFC400 ;
+    
+}
+.espacio{
+    margin-left: 20px ;
     
 }
 

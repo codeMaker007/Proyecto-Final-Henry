@@ -3,25 +3,26 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { userAddressesA } from '../../redux/actions/userAddressesA'; //   UpdateProductR.UpdateProduct
+// import { useSelector, useDispatch } from 'react-redux'
+// import { userAddressesA } from '../../redux/actions/userAddressesA'; 
 // import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 
 
 export default function LoginData({ adress, addressData, setAddressData }) {
     // const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { user } = useAuth0();
-    const allUser = useSelector((state) => state.DashboardUsersR.allUsers);
+    // const dispatch = useDispatch();
+    // const { user } = useAuth0();
+    // const allUser = useSelector((state) => state.DashboardUsersR.allUsers);
 
-    const usuario = allUser.find(u => u.email === user?.email);
-    const id = usuario?.id;
+
+    // const usuario = allUser.find(u => u.email === user?.email);
+    // const id = usuario?.id;
 
     // const [input, setInput] = useState({ street: "", number: "", zipCode: "", province: "", location: "", apartment: "", description: "" });
 
     useEffect(() => {
-        dispatch(userAddressesA(id));
+        // dispatch(userAddressesA(id));
         setAddressData({
             street: adress[0]?.street,
             number: adress[0]?.number,
@@ -69,9 +70,8 @@ export default function LoginData({ adress, addressData, setAddressData }) {
                                 id="outlined-helperText"
                                 label='Provincia'
                                 htmlFor="name"
-                                value={addressData.province}
+                                value={addressData.province || ''}
                                 onChange={(e) => setAddressData({ ...addressData, province: e.target.value })}
-                                defaultValue={adress.province ? "" : "Ingrese un nombre"}
                                 helperText=""
                                 InputLabelProps={{
                                     shrink: true,
@@ -81,9 +81,8 @@ export default function LoginData({ adress, addressData, setAddressData }) {
                                 id="outlined-helperText"
                                 label='Ciudad'
                                 htmlFor="lastName"
-                                value={addressData.location}
+                                value={addressData.location || ''}
                                 onChange={(e) => setAddressData({ ...addressData, location: e.target.value })}
-                                defaultValue=''
                                 helperText=""
                                 InputLabelProps={{
                                     shrink: true,
@@ -95,9 +94,8 @@ export default function LoginData({ adress, addressData, setAddressData }) {
                                 id="outlined-number"
                                 label="Calle"
                                 htmlFor="calle"
-                                value={addressData.street}
+                                value={addressData.street || ''}
                                 onChange={(e) => setAddressData({ ...addressData, street: e.target.value })}
-                                defaultValue={adress.street ? "" : "Ingrese un DNI"}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -108,10 +106,9 @@ export default function LoginData({ adress, addressData, setAddressData }) {
                                 id="outlined-number"
                                 label="Codigo postal"
                                 htmlFor="caracteristica"
-                                value={addressData.zipCode}
+                                value={addressData.zipCode || 0}
                                 onChange={(e) => setAddressData({ ...addressData, zipCode: e.target.value })}
                                 name="caracteristica"
-                                defaultValue=""
                                 type="number"
                                 InputLabelProps={{
                                     shrink: true,
@@ -121,9 +118,8 @@ export default function LoginData({ adress, addressData, setAddressData }) {
                                 id="outlined-number"
                                 label="N° Calle"
                                 htmlFor="number"
-                                value={addressData.number}
+                                value={addressData.number || 0}
                                 onChange={(e) => setAddressData({ ...addressData, number: e.target.value })}
-                                defaultValue={adress.number ? "" : "Ingrese un telefono"}
                                 type="number"
                                 InputLabelProps={{
                                     shrink: true,

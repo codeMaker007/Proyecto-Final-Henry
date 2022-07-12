@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Button } from '@mui/material';
 import { resetTotal } from '../../redux/actions/carritoA';
+import style from './assets/Favoritos.module.css'
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -68,18 +69,19 @@ export default function Favoritos() {
 
     // if (currentPage < 1) setCurrentPage(1);
     return (
-        <Box sx={{ width: 1, marginTop: 3 }}>
+        <Box sx={{ width: 1, marginTop: 3  }}>
 
             <Grid container direction='column'>
-                <Grid container justifyContent='center' spacing={2} >
+                <Grid  container justifyContent='center' spacing={2} >
                     <Grid item xs={12} md={7} lg={7} xl={6}>
-                        <Item sx={{ marginTop: 3, display: 'flex', flexDirection: 'column' }} elevation={1}>
+
+                        {/* <Item sx={{ bgcolor: "blue"}}> */}
                             {
                                
                                 (productosFavoritos.length === 0)
-                                    ? <div> <br />
+                                    ? <Item sx={{ bgcolor: "#fff",  marginTop: 0, display: 'flex', flexDirection: 'column' }}  elevation={1}> <br />
                                         <h1>No has agregado nada a favoritos... </h1>
-                                    </div>
+                                    </Item>
                                     : (
 
                                         <>
@@ -100,9 +102,9 @@ export default function Favoritos() {
                                                     </div>
                                         }
                                         </Grid>
-                                            <div>
+                                            <div >
 
-                                            <Item >
+                                            <Item className={style.card} >
                                                 <Grid container spacing={0.5}>
                                                     {productosFavoritos.map(e => {
                                                         return (<ProductsCard
@@ -130,11 +132,15 @@ export default function Favoritos() {
 
                             {
                                 (productosFavoritos.length === 0)
-                                    ? <Link to="/products" style={{ textDecoration: 'none', color: 'black' }}><ColorButton sx={{ margin: 1, borderRadius: 1, fontSize: 10 }}>Ver productos</ColorButton></Link>
-                                    : ""
+                                ? <Item sx={{ bgcolor: "#fff",  marginTop: 0, display: 'flex', flexDirection: 'column' }}  elevation={1}> <br />
+                                    <Link to="/products" style={{ textDecoration: 'none', color: 'black' }}><ColorButton sx={{ margin: 1, borderRadius: 1, fontSize: 10 }}>Ver productos</ColorButton></Link>
+                                </Item> : ""
+                                // (productosFavoritos.length === 0)
+                                //     ? <Link to="/products" style={{ textDecoration: 'none', color: 'black' }}><ColorButton sx={{ margin: 1, borderRadius: 1, fontSize: 10 }}>Ver productos</ColorButton></Link>
+                                //     : ""
                             }
 
-                        </Item>
+                        {/* </Item> */}
                     </Grid>
 
                 </Grid>

@@ -49,7 +49,7 @@ export default function Checkout({ setCheckout }) {
     const { isAuthenticated } = useAuth0();
     const [value, setValue] = useState('mercadopago');
 
-    const [personalData, setPersonalData] = useState({ name: "", lastName: "", username: "", dni: "", celphone: "", caracteristica: "" })
+    const [personalData, setPersonalData] = useState({ name: "", username: "", dni: "", celphone: "", caracteristica: "" })
 
     const [addressData, setAddressData] = useState({ street: "", number: "", zipCode: "", province: "", location: "", apartment: "", description: "" });
 
@@ -65,7 +65,7 @@ export default function Checkout({ setCheckout }) {
     };
 
     const handlePayment = async () => {
-        if (personalData.name?.length < 2 || personalData.lastName?.length < 2 || personalData.username?.length < 2 || personalData.dni?.length < 2 || personalData.celphone?.length < 2 || personalData.caracteristica?.length < 2) return enqueueSnackbar('Faltan completar datos', { variant: 'info' });
+        if (personalData.name?.length < 2 || personalData.username?.length < 2 || personalData.dni?.length < 2 || personalData.celphone?.length < 2 || personalData.caracteristica?.length < 2) return enqueueSnackbar('Faltan completar datos', { variant: 'info' });
         if (addressData.street?.length < 2 || addressData.number?.length < 2 || addressData.zipCode?.length < 2 || addressData.province?.length < 2 || addressData.location?.length < 2) return enqueueSnackbar('Faltan completar datos', { variant: 'info' });
         if (value === 'mercadopago') {
             let data = (products.productosCarrito.map(e => {
@@ -95,7 +95,9 @@ export default function Checkout({ setCheckout }) {
                 }
             });
             const response = await axios.post('/create-order', data);
-            window.location.href = `${response.data}`;
+            const id = response.data.id;
+            localStorage.setItem('idOrderPP', JSON.stringify(id));
+            window.location.href = `${response.data.links[1].href}`;
         }
     };
 

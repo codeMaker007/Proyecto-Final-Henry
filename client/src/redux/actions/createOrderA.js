@@ -1,13 +1,16 @@
-// return async function () {
-//     const response = (await axios.get(`/orderMP?merchant_order_id=${term}`)).data;
-// }
+
 import axios from 'axios';
 
-export const getOrder = (orderId) => {
-    return async function (dispatch) {
-        const response = (await axios.get(`/orderMP?merchant_order_id=${orderId}`)).data;
-        dispatch(controlStock(response.items));
-        dispatch(createOrder(orderId));
+export const getOrder = (orderId, userID, type) => {
+    if (type === 'mp') {
+        return async function (dispatch) {
+            const response = (await axios.get(`/orderMP?merchant_order_id=${orderId}`)).data;
+            dispatch(controlStock(response.items));
+            dispatch(createOrder(orderId, response.status, userID));
+        }
+    }
+    else if (type === 'pp') {
+        console.log('...')
     }
 }
 
@@ -19,12 +22,12 @@ const controlStock = (response) => {
     }
 }
 
-const createOrder = (orderId) => {
+const createOrder = (orderId, status, userID) => {
     return async function () {
         await axios.post(`/createOrderMP`, {
-            payment_status: 'approved',
+            payment_status: status,
             merchant_order_id: orderId,
-            userId: 1
+            userId: userID
         })
     }
 }

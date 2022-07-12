@@ -20,7 +20,6 @@ export default function LoginData({ personalData, setPersonalData }) {
     useEffect(() => (setPersonalData({
         name: usuario?.name,
         username: usuario?.username,
-        lastName: '',
         dni: usuario?.dni,
         celphone: usuario?.celphone,
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -61,40 +60,37 @@ export default function LoginData({ personalData, setPersonalData }) {
                         <div sx={{ display: 'flex' }}>
                             <TextField
                                 id="outlined-helperText"
-                                label='Nombre'
+                                label='Nombre y apellido'
                                 htmlFor="name"
-                                value={personalData.name}
+                                value={personalData.name || ''}
                                 name="name"
                                 onChange={(e) => setPersonalData({ ...personalData, name: e.target.value })}
-                                defaultValue={usuario?.name}
                                 helperText=""
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                             />
-                            <TextField
+                            {/* <TextField
                                 id="outlined-helperText"
                                 label='Apellido'
                                 htmlFor="lastName"
-                                value={personalData.lastname}
+                                value={personalData.lastname || ''}
                                 name="lastname"
                                 onChange={(e) => setPersonalData({ ...personalData, lastName: e.target.value })}
-                                defaultValue=''
                                 helperText=""
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
-                            />
+                            /> */}
                             <div>
                                 <TextField
                                     id="outlined-number"
                                     label="DNI"
                                     htmlFor="dni"
-                                    value={personalData.dni}
+                                    value={personalData.dni || 0}
                                     onChange={(e) => setPersonalData({ ...personalData, dni: e.target.value })}
                                     name="dni"
                                     type="number"
-                                    defaultValue={usuario?.dni}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -106,10 +102,9 @@ export default function LoginData({ personalData, setPersonalData }) {
                                 id="outlined-number"
                                 label="Caracteristica"
                                 htmlFor="caracteristica"
-                                value={personalData.caracteristica}
+                                value={personalData.caracteristica || 0}
                                 onChange={(e) => setPersonalData({ ...personalData, caracteristica: e.target.value })}
                                 name="caracteristica"
-                                defaultValue=""
                                 type="number"
                                 InputLabelProps={{
                                     shrink: true,
@@ -119,10 +114,9 @@ export default function LoginData({ personalData, setPersonalData }) {
                                 id="outlined-number"
                                 label="Telefono"
                                 htmlFor="celphone"
-                                value={personalData.celphone}
+                                value={personalData.celphone || 0}
                                 onChange={(e) => setPersonalData({ ...personalData, celphone: e.target.value })}
                                 name="celphone"
-                                defaultValue={usuario?.celphone}
                                 type="number"
                                 InputLabelProps={{
                                     shrink: true,
