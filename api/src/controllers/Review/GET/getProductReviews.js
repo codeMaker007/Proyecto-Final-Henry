@@ -10,4 +10,16 @@ async function getProductReviews(ProductId) {
     });
     return reviewList;
 }
-module.exports = getProductReviews;
+
+async function getScore (ProductId) {
+    let score = {numReviews: 0, averageScore: 0};
+    let reviewList = await getProductReviews(ProductId);
+    score.numReviews = reviewList.length;
+    if (score.numReviews > 0)
+        score.averageScore = Math.round(2*(reviewList.reduce(
+                                (pre, curr) => pre + curr.score, 0)
+                            )/score.numReviews)/2;
+    return score;
+}
+
+module.exports = {getProductReviews, getScore};

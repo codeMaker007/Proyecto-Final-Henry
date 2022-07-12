@@ -1,0 +1,154 @@
+.contenedor{
+    background: rgb(219, 219, 219);
+    margin-left: 30%;
+    margin-top: 5%;
+    margin-right: 30%;
+    display:center;
+    align-items:stretch ;
+    color:white;
+    font-family:Verdana;
+    font-size:12px;
+    font-weight:bold;
+    padding-top:2%;
+    padding-bottom:2%;
+    padding-left:10%;
+    text-decoration:none;
+    /* width: 350px; */
+    /* margin: center */
+}
+.boton1{
+    
+    background-color:rgb(0, 38, 255);
+    display:inline-block;
+    cursor:pointer;
+    color:white;
+    font-family:Verdana;
+    font-size:14px;
+    font-weight:bold;
+    font-style:normal;
+    padding:5px 88px;
+    text-decoration:none;
+    }
+.boton1:hover{
+    background-color:white;
+    display:inline-block;
+    cursor:pointer;
+    color:rgb(0, 38, 255);
+    font-family:Verdana;
+    font-size:14px;
+    font-weight:bold;
+    padding:5px 88px;
+    text-decoration:none;
+}
+.volver {
+    background-color:rgb(0, 38, 255);
+    display:inline-block;
+    cursor:pointer;
+    color:white;
+    font-family:Verdana;
+    font-size:14px;
+    font-weight:bold;
+    
+    padding:5px 24px;
+    text-decoration:none;
+}
+.volver:hover{
+    background-color:white;
+    color:rgb(0, 38, 255);
+}
+
+.error{
+    color: red;
+    font-size: 12px;
+    font-style:italic;
+}
+
+.botonBorrar{
+    background-color:red;
+    display:inline-block;
+    cursor:pointer;
+    color:white;
+    font-family:Verdana;
+    font-size:10px;
+    font-weight:bold;
+    font-style:normal;
+    padding:5px 25px;
+}
+
+.botonBorrar:hover{
+    background-color:white;
+    display:inline-block;
+    cursor:pointer;
+    color:red;
+    font-family:Verdana;
+    font-size:10px;
+    font-weight:bold;
+    padding:5px 25px;
+    text-decoration:none;
+}
+
+.categorias {
+    background: #1122b8 100%;
+    background-color:rgb(0, 38, 255);
+    /* border-radius:42px; */
+    display:inline-block;
+    cursor:pointer;
+    color:white;
+    font-family:Verdana;
+    font-size:13px;
+    font-weight:bold;
+    font-style:normal;
+    padding:2px 53px;
+    text-decoration:none;   
+}
+.categorias:hover{
+    background-color:white;
+    color:rgb(0, 38, 255);
+}
+.envio {
+    background: #1122b8 100%;
+    background-color:rgb(0, 38, 255);
+    /* border-radius:42px; */
+    display:inline-block;
+    cursor:pointer;
+    color:white;
+    font-family:Verdana;
+    font-size:13px;
+    font-weight:bold;
+    font-style:normal;
+    padding:2px 87px;
+    text-decoration:none;
+}
+.envio:hover{
+    background-color:white;
+    color:rgb(0, 38, 255);
+}
+
+.input {
+    background: #ffffff 100%;
+    /* border-radius:42px; */
+    /* display:inline-block; */
+    cursor:pointer;
+    color:black;
+    font-family:Verdana;
+    font-size: 12px;
+    font-weight:bold;
+    font-style:normal;
+    padding: 3px 58px;
+    text-decoration:none;
+    
+}
+.inputDiscount {
+    background: #ffffff 100%;
+    /* border-radius:42px; */
+    /* display:inline-block; */
+    cursor:pointer;
+    color:black;
+    font-family:Verdana;
+    font-size: 12px;
+    font-weight:bold;
+    font-style:normal;
+    padding: 3px 58px;
+    text-decoration:none;
+    
+}

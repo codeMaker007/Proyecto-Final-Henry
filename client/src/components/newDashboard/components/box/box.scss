@@ -1,0 +1,73 @@
+@use '../../scss/abstracts/' as *;
+
+.box {
+    padding: 20px 30px;
+    border-radius: $borderRadius;
+    background-color: $mainBg;
+    box-shadow: rgba(149, 157, 155, 0.2) 0px 8px 24px;
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        overflow-x: hidden;
+    }
+    
+    body {
+        font-family: $fontFamily;
+        color: $txtColor;
+        font-size: $fontSizeNormal;
+        line-height: 1.5;
+        background-color: $bodyBg;
+        overflow-x: hidden;
+    }
+    
+    a {
+        text-decoration: none;
+        color: unset;
+    }
+    
+    img {
+        width: 100%;
+    }
+    
+    ul,
+    li {
+        list-style-type: none;
+    }
+    
+    .mb {
+        margin-bottom: $spacing;
+    
+        @include tablet {
+            margin-bottom: $mobileSpacing;
+        }
+    
+        .title {
+            font-size: $fontSizeMedium;
+            font-weight: 700;
+        }
+    
+        .title2 {
+            font-size: $fontSizeLarge;
+            font-weight: 800;
+            color: #FFC400;
+        }
+    }
+
+    &-purple {
+        background-color: $purple;
+        color: $white;
+    }
+
+    &-fullheight {
+        height: calc(100% - $spacing);
+
+        @include tablet {
+            height: calc(100% - $mobileSpacing);            
+        }
+    }
+}

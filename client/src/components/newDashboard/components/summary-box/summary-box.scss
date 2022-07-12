@@ -1,0 +1,108 @@
+@use '../../scss/abstracts/' as *;
+
+.summary-box {
+    @include flex(stretch, flex-start);
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        overflow-x: hidden;
+    }
+    
+    body {
+        font-family: $fontFamily;
+        color: $txtColor;
+        font-size: $fontSizeNormal;
+        line-height: 1.5;
+        background-color: $bodyBg;
+        overflow-x: hidden;
+    }
+    
+    a {
+        text-decoration: none;
+        color: unset;
+    }
+    
+    img {
+        width: 100%;
+    }
+    
+    ul,
+    li {
+        list-style-type: none;
+    }
+    
+    .mb {
+        margin-bottom: $spacing;
+    
+        @include tablet {
+            margin-bottom: $mobileSpacing;
+        }
+    
+        .title {
+            font-size: $fontSizeMedium;
+            font-weight: 700;
+        }
+    
+        .title2 {
+            font-size: $fontSizeLarge;
+            font-weight: 800;
+            color: #FFC400;
+        }
+    }
+
+    &__chart {
+        width: 40%;
+
+        &__value {
+            margin-top: -15%;
+            font-weight: 900;
+            font-size: $fontSizeMedium;
+        }
+    }
+
+    &__info {
+        width: 60%;
+        @include flex(flex-start, space-between);
+        flex-direction: column;
+
+        &__title {
+            font-size: $fontSizeMedium;
+            font-weight: 700;
+            line-height: 1.2;
+
+            span {
+                font-size: 13px;
+                font-weight: 400;
+            }
+        }
+
+        &__value {
+            font-weight: 700;
+            font-size: $fontSizeLarge;
+            color: $black;
+        }
+    }
+}
+
+.summary-box-special {
+    @include flex(center, space-between);
+    flex-direction: column;
+    height: max-content;
+
+
+    &__title {
+        font-weight: 700;
+        font-size: $fontSizeMedium;
+    }
+
+    &__value {
+        font-size: $fontSizeLarge;
+        font-weight: 700;
+    }
+
+}

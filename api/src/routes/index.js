@@ -25,13 +25,13 @@ const { mostDiscountedProducts } = require('../controllers/Product/GET/mostDisco
 const { bestSellingProducts } = require('../controllers/Product/GET/bestSellingProducts');
 const { payments } = require('../controllers/PaymentsMP/payments');
 const { suscription } = require('../controllers/PaymentsMP/suscription');
-const {createOrder, captureOrder, cancelOrder} = require('../controllers/PaymentsPP/payment.paypal');
+const {createOrder, captureOrder, cancelOrder, orderDetails} = require('../controllers/PaymentsPP/payment.paypal');
 const { getOrder } = require('../controllers/PaymentsMP/getOrder');
 const { createOrderMP } = require('../controllers/Order/POST/createOrderMP');
 const { getAdminOrders } = require('../controllers/Order/GET/getAdminOrders');
 const { getUserOrders } = require('../controllers/Order/GET/getUserOrders');
-// const {converter} = require('../controllers/Product/GET/converter')
 const {orderByPrice} = require('../controllers/Product/GET/orderByPrice')
+const {createOrderPP} = require('../controllers/Order/POST/createOrderPP')
 
 const router = Router();
 
@@ -96,8 +96,10 @@ router.get('/capture-order', captureOrder)
 
 router.get('/cancel-order', cancelOrder)
 
-// router.get('/conversor/:moneda/:cantidad', converter)
-
 router.get('/order/:priceOrder', orderByPrice)
+
+router.get('/orderDetails/:order_id', orderDetails)
+
+router.post('/create-order-pp', createOrderPP)
 
 module.exports = router;

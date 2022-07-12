@@ -18,7 +18,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { Link } from 'react-router-dom'
-
+import  Loading  from '../loading/Loading.jsx';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -84,7 +84,7 @@ export default function DashboardUsers() {
               <StyledTableCell align="right">{i.description}</StyledTableCell>
               <StyledTableCell align="right">{list.status === "approved"? "Aprobado" : "Rechazado"}</StyledTableCell>
             </StyledTableRow>
-          ) : <p>Loading...</p>
+          ) : <Loading/>
         }
         </TableBody>
       </Table>

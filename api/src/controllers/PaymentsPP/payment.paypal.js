@@ -80,6 +80,37 @@ const createOrder = async (req, res) => {
 
 }
 
+const orderDetails = async (req, res) => {
+    const order_id = req.params.order_id
+    try {
+
+        const params = new URLSearchParams()
+        params.append('grant_type', 'client_credentials')
+
+        const { data: { access_token } } = await axios.post('https://api-m.sandbox.paypal.com/v1/oauth2/token', params, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            auth: {
+                username: PAYPAL_API_CLIENT,
+                password: PAYPAL_API_SECRET
+            }
+        })
+
+
+        const response = await axios.get(`${PAYPAL_API}/v2/checkout/orders/${order_id}`, {
+            headers: {
+                Authorization: `Bearer ${access_token}`
+            }
+        })
+        console.log(response.data)
+        res.send(response.data)
+    } catch (e) {
+        console.log(e)
+
+    }
+}
+
 const captureOrder = async (req, res) => {
     const { token } = req.query
 
@@ -101,5 +132,6 @@ const cancelOrder = async (req, res) => {
 module.exports = {
     createOrder,
     captureOrder,
-    cancelOrder
+    cancelOrder,
+    orderDetails
 }

@@ -1,25 +1,37 @@
 const { Order, User } = require('../../../db')
-const { main } = require('../../Emailer/Emailer')
-const {EMAIL} = process.env
+const nodemailer = require("nodemailer");
+const {EMAIL_PASSWORD, EMAIL} = process.env
 
 
-const createOrderMP = async (req, res) => {
-    const { payment_status, merchant_order_id, items, userId } = req.body
+const Main = () => {
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth: {
+            user: EMAIL, 
+            pass: EMAIL_PASSWORD, 
+        },
+    });
+    return transporter
+}
     
+    
+    const createOrderMP = async (req, res) => {
+    const { payment_status, merchant_order_id, items, userId } = req.body
     let user = await User.findByPk(userId)
     try {
         let newOrder = await Order.create({
             payment_status,
             merchant_order_id,
-            items
         })
         newOrder.addUser(userId)
-        
-       /*  (await main()).sendMail({
+       if(newOrder) {
+        Main().sendMail({
             from: EMAIL,
-            to: `${user.email}`,
-            subject: `${items[0].title}`,
-            html:  `	<table border="0" cellpadding="40" cellspacing="0" class="nl-container" role="presentation"style="background-color: #FFFFFF;" width="100%"><tbody>
+            to: `${user.email}`, 
+            subject: "COMPRA CONFIRMADA", 
+            html: `<table border="0" cellpadding="40" cellspacing="0" class="nl-container" role="presentation"style="background-color: #FFFFFF;" width="100%"><tbody>
             <tr>
                 <td>
                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1"
@@ -109,7 +121,7 @@ const createOrderMP = async (req, res) => {
                                                             <td
                                                                 style="width:100%;padding-right:0;padding-left:0;padding-top:5px;padding-bottom:5px">
                                                                 <div align="center" style="line-height:10px"><img
-                                                                        src="${items[0].picture_url}"
+                                                                        src=${items[0].picture_url}
                                                                         style="display:block;height:auto;border:0;width:100px;max-width:100%"
                                                                         width="100" /></div>
                                                             </td>
@@ -127,11 +139,11 @@ const createOrderMP = async (req, res) => {
                                                                 style="padding-top:15px;padding-right:10px;padding-bottom:15px;padding-left:10px;">
                                                                 <ul
                                                                     style="margin: 0; padding: 0; margin-left: 20px; list-style-type: revert; color: #000000; font-size: 16px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-weight: 400; line-height: 120%; text-align: left; direction: ltr; letter-spacing: 0px;">
-                                                                    <li style="margin-bottom: 0px;">Nombre del producto: ${items[0].title}
+                                                                    <li style="margin-bottom: 0px;">Nombre del producto: ${items[0].name}
                                                                     </li>
                                                                     <li style="margin-bottom: 0px;">Descripción del
                                                                         producto: ${items[0].description}</li>
-                                                                    <li style="margin-bottom: 0px;">Precio del producto: ${items[0].unit_price}
+                                                                    <li style="margin-bottom: 0px;">Precio del producto: ${items[0].price}
                                                                     </li>
                                                                     <li>Cantidad: ${items[0].quantity}</li>
                                                                 </ul>
@@ -179,9 +191,9 @@ const createOrderMP = async (req, res) => {
     </tr>
     </tbody>
     </table>`
-        }) */
-    res.send("Orden Creada")
-    } catch (error) {
+        });
+        }
+    }catch (error) {
         res.status(404).send(error)
     }
 }

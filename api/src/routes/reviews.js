@@ -5,7 +5,7 @@ const editReview = require("../controllers/Review/PUT/editReview");
 const getReview = require("../controllers/Review/GET/getReview");
 const getReviews = require("../controllers/Review/GET/getReviews");
 const getUserReviews = require("../controllers/Review/GET/getUserReviews");
-const getProductReviews = require("../controllers/Review/GET/getProductReviews");
+const {getProductReviews} = require("../controllers/Review/GET/getProductReviews");
 const router = Router();
 
 router.post('/Create', async (req, res) => {
@@ -69,7 +69,7 @@ router.get('/product/:productId', async (req, res) => {
     }
 });
 
-router.get('/User_Products', async (req, res) => {
+router.get('/UserProducts', async (req, res) => {
     const {productId, userId} = req.body;
     try {
         const review = await getReview(productId, userId);

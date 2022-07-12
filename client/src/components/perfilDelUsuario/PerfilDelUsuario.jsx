@@ -35,12 +35,17 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import Box from '@mui/material/Box';
+import  Loading  from '../loading/Loading.jsx';
 
 const labels = {
     1: 'Malo',
+    1.5: 'Regular',
     2: 'Regular',
+    2.5: 'Bueno',
     3: 'Bueno',
+    3.5: 'Muy bueno',
     4: 'Muy bueno',
+    4.5: 'Excelente',
     5: 'Excelente',
   };
 
@@ -89,7 +94,7 @@ export default function PerfilDelUsuario(){
 
 
     if(isLoading){
-        return <p> Loading... </p>
+        return <Loading />
     }
         return (
 
@@ -138,19 +143,19 @@ export default function PerfilDelUsuario(){
                 <ListItemIcon>
                 <div>
                    <div>
-                       {usuario.username !== null? <p className= {style.subTitulo}>Usuario: {usuario.username}</p> 
+                       {usuario?.username? <p className= {style.subTitulo}>Usuario: {usuario.username}</p> 
                         : <p className= {style.subTitulo}>Complete su usuario</p>}
                     </div>  
                     <div>
-                       {usuario.email !== null? <p className= {style.subTitulo}>Email: {usuario.email}</p> 
+                       {usuario?.email? <p className= {style.subTitulo}>Email: {usuario.email}</p> 
                         : <p className= {style.subTitulo}>Complete su email</p>}
                     </div> 
                     <div>
-                        {usuario.dni !== null? <p className= {style.subTitulo}>DNI: {usuario.dni}</p> 
+                        {usuario?.dni? <p className= {style.subTitulo}>DNI: {usuario.dni}</p> 
                         : <p className= {style.subTitulo}>Complete su DNI</p>}
                     </div>
                     <div>
-                        {usuario.celphone !== null? <p className= {style.subTitulo}>Telefono: {usuario.celphone}</p> 
+                        {usuario?.celphone? <p className= {style.subTitulo}>Telefono: {usuario.celphone}</p> 
                         : <p className= {style.subTitulo}>Complete su Telefono</p>}
                     </div>
 
@@ -159,7 +164,7 @@ export default function PerfilDelUsuario(){
                         <Stack direction="row"  fontSize = "small">
 
                         <Button sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
-                            <Link className= {style.modificar} to = {"/loginData/" + usuario.id}> Modificar datos </Link>
+                            <Link className= {style.modificar} to = {"/loginData/" + usuario?.id}> Modificar datos </Link>
                         </Button>
 
                         </Stack>

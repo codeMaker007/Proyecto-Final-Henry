@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import style from './assets/Dashboard.module.css';
 import CreateProduct from "../createProduct/CreateProduct";
-import AdminProd from "./AdminProducts";
-import DashboardUsers from './DashboardUsers';
+import AdminProd from "../newDashboard/components/adminProducts/AdminProducts";
+// import DashboardUsers from './DashboardUsers';
 // import DashboardHistoryShopping from './DashboardHistoryShopping';
 // import DashboardHistorySearch from './DashboardHistorySearch';
 // import Favoritos from "./FavoritosAdmin";
@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { DashboardUsersA } from '../../redux/actions/DashboardUsersA';
 import { refresh } from '../../redux/actions/detailProductA';
-import DashboardOrders from "./DashboardOrders";
+/* import DashboardOrders from "./DashboardOrders"; */
 
 
 const Dashboard = () => {
@@ -60,11 +60,11 @@ const Dashboard = () => {
                         </div>
                         <div>
                             <button id={3} onClick={handleClick} className={style.btn}>Usuarios</button>
-                            {isShown && buttIndex === 3 && <DashboardUsers />}
+                            {/* {isShown && buttIndex === 3 && <DashboardUsers />} */}
                         </div>
                         <div>
                             <button id={4} onClick={handleClick} className={style.btn}>Ordenes</button>
-                            {isShown && buttIndex === 4 && <DashboardOrders />}
+                            {/* {isShown && buttIndex === 4 && <DashboardOrders />} */}
                         </div>
                         {/* <div>
                     <button id={4} onClick={handleClick} className={style.btn}>Historial de compra</button>

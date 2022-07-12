@@ -22,6 +22,16 @@ import CreateAddress from './components/createAddress/CreateAddress';
 import UpdateAddress from './components/updateAddress/UpdateAddress';
 import { SnackbarProvider } from 'notistack';
 
+import NewDashboard from './components/newDashboard/pages/NewDashboard'
+import MainLayout from './components/newDashboard/components/layout/MainLayout'
+import './components/newDashboard/assets/libs/boxicons-2.1.1/css/boxicons.min.css'
+import './components/newDashboard/scss/App.scss'
+import CreateProduct from './components/newDashboard/components/createProduct/CreateProduct';
+import AdminProd from './components/newDashboard/components/adminProducts/AdminProducts';
+import DashboardUsers from './components/newDashboard/components/DashboardUsers/DashboardUsers';
+import DashboardOrders from './components/newDashboard/components/DashboardOrders/DashboardOrders';
+
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -46,7 +56,7 @@ function App() {
             <Route path="/detail/:id" element={<DetailProduct />} />
             <Route path="/profile" element={<PerfilDelUsuario />} />
             <Route path="/favoritos" element={<Favoritos />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/dashboard" element={<Dashboard />} /> */}
             {/* <Route path="/material" element={<Material_UI />} /> */}
             <Route path="/up/:id" element={<UpdateProduct />} />
             <Route path="/UpdateAdmin/:id" element={<UpdateAdmin />} />
@@ -57,6 +67,13 @@ function App() {
             <Route path="/orderDetail/:id" element={<OrderDetail />} />
             <Route path="/createAddress" element={<CreateAddress />} />
             <Route path="/updateAddress/:id" element={<UpdateAddress />} />
+            <Route path='/dashboard' element={<MainLayout/>}>
+                  <Route index element={<NewDashboard/>}/>
+              </Route>
+            <Route path='/createproducts' element={<CreateProduct/>}/>
+            <Route path='/adminProducts' element={<AdminProd/>}/>
+            <Route path='/users' element={<DashboardUsers/>}/>
+            <Route path='/orders' element={<DashboardOrders/>}/>
           </Routes>
         </SnackbarProvider>
       </ThemeProvider>
