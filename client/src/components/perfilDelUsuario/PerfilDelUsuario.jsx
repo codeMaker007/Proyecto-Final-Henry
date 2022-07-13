@@ -35,7 +35,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import Box from '@mui/material/Box';
-import Loading  from '../loading/Loading.jsx';
+import  Loading  from '../loading/Loading.jsx';
 
 const labels = {
     1: 'Malo',
@@ -118,7 +118,7 @@ export default function PerfilDelUsuario(){
                         {usuario?.picture? <img src={usuario.picture} className= {style.foto} alt= ""/>:  <AccountCircleIcon  className= {style.foto2} fontSize = "large"/>  } 
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText    primary= {<p className= {style.espacio}> Bienvenido {usuario?.name}!!</p>}secondary= {usuario?.isAdmin === true? <p className= {style.espacio}> Administrador. </p> : ""} />
+                    <ListItemText    primary= {<p > Bienvenido {usuario?.name}!!</p>}secondary= {usuario?.isAdmin === true? <p className= {style.subTitulo}> Administrador. </p> : ""} />
                     </ListItem>
                     <Divider variant="inset" component="li" />
                
@@ -243,7 +243,7 @@ export default function PerfilDelUsuario(){
                 <div>
                     {(order.Orders && order.Orders[0])? order.Orders.map ((o, index) => 
                         <div key={index}>
-                            <p className= {style.subTitulo}>{o.payment_status === "approved"? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</span>: <span>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</span>}</p>
+                            <p className= {style.subTitulo}>{(o.payment_status === "approved" && o.merchant_order_id)? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</span>: (o.payment_status === "rejected" && o.merchant_order_id)? <span>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</span> : (o.payment_status === "approved" && o.merchant_order_id)? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_id}</span> : (o.payment_status === "rejected" && o.merchant_order_id)? <span>Estado de compra: rechazado. N° de transacción: {o.merchant_id}</span> : <span></span>}</p>
                             
                             <Stack direction="row"  fontSize = "small">
                             <Button sx={{bgcolor:  "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>

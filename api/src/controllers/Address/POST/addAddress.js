@@ -8,7 +8,7 @@ async function addAddress (id, addressData) {
     if (!(province && zipCode && street && number))
         throw new Error('Falta enviar datos obligatorios de la dirección');
     const newAddress = await Address.create({province, zipCode, street, number, location, apartment, description});
-    user.addAddress(newAddress);
+    await user.addAddress(newAddress);
     return newAddress;
 }
 

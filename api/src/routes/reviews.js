@@ -17,7 +17,7 @@ router.post('/Create', async (req, res) => {
     }
     try {
         const review = await createReview(userId, productId, reviewData);
-        return res.json(review);
+        return res.json("Reseña creada");
     }
     catch (err) {
         return res.status(500).send(`No se pudo crear la reseña (${err})`);
@@ -29,7 +29,7 @@ router.put('/:id', async (req, res) => {
     const reviewData = req.body;
     try {
         const review = await editReview(id, reviewData);
-        return res.json(review);
+        return res.json("Reseña modificada");
     }
     catch (err) {
         return res.status(500).send(`No se pudo modificar la reseña (${err})`);
@@ -41,7 +41,7 @@ router.delete('/:id', async (req, res) => {
     try {
         let rows = await deleteReview(id);
 
-        return res.status(204).json(`${rows} reseña eliminada`);
+        return res.status(204).json("Reseña eliminada");
     }
     catch (err) {
         return res.status(500).send(`No se pudo eliminar la reseña (${err})`);

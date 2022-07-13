@@ -1,5 +1,6 @@
 const {Product} = require('../../../db')
 const {Op} = require('sequelize')
+const {getScore} = require("../../Review/GET/getProductReviews");
 
 async function getProductByName (name) {
     let products = await Product.findAll({
@@ -35,9 +36,16 @@ const getProduct = async (req, res) =>{
             ]
         }
     })
-    res.json(products)        
+    // console.log(products);
+
+    res.json(await Promise.all(products.map(
+        async (product) => {
+            let score = await getScore(product.id);
+            return {...product.dataValues, numReviews: score.numReviews, averageScore: score.averageScore};
+        }
+    ))) 
     } catch (error) {
-     res.status(404).send("No se pudieron obtener los productos")    
+     res.status(404).send(error.message)    
     }}
 
 

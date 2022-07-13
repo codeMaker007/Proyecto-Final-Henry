@@ -9,8 +9,8 @@ async function createReview (userId, productId, reviewData) {
     if (!(score && title))
         throw new Error('Falta enviar datos obligatorios de la reseña');
     const newReview = await Review.create({score, title, text});
-    user.addReview(newReview);
-    product.addReview(newReview);
+    await user.addReview(newReview);
+    await product.addReview(newReview);
     return newReview;
 }
 

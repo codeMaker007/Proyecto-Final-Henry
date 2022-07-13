@@ -48,7 +48,8 @@ const createOrder = async (req, res) => {
             "application_context": {
                 "landing_page": "NO_PREFERENCE",
                 "user_action": "PAY_NOW",
-                "return_url": "http://localhost:3001/capture-order",
+                "return_url": "http://localhost:3000/success",
+                // "return_url": "http://localhost:3001/capture-order",
                 "cancel_url": "http://localhost:3001/cancel-order"
             }
         }
@@ -72,8 +73,8 @@ const createOrder = async (req, res) => {
                 Authorization: `Bearer ${access_token}`
             }
         })
-        console.log('DATA INFO:', info.data.links[1].href)
-        res.json(info.data.links[1].href)
+        // console.log('DATA INFO:', info.data)
+        res.json(info.data)
     } catch (e) {
         res.status(400).send(e)
     }
@@ -103,7 +104,7 @@ const orderDetails = async (req, res) => {
                 Authorization: `Bearer ${access_token}`
             }
         })
-        console.log(response.data)
+        // console.log(response.data)
         res.send(response.data)
     } catch (e) {
         console.log(e)
