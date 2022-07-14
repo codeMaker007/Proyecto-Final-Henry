@@ -20,9 +20,10 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { useSnackbar } from 'notistack';
 
 export default function CreateProduct() {
-   
+    const { enqueueSnackbar } = useSnackbar();
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
@@ -83,7 +84,7 @@ export default function CreateProduct() {
             && input.freeShipping
         ) {
             dispatch(postProducto(input))
-            alert("Producto creado con exito")
+             enqueueSnackbar('Producto creado con exito', { variant: 'success' });
             setInput({
                 name: "",
                 image: "",
@@ -97,7 +98,7 @@ export default function CreateProduct() {
             })
         }
         else {
-            alert("Debe compeltar correctamente todos los campo con asteriscos (*)")
+             enqueueSnackbar("Debe compeltar correctamente todos los campos con asteriscos (*)", { variant: 'error' });
 
         }
     }

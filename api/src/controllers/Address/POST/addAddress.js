@@ -1,13 +1,15 @@
 const {Address, User} = require('../../../db');
+const getAddresses = require('../GET/getAddresses');
 
 async function addAddress (id, addressData) {
-    const {province, zipCode, street, number, location, apartment, description} = addressData; 
     const where = {id};
     let user = await User.findOne({where});
     if (!user) throw new Error('El usuario no existe en la base de datos.');
-    if (!(province && zipCode && street && number))
+    if (!(addressData.province && addressData.zipCode && addressData.street && addressData.number))
         throw new Error('Falta enviar datos obligatorios de la dirección');
-    const newAddress = await Address.create({province, zipCode, street, number, location, apartment, description});
+    const addresses = await getAddresses(id);
+    if (addresses.length === 0) addressData = {...addressData, active: true};
+    const newAddress = await Address.create(addressData);
     await user.addAddress(newAddress);
     return newAddress;
 }

@@ -23,9 +23,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { Link } from "react-router-dom";
+import { useSnackbar } from 'notistack';
 
 export default function UpdateProduct() {
  
+    const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate ()
     const location = useLocation()
     let id = (location.pathname.substring(4,location.pathname.length)) 
@@ -113,7 +115,7 @@ export default function UpdateProduct() {
             && input.brand === update.brand
             && input.freeShipping === update.freeShipping
          ){
-            alert ("Debe modificar algún campo")
+             enqueueSnackbar("Debe modificar algún campo", { variant: 'error' }); 
 
          }
         else if (input.name.length === 0
@@ -126,12 +128,15 @@ export default function UpdateProduct() {
             || !input.categories
             || errors.hasOwnProperty("stock")
         ) {
-            alert ("Hay campos no completados")
+             enqueueSnackbar("Debe compeltar correctamente todos los campos con asteriscos (*)", { variant: 'error' });
         }
         else {
             dispatch(UpdateProductA(id, input))
-            alert("Producto modificado con exito")
-            navigate('/dashboard')
+             enqueueSnackbar("Producto modificado con exito", { variant: 'success' });
+             setTimeout(() => {
+                navigate('/dashboard')
+            }, 2000);
+           
         }
                 
     }

@@ -25,3 +25,15 @@ export const updateAddress = (userId, payload) => {
         await axios.put(`/users/${userId}/addresses`, payload);
     }
 }
+
+export const removeAddress = (userId, id) => {
+    return async function (dispatch) {
+        await axios.delete(`/users/${userId}/addresses/${id}`);
+    }
+}
+
+export const setActiveAddress = (userId, id) => {
+    return async function (dispatch) {
+        await axios.put(`/users/${userId}/activeAddress/${id}`);
+    }
+}

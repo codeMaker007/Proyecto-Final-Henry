@@ -2,7 +2,7 @@ import * as React from 'react';
 import {  useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userOrderA } from '../../redux/actions/userOrderA';
-import { userAddressesA } from '../../redux/actions/userAddressesA';
+import { userAddressesA, removeAddress, setActiveAddress } from '../../redux/actions/userAddressesA';
 import { getUserReviews } from '../../redux/actions/productReviewA';
 
 import ListSubheader from '@mui/material/ListSubheader';
@@ -36,6 +36,8 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import Box from '@mui/material/Box';
 import  Loading  from '../loading/Loading.jsx';
+import DeleteIcon from '@mui/icons-material/Delete';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 const labels = {
     1: 'Malo',
@@ -96,14 +98,14 @@ export default function PerfilDelUsuario(){
     if(isLoading){
         return <Loading />
     }
-        return (
+    return (
 
-            isAuthenticated && (
-                <Grid container justify = "center"  sx={{width: '100%', my: "5%", mx: "20%", maxWidth: "100%" }}>     
-        <List 
-        
-            sx={{   maxWidth: "100%", bgcolor: '#fff', borderRadius: "10px", color: "#FFC400 " , width: '60%'}} 
-            component="nav"
+        isAuthenticated && (
+            <Grid container justify = "center"  sx={{width: '100%', my: "5%",  maxWidth: "100%" }}>     
+    <List 
+    
+    sx={{bgcolor: '#fff' , borderRadius: "10px", color: "#FFC400 " , mx: "auto", minWidth: "60%", width: 'auto' }}
+        component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
             <ListSubheader  sx={{mb: 5, width: '100%', maxWidth:  "100%", bgcolor: '#fff ', borderRadius: "10px", color: "#FFC400 " }} component="div" id="nested-list-subheader">
@@ -118,7 +120,7 @@ export default function PerfilDelUsuario(){
                         {usuario?.picture? <img src={usuario.picture} className= {style.foto} alt= ""/>:  <AccountCircleIcon  className= {style.foto2} fontSize = "large"/>  } 
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText    primary= {<p > Bienvenido {usuario?.name}!!</p>}secondary= {usuario?.isAdmin === true? <p className= {style.subTitulo}> Administrador. </p> : ""} />
+                    <ListItemText    primary= {<p className= {style.espacio}> Hola {usuario?.name}!!</p>}secondary= {usuario?.isAdmin === true? <p className= {style.espacio}> Administrador. </p> : ""} />
                     </ListItem>
                     <Divider variant="inset" component="li" />
                
@@ -199,18 +201,37 @@ export default function PerfilDelUsuario(){
                     {addresses[0]? addresses.map(a => {
                         return(
                         <div key={a.id}><br/>
-                            <spam className= {style.subTitulo}>Calle: {a.street}. </spam>
-                            <spam className= {style.subTitulo}>N°: {a.number}. </spam>
-                            <spam className= {style.subTitulo}>Pcia.: {a.province}. </spam>
-                            <spam className= {style.subTitulo}>CP.: {a.zipCode}.</spam>
-                            {a.location? <spam className= {style.subTitulo}>Loc.: {a.location} </spam>: <spam className= {style.subTitulo}> Loc.: no especificada </spam>}
-                            {a.apartment? <spam className= {style.subTitulo}>Depto.: {a.apartment} </spam>: <spam className= {style.subTitulo}>Depto.: no especificado </spam>}
+                            {a.active && <span className= {style.subTitulo}><b>Dirección de Envíos:</b><br/></span>}
+                            <span className= {style.subTitulo}>Calle: {a.street}. </span>
+                            <span className= {style.subTitulo}>N°: {a.number}. </span><br/>
+                            <span className= {style.subTitulo}>Pcia.: {a.province}. </span>
+                            <span className= {style.subTitulo}>CP.: {a.zipCode}.</span><br/>
+                            {a.location? <span className= {style.subTitulo}>Loc.: {a.location} </span>: <span className= {style.subTitulo}> Loc.: no especificada </span>}
                             <br/>
-                            {a.description? <spam className= {style.subTitulo}>Descripción: {a.description} </spam>: <spam className= {style.subTitulo}>Descripción no especificada </spam>}
+                            {a.apartment? <span className= {style.subTitulo}>Depto.: {a.apartment} </span>: <span className= {style.subTitulo}>Depto.: no especificado </span>}
+                            <br/>
+                            {a.description? <span className= {style.subTitulo}>Descripción: {a.description} </span>: <span className= {style.subTitulo}>Descripción no especificada </span>}
                             <br/>
                             <Button sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
-                            <Link className= {style.modificar} to={`/updateAddress/${a.id}`}>Modificar dirección.</Link>
+                            <Link className= {style.modificar}  to={`/updateAddress/${a.id}?street=${a.street}&number=${a.number}&province=${a.province}&zipCode=${a.zipCode}${a.location ? `&location=${a.location}` : ''}${a.apartment ? `&apartment=${a.apartment}` : ''}${a.description ? `&description=${a.description}` : ''}`}>Modificar</Link>
                             </Button>
+                            <Button className= {style.modificar} sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#1A2027' }} variant="outlined" startIcon={<DeleteIcon sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }}fontSize = "large"/>}
+                                    onClick={() => {
+                                        dispatch(removeAddress(usuario.id, a.id))
+                                        .then(() => 
+                                        dispatch(userAddressesA(usuario.id)));
+                                        }}>Eliminar
+                            </Button><br/>
+                            { a.active ? <p></p> :
+                            <Button className= {style.modificar} sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#1A2027' }} variant="outlined" startIcon={<LocalShippingIcon sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }}fontSize = "large"/>}
+                            onClick={() => {
+                                        console.log(usuario.id);
+                                        dispatch(setActiveAddress(usuario.id, a.id))
+                                        .then(() => 
+                                        dispatch(userAddressesA(usuario.id)));
+                                        }}>Seleccionar para envíos
+                            </Button>
+                            }
                             
                             
                         </div>
