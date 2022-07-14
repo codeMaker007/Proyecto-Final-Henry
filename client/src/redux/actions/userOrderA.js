@@ -24,3 +24,15 @@ export const  userDetail = (id)=> {
         })
     }
 }
+
+export const  userDetailPP = (id)=> {
+    return async function (dispatch) {
+        var json = await axios.get(`/orderDetails/${id}`);
+        console.log("Soy data", json);
+        return dispatch({
+            type: USER_DETAIL,
+            payload: json.data,
+            
+        })
+    }
+}

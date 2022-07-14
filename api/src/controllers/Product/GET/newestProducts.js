@@ -1,4 +1,5 @@
 const { Product } = require('../../../db')
+const {getScore} = require("../../Review/GET/getProductReviews");
 
 const newestProducts = async (req, res) => {
     try {
@@ -15,7 +16,12 @@ const newestProducts = async (req, res) => {
         } else {
             products
         }
-        res.json(products)
+        res.json(await Promise.all(products.map(
+            async (product) => {
+                let score = await getScore(product.id);
+                return {...product.dataValues, numReviews: score.numReviews, averageScore: score.averageScore};
+            }
+        )));
     } catch (error) {
         res.send("No se pudieron obtener los últimos productos")
     }

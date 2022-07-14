@@ -12,8 +12,8 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
 
-export default function CardsLanding({ name, image, price, description, category, stock, id, addProductCarrito, favorito = false, addFavorite, removeFavorite }) {
-    const [value, setValue] = useState(2);
+export default function CardsLanding({ name, image, price, description, category, stock, id, addProductCarrito, favorito = false, addFavorite, removeFavorite, averageScore }) {
+    const [value, setValue] = useState(averageScore);
 
     let imageProduct
     if (image.length < 30) imageProduct = noImage;

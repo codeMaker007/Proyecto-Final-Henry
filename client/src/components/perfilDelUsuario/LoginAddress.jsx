@@ -18,13 +18,13 @@ import Stack from '@mui/material/Stack';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-
+import { useSnackbar } from 'notistack';
 
 export default function LoginData() {
  
   const navigate = useNavigate ()
   const dispatch = useDispatch()
-
+  const { enqueueSnackbar } = useSnackbar();
   
   const {user, isAuthenticated, isLoading} = useAuth0()
   const allUser = useSelector ((state) => state.DashboardUsersR.allUsers); 
@@ -60,10 +60,13 @@ export default function LoginData() {
 
      ){
         dispatch(UpdateUserA(id, input))
-        alert ("Cambios realizados con exito")
-        navigate('/')}
+        enqueueSnackbar('Cambios realizados con exito', { variant: 'success' });
+        setTimeout(() => {
+          window.location.href='http://localhost:3000/profile'
+      }, 1000);
+      }
     else {
-        alert ("Debe modificar algún campo")
+      return enqueueSnackbar("Debe modificar algún campo", { variant: 'error' });
     }
     
   }
@@ -184,17 +187,17 @@ export default function LoginData() {
             </Box>
             <Stack direction="row" spacing={2} >
 
-            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit' variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                 Modificar datos
             </Button>
             </Stack>
             
+            <Link to= "/profile" className= {style.modificar}>
             <Stack direction="row" spacing={2} >
-            <Link to= "/profile" className= {style.modificar}><Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+            <Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
                volver
-            </Button></Link> 
-
-            </Stack>
+            </Button>
+            </Stack></Link> 
        
             </Box>
                 <br />

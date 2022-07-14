@@ -40,7 +40,7 @@ export default function BasicGrid() {
         dispatch(getDiscountedProducts());
         dispatch(getBestSellers());
         dispatch(getNewProducts());
-        window.addEventListener('resize', handleResponsive())
+        // window.addEventListener('resize', handleResponsive())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -92,7 +92,7 @@ export default function BasicGrid() {
                     <img src='https://www.nvidia.com/content/dam/en-zz/Solutions/events/ces-2022/strip-banner/geforce-ampere-rtx-laptops-learn-gf-strip-1024-t@2x-es-mx.jpg' alt='imagen' width='100%' style={{ borderRadius: 7 }} />
                 </Grid>
                 <Grid container justifyContent='center' spacing={2}>
-                    <Grid item xs={10.5} sm={9.7} lg={9} xl={8.5}>
+                    <Grid item xs={10.5} sm={9.7} lg={9} xl={8.5} >
                         <div style={{
                             marginTop: 12,
                             textDecoration: 'underline',
@@ -103,29 +103,28 @@ export default function BasicGrid() {
                             </Typography>
                         </div>
                     </Grid>
-                    <Grid item xs={10} sm={9.5} lg={9} xl={8.5}>
-                        {
-                            (responsive.md || responsive.xs)
-                                ? <ContentBestSellers products={bestSellers} />
-                                : <Box
-                                    sx={{
-                                        display: 'grid',
-                                        gridTemplateColumns: 'repeat(12, 1fr)',
-                                        gap: 2,
-                                        gridRow: '1 / 3'
-                                    }}
-                                >
-                                    <Grid item elevation={0} sx={{ gridRow: '1 / 3', gridColumn: '1 / 6', height: 480 }}><CardsBestSellers booleano={true} key={61} bestSellers={bestSellers[0]} /></Grid>
-                                    <Grid item elevation={0} sx={{ gridRow: '1', gridColumn: '6 / 10 ', height: 200 }}><CardsBestSellers booleano={false} key={52} bestSellers={bestSellers[1]} /></Grid>
-                                    <Grid item elevation={0} sx={{ gridRow: '1', gridColumn: '10 / 16', height: 200 }}><CardsBestSellers booleano={false} key={763} bestSellers={bestSellers[2]} /></Grid>
-                                    <Grid item elevation={0} sx={{ gridRow: '2', gridColumn: '6 / 10', height: 180, marginTop: -8 }}><CardsBestSellers booleano={false} key={457} bestSellers={bestSellers[3]} /></Grid>
-                                    <Grid item elevation={0} sx={{ gridRow: '2', gridColumn: '10 / 16', height: 180, marginTop: -8 }}><CardsBestSellers booleano={false} key={565} bestSellers={bestSellers[4]} /></Grid>
-                                </Box>
-                        }
+                    <Grid item xs={9.5} sx={{ display: { md: 'none', xs: 'unset' } }}>
+                        <ContentBestSellers products={bestSellers} />
+                    </Grid>
+                    <Grid item xs={10} sm={9.5} lg={9} xl={8.5} sx={{ display: { xs: 'none', md: 'unset' } }}>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(12, 1fr)',
+                                gap: 2,
+                                gridRow: '1 / 3'
+                            }}
+                        >
+                            <Grid item elevation={0} sx={{ gridRow: '1 / 3', gridColumn: '1 / 6', height: 480 }}><CardsBestSellers booleano={true} key={61} bestSellers={bestSellers[0]} /></Grid>
+                            <Grid item elevation={0} sx={{ gridRow: '1', gridColumn: '6 / 10 ', height: 200 }}><CardsBestSellers booleano={false} key={52} bestSellers={bestSellers[1]} /></Grid>
+                            <Grid item elevation={0} sx={{ gridRow: '1', gridColumn: '10 / 16', height: 200 }}><CardsBestSellers booleano={false} key={763} bestSellers={bestSellers[2]} /></Grid>
+                            <Grid item elevation={0} sx={{ gridRow: '2', gridColumn: '6 / 10', height: 180, marginTop: -8 }}><CardsBestSellers booleano={false} key={457} bestSellers={bestSellers[3]} /></Grid>
+                            <Grid item elevation={0} sx={{ gridRow: '2', gridColumn: '10 / 16', height: 180, marginTop: -8 }}><CardsBestSellers booleano={false} key={565} bestSellers={bestSellers[4]} /></Grid>
+                        </Box>
                     </Grid>
                 </Grid>
                 <Grid item container justifyContent='center' spacing={2}>
-                    <Grid container justifyContent='center' item xs={11} width='100%' height={110} mt={5}>
+                    <Grid container justifyContent='center' item md={11} sx={{ display: { xs: 'none' } }} width='100%' height={110} mt={5}>
                         {
                             (responsive.md) ? <div style={{ backgroundColor: '#3a0ca3', width: '100%', display: 'flex', borderRadius: 5, justifyContent: 'space-evenly', alignItems: 'center' }}>
                                 <img src={asus} alt='asus' height='155%' />

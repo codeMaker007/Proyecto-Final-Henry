@@ -20,6 +20,7 @@ export default function App({ products }) {
                                 category={e.categories}
                                 image={e.image}
                                 stock={e.stock}
+                                averageScore={e.averageScore}
                             />
                         </Grid>
                     )

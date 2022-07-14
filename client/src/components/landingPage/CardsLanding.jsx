@@ -14,6 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addFavorite, removeFavorite } from '../../redux/actions/favoritosA';
 import { addProductCarrito } from '../../redux/actions/carritoA';
 import { useSnackbar } from 'notistack';
+import { Link } from "react-router-dom";
 
 const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText('#FFC400'),
@@ -23,9 +24,9 @@ const ColorButton = styled(Button)(({ theme }) => ({
     },
 }));
 
-export default function CardsLanding({ name, image, price, description, category, stock, id, discount, favorito = false, quantity, amountSold }) {
+export default function CardsLanding({ name, image, price, description, category, stock, id, discount, favorito = false, quantity, amountSold, averageScore }) {
     const { enqueueSnackbar } = useSnackbar();
-    const [value, setValue] = useState(2);
+    const [value, setValue] = useState(averageScore);
     const dispatch = useDispatch();
     const productsInFavoritos = useSelector((state) => state.favoritos.productosFavoritos);
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
@@ -111,7 +112,9 @@ export default function CardsLanding({ name, image, price, description, category
             <div style={{
                 padding: 10
             }}>
-                <CardMedia style={{ height: "245px", backgroundSize: 'contain' }} image={imageProduct} />
+                <Link to={`/detail/${id}`} >
+                    <CardMedia style={{ height: "245px", backgroundSize: 'contain' }} image={imageProduct} />
+                </Link>
             </div>
 
             <div style={{

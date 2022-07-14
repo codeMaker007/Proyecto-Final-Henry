@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, Fragment } from "react";
+import { useEffect, Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { adminProducts } from "../../../../redux/actions/adminProductsA";
 import CardAdminProducts from '../../../dashboard/CardAdminProducts';
@@ -18,8 +18,7 @@ import  Loading  from '../../../loading/Loading';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-
-
+import Error404NotAdmin from "../../../error404/Error404NotAdmin"
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -58,12 +57,16 @@ export default function AdminProd() {
         findedUser = users.find(e => e.email === user.email)
     }
 
+
+
+
     return (
         <div>
         
         {
     (isAuthenticated && findedUser?.isAdmin)?
     <div>
+
     <TableContainer component={Paper} sx={{ mt: 2,}}>
       <Table sx={{ minWidth: 700, bgcolor: "#e5e5e5", color: "#3a0ca3" }} aria-label="customized table">
         <TableHead>
@@ -113,7 +116,7 @@ export default function AdminProd() {
 
       </Stack>
     </TableContainer>
-    </div> : <h1>No eres administrador</h1>
+    </div> : <Error404NotAdmin/>
 }      
         
 {/*             <div>

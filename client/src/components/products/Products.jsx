@@ -156,6 +156,7 @@ export default function BasicGrid() {
                                         stock={e.stock}
                                         quantity={e.quantity}
                                         discount={e.discount}
+                                        averageScore={e.averageScore}
                                     />)
                                 })}
 

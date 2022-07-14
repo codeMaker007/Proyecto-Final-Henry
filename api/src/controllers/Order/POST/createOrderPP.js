@@ -36,7 +36,7 @@ const createOrderPP = async (req, res) => {
                 <tr>
                     <td>
                         <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1"
-                            style="background-color: #022335" role="presentation" width="100%">
+                            style="background-color: #3a0ca3" role="presentation" width="100%">
                             <tbody>
                                 <tr>
                                     <td>
@@ -56,7 +56,7 @@ const createOrderPP = async (req, res) => {
                                                                         style="margin: 0; color: #000000; font-size: 60px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
                                                                         <i>
                                                                             <span class="tinyMce-placeholder"
-                                                                            style="background-color: #022335; color: #ffc400;">¡Hentech!</span>
+                                                                            style="background-color: #3a0ca3; color: #ced4da;">¡Hentech!</span>
                                                                         </i>
                                                                     </h1>
                                                                 </td>
@@ -122,7 +122,7 @@ const createOrderPP = async (req, res) => {
                                                                 <td
                                                                     style="width:100%;padding-right:0;padding-left:0;padding-top:5px;padding-bottom:5px">
                                                                     <div align="center" style="line-height:10px"><img
-                                                                            src=${items[0].picture}
+                                                                            src=""
                                                                             style="display:block;height:auto;border:0;width:100px;max-width:100%"
                                                                             width="100" /></div>
                                                                 </td>
@@ -144,7 +144,7 @@ const createOrderPP = async (req, res) => {
                                                                         </li>
                                                                         <li style="margin-bottom: 0px;">Descripción del
                                                                             producto: ${items[0].description}</li>
-                                                                        <li style="margin-bottom: 0px;">Precio del producto: ${items[0].unit_amount.value}
+                                                                        <li style="margin-bottom: 0px;">Precio del producto: ${items[0].unit_amount.value} USD
                                                                         </li>
                                                                         <li>Cantidad: ${items[0].quantity}</li>
                                                                     </ul>
@@ -169,12 +169,12 @@ const createOrderPP = async (req, res) => {
                                     <td class="column column-1"
                                         style="font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
                                         width="100%">
-                                        <table border="0" style="background-color: #000000 " cellpadding="0" cellspacing="0" class="heading_block"
+                                        <table border="0" style="background-color: #3a0ca3 " cellpadding="0" cellspacing="0" class="heading_block"
                                             role="presentation" width="100%">
                                             <tr>
                                                 <td style="width:100%;text-align:center;">
                                                     <h1
-                                                        style="margin: 0; color: #FFC400 ; font-size: 23px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
+                                                        style="margin: 0; color: #ced4da ; font-size: 23px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
                                                         <span class="tinyMce-placeholder">Gracias por su compra!</span>
                                                     </h1>
                                                 </td>

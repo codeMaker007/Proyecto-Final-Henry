@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import { Button } from "@material-ui/core";
 // import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Rating from '@mui/material/Rating';
+// import Rating from '@mui/material/Rating';
 import noImage from '../productCard/assets/no-image.jpg';
 import { addProductCarrito } from '../../redux/actions/carritoA';
 import { styled } from '@mui/material/styles';
@@ -24,7 +24,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 export default function MediaControlCard({ booleano, bestSellers }) {
     const { enqueueSnackbar } = useSnackbar();
     const dispatch = useDispatch();
-    const [value, setValue] = useState(2);
+    // const [value, setValue] = useState(bestSellers?.averageScore);
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
 
     function handleCarrito() {
@@ -78,7 +78,7 @@ export default function MediaControlCard({ booleano, bestSellers }) {
                                 </div>
                             </CardContent>
                             <Box sx={{ display: 'flex', pl: 1, pb: 1, flexDirection: 'column' }}>
-                                <Rating name="read-only" value={value} readOnly size="small" sx={{ pb: 1.5 }} />
+                                {/* <Rating name="read-only" value={value} readOnly size="small" sx={{ pb: 1.5 }} /> */}
                                 <div onClick={handleCarrito}>
                                     <ColorButton disableElevation color='primary' variant="contained" >
                                         Comprar
@@ -114,7 +114,7 @@ export default function MediaControlCard({ booleano, bestSellers }) {
                                 </div>
                             </CardContent>
                             <Box sx={{ display: 'flex', pl: 1, pb: 1, flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <Rating name="read-only" value={value} readOnly size="small" sx={{ pb: 0.9 }} />
+                                {/* <Rating name="read-only" value={value} readOnly size="small" sx={{ pb: 0.9 }} /> */}
                                 <div onClick={handleCarrito} style={{ marginBottom: -5 }}>
                                     <ColorButton size="small" color='primary' disableElevation variant="contained" >
                                         Comprar

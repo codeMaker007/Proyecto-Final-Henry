@@ -4,6 +4,13 @@ const { PAYPAL_API, PAYPAL_API_SECRET, PAYPAL_API_CLIENT } = process.env
 
 const createOrder = async (req, res) => {
 
+    function converter(cantidad) {
+        let dolar = 0.0079;
+        let resultado = (cantidad * dolar).toFixed(2)
+        return resultado
+    }
+
+
     let allProducts = [];
     req.body.forEach(e => {
         let obj = {
@@ -12,7 +19,7 @@ const createOrder = async (req, res) => {
             "quantity": e.quantity,
             "unit_amount": {
                 "currency_code": "USD",
-                "value": e.unit_amount.value
+                "value": converter(e.unit_amount.value)
             }
         }
         allProducts.push(obj)

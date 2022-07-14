@@ -6,15 +6,15 @@ export const getOrder = (orderId, userID, type) => {
         return async function (dispatch) {
             const response = (await axios.get(`/orderMP?merchant_order_id=${orderId}`)).data;
             dispatch(controlStock(response.items));
-            dispatch(createOrder(orderId, response.status, userID));
+            dispatch(createOrder(orderId, response.status, userID, response.items));
         }
     }
     else if (type === 'pp') {
         return async function (dispatch) {
             const response = (await axios.get(`/orderDetails/${orderId}`)).data;
-            console.log(response.purchase_units[0].items)
+            console.log(response)
             console.log(userID, response.purchase_units[0].items, response.purchase_units[0].payee.merchant_id, response.status)
-            dispatch(createOrderPP(response.status, response.purchase_units[0].payee.merchant_id, response.purchase_units[0].items, userID))
+            dispatch(createOrderPP(response.status, response.id, response.purchase_units[0].items, userID))
             dispatch(controlStockPP(response.purchase_units[0].items));
         }
     }
@@ -38,12 +38,13 @@ const controlStockPP = (response) => {
     }
 }
 
-const createOrder = (orderId, status, userID) => {
+const createOrder = (orderId, status, userID, items) => {
     return async function () {
         await axios.post(`/createOrderMP`, {
             payment_status: status,
             merchant_order_id: orderId,
-            userId: userID
+            userId: userID,
+            items: items
         })
     }
 }

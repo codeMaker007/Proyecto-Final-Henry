@@ -30,6 +30,7 @@ import CreateProduct from './components/newDashboard/components/createProduct/Cr
 import AdminProd from './components/newDashboard/components/adminProducts/AdminProducts';
 import DashboardUsers from './components/newDashboard/components/DashboardUsers/DashboardUsers';
 import DashboardOrders from './components/newDashboard/components/DashboardOrders/DashboardOrders';
+import OrderDetailPP from './components/perfilDelUsuario/OrderDetailPP';
 
 
 const theme = createTheme({
@@ -65,6 +66,7 @@ function App() {
             <Route path="/LoginAddress/:id" element={<LoginAddress />} />
             <Route path="/success" element={<Success />} />
             <Route path="/orderDetail/:id" element={<OrderDetail />} />
+            <Route path="/orderDetailPP/:id" element={<OrderDetailPP />} />
             <Route path="/createAddress" element={<CreateAddress />} />
             <Route path="/updateAddress/:id" element={<UpdateAddress />} />
             <Route path='/dashboard' element={<MainLayout/>}>

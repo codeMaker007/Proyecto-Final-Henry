@@ -40,7 +40,7 @@ const ColorButton2 = styled(Button)(({ theme }) => ({
     },
 }));
 
-export default function BasicCard({ id, name, price, category, image, description, stock, quantity, discount }) {
+export default function BasicCard({ id, name, price, category, image, description, stock, quantity, discount, averageScore }) {
     const { enqueueSnackbar } = useSnackbar();
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
     const dispatch = useDispatch();
@@ -117,7 +117,7 @@ export default function BasicCard({ id, name, price, category, image, descriptio
                             </div>
                         </Typography>
                         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
-                            <Rating name="read-only" value={1} readOnly size="small" sx={{ marginTop: 5, marginBottom: 1 }} />
+                            <Rating name="read-only" value={averageScore} readOnly size="small" sx={{ marginTop: 5, marginBottom: 1 }} />
                             <div style={{ display: 'flex', alignItems: 'baseline' }}>
                                 {
                                     (discount > 0)

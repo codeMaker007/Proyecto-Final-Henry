@@ -1,8 +1,11 @@
-import { USERS } from "../actions/DashboardUsersA";
+import { USERS, FILTER_ADMIN, FILTER_BANNED } from "../actions/DashboardUsersA";
 import { UPDATE_USER } from '../actions/DashboardUpdateUserA';
 
 const initialState = {
     allUsers: [],
+    usersBanned:[] ,
+    usersAdmin: [],
+
 }
 
 const DashboardUsersR = (state = initialState, { type, payload }) => {
@@ -19,7 +22,20 @@ const DashboardUsersR = (state = initialState, { type, payload }) => {
                 ...state,
                 allUsers: payload
             }
+         
+        case FILTER_ADMIN:
+            return {
+                ...state,
+                usersAdmin: payload
+            } 
 
+
+        case FILTER_BANNED:
+            return {
+                ...state,
+                usersBanned: payload
+            } 
+    
         default:
             return state;
     }

@@ -27,8 +27,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { Link } from "react-router-dom";
 
+import Error404NotAdmin from "../../../error404/Error404NotAdmin"
+import { useSnackbar } from 'notistack';
+
 export default function CreateProduct() {
-   
+    const { enqueueSnackbar } = useSnackbar();
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
@@ -96,7 +99,7 @@ export default function CreateProduct() {
             && input.freeShipping
         ) {
             dispatch(postProducto(input))
-            alert("Producto creado con exito")
+            enqueueSnackbar('Producto creado con exito', { variant: 'success' })
             setInput({
                 name: "",
                 image: "",
@@ -110,7 +113,7 @@ export default function CreateProduct() {
             })
         }
         else {
-            alert("Debe compeltar correctamente todos los campo con asteriscos (*)")
+             enqueueSnackbar("Debe compeltar correctamente todos los campos con asteriscos (*)", { variant: 'error' });
 
         }
     }
@@ -394,7 +397,7 @@ export default function CreateProduct() {
     
             </form>
         </div>
-        : <h1>No eres administrador</h1>
+         : <Error404NotAdmin/>
         }
 </>
   );

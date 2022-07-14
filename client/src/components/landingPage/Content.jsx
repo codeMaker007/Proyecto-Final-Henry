@@ -60,6 +60,7 @@ export default function App({ products }) {
                                     quantity={e.quantity}
                                     discount={e.discount}
                                     amountSold={e.amountSold}
+                                    averageScore={e.averageScore}
                                 />
                             </SwiperSlide>
                         )

@@ -5,6 +5,7 @@ import SideBar from '../sideBar/SideBar'
 import TopNav from '../topNav/TopNav'
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+import Error404NotAdmin from "../../../error404/Error404NotAdmin"
 
 const MainLayout = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -23,7 +24,7 @@ const MainLayout = () => {
                 <Outlet />
             </div>
         </div>
-    </div> : <h1>No eres administrador</h1>
+    </div> : <Error404NotAdmin/>
         }
     </>
   ) 

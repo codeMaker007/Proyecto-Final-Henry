@@ -12,8 +12,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import {IconButton, Rating} from "@mui/material";
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import Button from "@mui/material/Button";
 import CardMedia from "@mui/material/CardMedia";
 import { Container, Stack } from '@mui/material';
@@ -52,12 +50,12 @@ function Producto({ getOneProduct }) {
             backgroundColor: '#f7f7f7',
         },
     }));
-
     useEffect(() => {
         dispatch(getAllReviews(idProduct))
         getOneProduct(idProduct)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    let pro = productDetail.averageScore
 
     const [isShown, setIsShown] = useState(false);
 
@@ -132,7 +130,8 @@ function Producto({ getOneProduct }) {
                 }}
             >
                 <Stack sx={{
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    padding: '30px'
                 }}>
                     <Typography
                         variant="h4" component="h5"
@@ -144,14 +143,16 @@ function Producto({ getOneProduct }) {
                     <Grid item xs={12} sm={6}>
                         <Box
                             sx={{
-                                boxShadow: 15,
+                                width: 'fit-content',
                                 borderRadius: 10
                             }}
-                            margin={5}
+                            marginLeft={15}
+                            marginTop={5}
                         >
                             <CardMedia
                                 sx={{
-                                    borderRadius: '20px',
+                                    borderRadius: '5px',
+                                    height: '460px',
                                 }}
                                 component="img"
                                 image={productDetail.image}
@@ -165,22 +166,49 @@ function Producto({ getOneProduct }) {
                         <Box
                             border={0.5}
                             margin={5}
+                            borderRadius={2}
                         >
-                            <Box>
+                            <div style={{
+                                position: 'relative',
+                                top: '25px',
+                                display: 'inline-block'
+                            }}>
                                 <Typography
                                     marginLeft={5}
                                     fontStyle="italic"
                                 >
                                     {stockDisponible()}
                                 </Typography>
+                            </div>
+                            <Box sx={{
+                                textAlign:'right',
+                                marginRight: '10px',
+                                marginBottom: '20px'
+                            }}>
+                                <Typography>Puntuacion Promedio</Typography>
+                                <Rating name="read-only" value={pro ? pro: 0} readOnly precision={0.5} />
                             </Box>
-                            <Box margin={5}>
+                            <Box sx={{
+                                textAlign:'right',
+                                marginRight: '10px'
+                            }}>
+                                <p>{`(${productDetail.numReviews} Reseñas)`}</p>
+                                <Rating name="read-only" value={5} readOnly />
+                            </Box>
+                            <div style={{
+                                position: 'relative',
+                                display: 'inline-block',
+                                bottom: '35px',
+                                marginLeft: '40px',
+                                marginBottom: '20px'
+                            }}
+                            >
                                 <Typography
                                     fontStyle="italic"
                                 >
                                     {tipoEnvio()}
                                 </Typography>
-                            </Box>
+                            </div>
                             <Box>
                                 <Typography
                                     marginLeft={5}
@@ -253,7 +281,7 @@ function Producto({ getOneProduct }) {
                         <div sx={{ width: 1, borderBottom: 'solid', borderBottomWidth: 1, borderColor: '#e1e1e1', marginLeft: -0.4, marginTop: 0.5 }}>
                                         {allReviews? allReviews.map((r, index) => {
                                             return(
-                                                <Box border={0.5} margin={2} borderRadius={2}>
+                                                <Box border={0.5} margin={2} width={530} borderRadius={1}>
                                                     <CardReview
                                                         key={index}
                                                         usuario={r.User.username}

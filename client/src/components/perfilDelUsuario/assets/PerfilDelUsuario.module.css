@@ -1,7 +1,12 @@
-/* .subTitulo{
-    color: red ;
+.seleccionarArchivo{
+    color: rgb(99, 99, 99) ;
+    margin-left: 5%;
+}
+.loading{
+    color: #FFC400 ;
     
-} */
+}
+
 .iconos{
     color: #FFC400 ;
     
@@ -14,7 +19,7 @@
 .modificar{
     color: #1A2027 ;
     text-decoration:none;
-    font-size: 12px;
+    font-size: 14px;
     /* border-color: red 10px; */
 }
 

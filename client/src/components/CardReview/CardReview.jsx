@@ -10,7 +10,7 @@ const CardReview = ({ usuario, score, review}) => {
             <div style={{marginLeft:'30px', display: 'inline-block', flexDirection: 'column', width: '25%', flexWrap: 'wrap', textAlign: 'left', justifyContent: 'center' }}>
                 <Rating name="read-only" value={score} readOnly />
             </div>
-            <div style={{ marginLeft:'10px', display: 'inline-block', flexDirection: 'column', width: '45%',  justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ marginLeft:'10px', display: 'inline-block',padding:'5px', wordWrap: 'break-word', width: '45%',  justifyContent: 'center', alignItems: 'center' }}>
                 <p>{review}</p>
             </div>
             

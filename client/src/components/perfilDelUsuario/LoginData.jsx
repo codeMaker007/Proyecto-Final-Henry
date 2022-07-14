@@ -18,13 +18,14 @@ import Stack from '@mui/material/Stack';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-
+import  Loading  from '../loading/Loading.jsx';
+import { useSnackbar } from 'notistack';
 
 export default function LoginData() {
  
   const navigate = useNavigate ()
   const dispatch = useDispatch()
-
+  const { enqueueSnackbar } = useSnackbar();
   
   const {user, isAuthenticated, isLoading} = useAuth0()
   const allUser = useSelector ((state) => state.DashboardUsersR.allUsers); 
@@ -40,6 +41,9 @@ export default function LoginData() {
 
   let [state, setState] = useState(false);
   const [input, setInput] = useState({ name: "", username: "", dni: "", celphone:  "", picture: "" })
+  const [imageChosen, setImageChosen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState("");
 
   useEffect(()=>(setInput({
     name: usuario?.name,
@@ -60,10 +64,13 @@ export default function LoginData() {
 
      ){
         dispatch(UpdateUserA(id, input))
-        alert ("Cambios realizados con exito")
-        navigate('/')}
+        enqueueSnackbar('Cambios realizados con exito', { variant: 'success' });
+        setTimeout(() => {
+          window.location.href='http://localhost:3000/profile'
+      }, 1000);
+      }
     else {
-        alert ("Debe modificar algún campo")
+      enqueueSnackbar("Debe modificar algún campo", { variant: 'error' });
     }
     
   }
@@ -76,7 +83,25 @@ export default function LoginData() {
       });
   }
 
+  async function uploadImage(e) {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset','ecommerce');
+    setImageChosen(true);
+    setLoading(true);
 
+    const res = await fetch('https://api.cloudinary.com/v1_1/hentech/image/upload', {
+        method: 'POST',
+        body: data
+    });
+
+    const file = await res.json();
+
+    setImage(file.secure_url);
+    setLoading(false);
+    setInput({...input, picture: file.secure_url});
+  }
 
   if (idd == id){
 
@@ -167,7 +192,7 @@ export default function LoginData() {
                 value={input.picture}
                 onChange={(e) => handleChange(e)}  
                 name="picture"
-                defaultValue= {usuario.picture? "" : "Ingrese una foto por Url:"}
+                defaultValue= {usuario.picture ? "" : "Ingrese una foto"}
                 InputProps={{
                   shrink: true,
                   startAdornment: (
@@ -179,22 +204,28 @@ export default function LoginData() {
                 variant="standard"
               />
               
+              <input className={style.seleccionarArchivo} type="file" name="file" onChange={uploadImage} ></input>
+          
+              {
+                  imageChosen && (!loading ?  (<img  className={style.seleccionarArchivo}src={image} style={{width:'50%'}} alt="Usuario"/>) : <Loading className={style.loading}/>)
+              }
               </div>  
             </div>
             </Box>
-            <Stack direction="row" spacing={2} >
 
-            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+            <Box sx={{ maxWidth: "100%"}}>
+            <Stack direction="row" spacing={2} >
+            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit'  variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                 Modificar datos
             </Button>
             </Stack>
-            
+            <Link to= "/profile" className= {style.modificar}>
             <Stack direction="row" spacing={2} >
-            <Link to= "/profile" className= {style.modificar}><Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+            <Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
                volver
-            </Button></Link> 
-
-            </Stack>
+            </Button>
+            </Stack></Link> 
+            </Box>
        
             </Box>
                 <br />
