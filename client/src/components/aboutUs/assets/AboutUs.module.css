@@ -1,0 +1,12 @@
+.imagenPerfil {
+    border-radius: 50%;
+    height: 49%;
+    width: 71%;
+}
+
+.iconSocialMedia {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
+}

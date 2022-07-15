@@ -30,6 +30,7 @@ import StoreSharpIcon from '@mui/icons-material/StoreSharp';
 import { getProductByName } from "../../redux/actions/productName";
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { useSnackbar } from 'notistack';
+import Error404Banned from '../error404/Error404Banned';
 
 const theme = createTheme({
     palette: {
@@ -140,11 +141,14 @@ export default function PrimarySearchAppBar() {
     const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     let isAdmin;
+    let isBanned;
     if (isAuthenticated) {
         let findedUser = users.find(e => e.email === user.email);
         (findedUser?.isAdmin) ? isAdmin = true : isAdmin = false;
+        (findedUser?.banned) ? isBanned = true : isBanned = false;
         localStorage.setItem('usuario', JSON.stringify(findedUser));
     }
+
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -330,13 +334,18 @@ export default function PrimarySearchAppBar() {
         </Menu >
     );
 
+    if (isBanned) {
+        navigate('/404');
+        return (<></>)
+    }
+    if (location.pathname.substring(0, 3) === '/up') return (<></>)
 
+    if (location.pathname.substring(0, 12) === '/orderDetail') return (<></>)
     if (location.pathname === '/dashboard') return (<></>)
     if (location.pathname === '/orders') return (<></>)
     if (location.pathname === '/adminProducts') return (<></>)
     if (location.pathname === '/createproducts') return (<></>)
     if (location.pathname === '/users') return (<></>)
-    if (location.pathname.length > 23) return (<></>)
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ flexGrow: 1 }}>
@@ -348,14 +357,14 @@ export default function PrimarySearchAppBar() {
                         <Grid item xs={0} sm={2.2} md={2} lg={4.9} xl={5} sx={{ color: '#ced4da', display: { xs: 'none', md: 'unset' } }}>
                         </Grid>
                         <Grid item xs={2} sm={2} md={2} lg={1.1} xl={1} sx={{ color: '#ced4da', fontSize: 14, cursor: 'pointer', display: { xs: 'none', md: 'unset' } }}>
-                            Sobre nosotros
+                            <Link to='/aboutUs' style={{ textDecoration: 'none', color: 'inherit' }}>Sobre nosotros</Link>
                         </Grid>
                         <Grid item xs={1} sm={2} md={2} lg={1} xl={1} sx={{ color: '#ced4da', fontSize: 14, cursor: 'pointer', display: { xs: 'none', md: 'unset' } }}>
                             <a href="https://api.whatsapp.com/send?phone=+5492616260059&text=Hola,%20me%20gustaría%20recibir%20asesoramiento" style={{ textDecoration: 'none', color: 'inherit' }}>Contactanos</a>
 
                         </Grid>
                         <Grid item xs={1} sm={2} md={2} lg={1} xl={1} sx={{ color: '#ced4da', fontSize: 14, textAlign: 'left', cursor: 'pointer', marginLeft: -2, display: { xs: 'none', md: 'unset' } }}>
-                            FAQs
+                            <Link to='/faqs' style={{ textDecoration: 'none', color: 'inherit' }}>FAQs</Link>
                         </Grid>
                     </Grid>
                 </div>
