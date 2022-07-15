@@ -31,7 +31,10 @@ import AdminProd from './components/newDashboard/components/adminProducts/AdminP
 import DashboardUsers from './components/newDashboard/components/DashboardUsers/DashboardUsers';
 import DashboardOrders from './components/newDashboard/components/DashboardOrders/DashboardOrders';
 import OrderDetailPP from './components/perfilDelUsuario/OrderDetailPP';
-
+import Faqs from './components/faqs/Faqs';
+import AboutUs from './components/aboutUs/AboutUs';
+import Error404Banned from './components/error404/Error404Banned';
+// import Footer from './components/footer/Footer';
 
 const theme = createTheme({
   palette: {
@@ -69,14 +72,18 @@ function App() {
             <Route path="/orderDetailPP/:id" element={<OrderDetailPP />} />
             <Route path="/createAddress" element={<CreateAddress />} />
             <Route path="/updateAddress/:id" element={<UpdateAddress />} />
-            <Route path='/dashboard' element={<MainLayout/>}>
-                  <Route index element={<NewDashboard/>}/>
-              </Route>
-            <Route path='/createproducts' element={<CreateProduct/>}/>
-            <Route path='/adminProducts' element={<AdminProd/>}/>
-            <Route path='/users' element={<DashboardUsers/>}/>
-            <Route path='/orders' element={<DashboardOrders/>}/>
+            <Route path='/dashboard' element={<MainLayout />}>
+              <Route index element={<NewDashboard />} />
+            </Route>
+            <Route path='/createproducts' element={<CreateProduct />} />
+            <Route path='/adminProducts' element={<AdminProd />} />
+            <Route path='/users' element={<DashboardUsers />} />
+            <Route path='/orders' element={<DashboardOrders />} />
+            <Route path='/faqs' element={<Faqs />} />
+            <Route path='/aboutus' element={<AboutUs />} />
+            <Route path='/404' element={<Error404Banned />} />
           </Routes>
+          {/* <Footer /> */}
         </SnackbarProvider>
       </ThemeProvider>
     </div>
